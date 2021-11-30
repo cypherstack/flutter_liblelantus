@@ -1,0 +1,3 @@
+[submodule "ios/Classes/mobileliblelantus"]
+	path = ios/Classes/mobileliblelantus
+	url = https://github.com/firoorg/mobileliblelantus.git
