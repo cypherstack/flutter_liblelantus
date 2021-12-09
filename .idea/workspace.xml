@@ -8,33 +8,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae0f24c2-4222-40ab-9e70-3d775a5d98ef" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.8/fileChanges/last-build.bin" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.8/fileHashes/fileHashes.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/6.8/gc.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/cache.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/configuration-cache/gc.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gradle/vcs-1/gc.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Classes/mobileliblelantus" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/CMakeLists/mobileliblelantus/dart_interface.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/CMakeLists/mobileliblelantus/template_CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/CMakeLists/secp256k1/template_CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/build_all.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/build_openssl.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/config.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/copyCMakeLists.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/install_ndk.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/linkDistros.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/renamedistros.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.metadata" beforeDir="false" afterPath="$PROJECT_DIR$/.metadata" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/.metadata" beforeDir="false" afterPath="$PROJECT_DIR$/example/.metadata" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/example/android/app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/example/android/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/example/android/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lelantus.iml" beforeDir="false" afterPath="$PROJECT_DIR$/lelantus.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/lelantus.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/lelantus.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +32,13 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/home/marco/.android/avd/Pixel_5_API_29.avd]" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -52,6 +49,17 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/scripts/build_openssl.sh" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/scripts/CMakeLists/secp256k1/template_CMakeLists.txt" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/scripts/CMakeLists/mobileliblelantus/template_CMakeLists.txt" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/scripts/CMakeLists/mobileliblelantus/Utils.cpp" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/example/lib/main.dart" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/scripts/CMakeLists/mobileliblelantus/dart_interface.cpp" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/scripts/build_all.sh" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/scripts/CMakeLists/mobileliblelantus/Utils.h" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/scripts/copyCMakeLists.sh" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectId" id="21KhcN0ZnPIi7mAYIJ1MmJq0hiq" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -68,6 +76,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="dart.analysis.tool.window.force.activate" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
@@ -75,7 +84,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="flutter.settings" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
