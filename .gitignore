@@ -5,3 +5,11 @@
 .pub/
 
 build/
+scripts/ios/mobileliblelantus/
+scripts/ios/External/
+scripts/ios/CMakeLists/mobileliblelantus/CMakeLists.txt
+scripts/ios/CMakeLists/secp256k1/CMakeLists.txt
+scripts/ios/toolchain/
+
+scripts/CMakeLists/mobileliblelantus/CMakeLists.txt
+scripts/CMakeLists/secp256k1/CMakeLists.txt
