@@ -8,34 +8,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae0f24c2-4222-40ab-9e70-3d775a5d98ef" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/scripts/ios/CMakeLists/missingheader/endian.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/ios/CMakeLists/mobileliblelantus/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/ios/CMakeLists/mobileliblelantus/Utils.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/ios/CMakeLists/mobileliblelantus/Utils.h" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/ios/CMakeLists/mobileliblelantus/dart_interface.cpp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/ios/CMakeLists/mobileliblelantus/template_CMakeLists.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/ios/CMakeLists/secp256k1/template_CMakeLists.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/ios/build_all.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/ios/build_lib.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/ios/build_openssl.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/ios/config.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/ios/copyCMakeLists.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/ios/copymobile.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/ios/install_missing_headers.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/ios/ioscmake.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/ios/linkDistros.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitmodules" beforeDir="false" afterPath="$PROJECT_DIR$/.gitmodules" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Flutter/Debug.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Flutter/Debug.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Flutter/Release.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Flutter/Release.xcconfig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcworkspace/contents.xcworkspacedata" beforeDir="false" afterPath="$PROJECT_DIR$/example/ios/Runner.xcworkspace/contents.xcworkspacedata" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/mobileliblelantus" beforeDir="false" afterPath="$PROJECT_DIR$/mobileliblelantus" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/ios/CMakeLists/mobileliblelantus/Utils.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/ios/CMakeLists/mobileliblelantus/Utils.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/ios/External/ios/sources/OpenSSL/build-libssl.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/ios/External/ios/sources/OpenSSL/build-libssl.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/ios/External/ios/sources/OpenSSL/include/LICENSE" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/ios/External/ios/sources/OpenSSL/include/opensslconf-template.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/ios/build_lib.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/ios/build_lib.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,6 +76,11 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts/ios/CMakeLists/mobileliblelantus" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
