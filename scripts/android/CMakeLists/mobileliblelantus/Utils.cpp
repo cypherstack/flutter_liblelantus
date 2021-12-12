@@ -21,7 +21,9 @@ const char *bin2hex(const unsigned char *bytes, int size) {
 		str.append(&hexArray[(ch & 0xF0) >> 4], 1);
 		str.append(&hexArray[ch & 0xF], 1);
 	}
-	return str.c_str();
+    char *new_str = new char[std::strlen(str.c_str()) + 1];
+    std::strcpy(new_str, str.c_str());
+	return new_str;
 }
 
 const char *bin2hex(const char *bytes, int size) {
@@ -31,7 +33,9 @@ const char *bin2hex(const char *bytes, int size) {
 		str.append(&hexArray[(ch & 0xF0) >> 4], 1);
 		str.append(&hexArray[ch & 0xF], 1);
 	}
-	return str.c_str();
+    char *new_str = new char[std::strlen(str.c_str()) + 1];
+    std::strcpy(new_str, str.c_str());
+	return new_str;
 }
 
 const char *bin2hex(std::vector<unsigned char> bytes, int size) {
@@ -41,7 +45,9 @@ const char *bin2hex(std::vector<unsigned char> bytes, int size) {
 		str.append(&hexArray[(ch & 0xF0) >> 4], 1);
 		str.append(&hexArray[ch & 0xF], 1);
 	}
-	return str.c_str();
+    char *new_str = new char[std::strlen(str.c_str()) + 1];
+    std::strcpy(new_str, str.c_str());
+	return new_str;
 }
 
 const char *CreateMintScript(
