@@ -15,3 +15,4 @@ scripts/ios/toolchain/
 scripts/android/CMakeLists/mobileliblelantus/CMakeLists.txt
 scripts/android/CMakeLists/secp256k1/CMakeLists.txt
 scripts/android/mobileliblelantus/
+scripts/android/android_on_mac/build/
