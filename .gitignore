@@ -5,3 +5,14 @@
 .pub/
 
 build/
+android/.cxx/
+scripts/ios/mobileliblelantus/
+scripts/ios/External/
+scripts/ios/CMakeLists/mobileliblelantus/CMakeLists.txt
+scripts/ios/CMakeLists/secp256k1/CMakeLists.txt
+scripts/ios/toolchain/
+
+scripts/android/CMakeLists/mobileliblelantus/CMakeLists.txt
+scripts/android/CMakeLists/secp256k1/CMakeLists.txt
+scripts/android/mobileliblelantus/
+scripts/android/android_on_mac/build/

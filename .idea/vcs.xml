@@ -3,5 +3,9 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/ios/Classes/mobileliblelantus" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/mobileliblelantus" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/scripts/ios/External/ios/sources/Apple-Boost-BuildScript" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/scripts/ios/External/ios/sources/OpenSSL" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/scripts/ios/toolchain" vcs="Git" />
   </component>
 </project>

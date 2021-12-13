@@ -54,7 +54,7 @@ android {
 
     externalNativeBuild {
         cmake {
-            path file('../ios/Classes/mobileliblelantus/CMakeLists.txt')
+            path file('../scripts/android/mobileliblelantus/CMakeLists.txt')
         }
     }
 }
