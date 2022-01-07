@@ -34,7 +34,19 @@ const char *CreateMintScript(
 		const char *seedID
 );
 
+const char *CreateTag(
+		const char *keydata,
+		int32_t index,
+		const char *seedID
+);
+
 const char *GetPublicCoin(
+		uint64_t value,
+		const char *keydata,
+		int32_t index
+);
+
+const char *GetSerialNumber(
 		uint64_t value,
 		const char *keydata,
 		int32_t index
@@ -52,6 +64,10 @@ uint32_t GetMintKeyPath(
 		uint64_t value,
 		const char *keydata,
 		int32_t index
+);
+
+uint32_t GetAesKeyPath(
+		const char *serializedCoin
 );
 
 const char *CreateJMintScript(
@@ -72,6 +88,11 @@ const char *CreateJoinSplitScript(
 		std::vector<std::vector<const char *>> anonymitySets,
 		const std::vector<const char *> &anonymitySetHashes,
 		std::vector<const char *> groupBlockHashes
+);
+
+uint64_t DecryptMintAmount(
+		const char *privateKeyAES,
+		const char *encryptedValue
 );
 
 #endif //ORG_FIRO_LELANTUS_UTILS_H

@@ -30,6 +30,17 @@ const char *CMS(uint64_t value,
     return return_this;
 }
 
+extern "C" __attribute__((visibility("default"))) __attribute__((used))
+const char * CT(const char *keydata,
+                 int32_t index,
+                 const char *seedID){
+    const char * return_this = CreateTag(
+		keydata,
+		index,
+		seedID
+);
+    return return_this;
+}
 
 extern "C" __attribute__((visibility("default"))) __attribute__((used))
 const char *GPC(uint64_t value,
@@ -41,6 +52,12 @@ const char *GPC(uint64_t value,
             index
     );
     return return_this;
+}
+
+extern "C" __attribute__((visibility("default"))) __attribute__((used))
+char** allocate_anonymity_set(int32_t size){
+    char ** anonymity_set_list = (char **) malloc(sizeof(char *) * size);
+    return anonymity_set_list;
 }
 
 extern "C" __attribute__((visibility("default"))) __attribute__((used))
@@ -66,13 +83,24 @@ uint64_t testy(LelantusEntry ** coins){
 }
 
 extern "C" __attribute__((visibility("default"))) __attribute__((used))
+const char * GSN(uint64_t value,
+              const char *keydata,
+              int32_t index){
+    const char * return_this = GetSerialNumber(
+		value,
+		keydata,
+		index);
+    return return_this;
+}
+
+extern "C" __attribute__((visibility("default"))) __attribute__((used))
 uint64_t EF(uint64_t spendAmount,
             bool subtractFeeFromAmount,
             LelantusEntry ** coins,
             int32_t coins_length,
-            uint64_t changeToMint,
+            uint64_t * changeToMint,
             int32_t * spendCoinIndexes,
-            int32_t spendCoinIndexes_length
+            int32_t * spendCoinIndexes_length
             ){
     std::list<LelantusEntry> list_coins;
     for(int i = 0; i < coins_length; i++){
@@ -80,19 +108,21 @@ uint64_t EF(uint64_t spendAmount,
     }
 
     std::vector<int32_t> list_spendCoinIndexes;
-    for(int i = 0; i < spendCoinIndexes_length; i++){
-        list_spendCoinIndexes.emplace_back(spendCoinIndexes[i]);
-    }
 
 
     uint64_t return_this = EstimateFee(
             spendAmount,
             subtractFeeFromAmount,
             list_coins,
-            changeToMint,
+            *changeToMint,
             list_spendCoinIndexes
     );
+    for(int i = 0; i < list_spendCoinIndexes.size(); i++){
+        spendCoinIndexes[i] = list_spendCoinIndexes[i];
+    }
+    spendCoinIndexes_length[0] = list_spendCoinIndexes.size();
     return return_this;
+
 }
 
 extern "C" __attribute__((visibility("default"))) __attribute__((used))
@@ -104,6 +134,12 @@ uint32_t GMKP(uint64_t value,
             keydata,
             index
     );
+    return return_this;
+}
+
+extern "C" __attribute__((visibility("default"))) __attribute__((used))
+uint32_t GAKP(const char *serializedCoin){
+    uint32_t return_this = GetAesKeyPath(serializedCoin);
     return return_this;
 }
 
@@ -126,7 +162,7 @@ extern "C" __attribute__((visibility("default"))) __attribute__((used))
 const char *CJSS(
     const char *txHash,
     uint64_t spendAmount,
-    bool subtractFeeFromAmount, 
+    bool subtractFeeFromAmount,
     const char *keydata,
     uint32_t index,
     LelantusEntry ** coins,
@@ -141,11 +177,9 @@ const char *CJSS(
     const char ** groupBlockHashes,
     int32_t groupBlockHashes_length){
 
-    
     std::list<LelantusEntry> list_coins;
     for(int i = 0; i < coins_length; i++){
-        list_coins.emplace_back(*(coins[i]));
-
+        list_coins.push_back(*((LelantusEntry *)coins[i]));
     }
 
     std::vector<uint32_t> list_setIds;
@@ -156,33 +190,48 @@ const char *CJSS(
     std::vector<std::vector<const char *>> list_anonymitySets;
     for(int i = 0; i < anonymitySets_length; i++){
         std::vector<const char *> anonymitySet;
+        anonymitySet.reserve(anonymitySets_lengths[i]);
         int32_t anonymitySet_length = anonymitySets_lengths[i];
         for(int j = 0; j < anonymitySet_length; j++){
-            anonymitySet.emplace_back( ((anonymitySets[i]))[j] );
+            anonymitySet.push_back( ((anonymitySets[i]))[j] );
         }
         list_anonymitySets.emplace_back(anonymitySet);
     }
 
     std::vector<const char *> list_anonymitySetHashes;
     for(int i = 0; i < anonymitySetHashes_length; i++){
-        list_anonymitySetHashes.emplace_back(anonymitySetHashes[i]);
+        list_anonymitySetHashes.push_back(anonymitySetHashes[i]);
     }
 
     std::vector<const char *> list_groupBlockHashes;
     for(int i = 0; i < groupBlockHashes_length; i++){
-        list_groupBlockHashes.emplace_back(groupBlockHashes[i]);
+        list_groupBlockHashes.push_back(groupBlockHashes[i]);
     }
 
-    const char * return_this = CreateJoinSplitScript(
-            txHash,
-            spendAmount,
-            subtractFeeFromAmount,
-            keydata,
-            index,
-            list_coins,
-            list_setIds,
-            list_anonymitySets,
-            list_anonymitySetHashes,
-            list_groupBlockHashes);
-    return return_this;
+    try{
+        const char * return_this = CreateJoinSplitScript(
+                txHash,
+                spendAmount,
+                subtractFeeFromAmount,
+                keydata,
+                index,
+                list_coins,
+                list_setIds,
+                list_anonymitySets,
+                list_anonymitySetHashes,
+                list_groupBlockHashes);
+        return return_this;
+    }catch(exception& e){
+        return "Error";
+    }
+}
+
+
+extern "C" __attribute__((visibility("default"))) __attribute__((used))
+uint64_t DMA(const char *privateKeyAES,
+             const char *encryptedValue){
+    uint64_t return_this = DecryptMintAmount(
+		privateKeyAES,
+		encryptedValue);
+	return return_this;
 }

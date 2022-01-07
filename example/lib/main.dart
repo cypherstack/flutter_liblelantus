@@ -56,13 +56,12 @@ class _MyAppState extends State<MyApp> {
     List<Pointer<LelantusEntry>> coins = List.empty(growable: true);
     coins.add(le);
 
+    List<int> changeToMint = List.empty(growable: true);
     List<int> spendCoinIndexes = List.empty(growable: true);
-    spendCoinIndexes.add(4);
 
     var lep = pkgffi.malloc.allocate<Pointer<LelantusEntry>>(1);
     lep[0] = le;
 
-    int changeToMint = 5;
     int fee = estimateFee(2, true, coins, changeToMint, spendCoinIndexes);
 
     List<int> setIds = List.empty(growable: true);
@@ -113,10 +112,6 @@ class _MyAppState extends State<MyApp> {
               ),
               Text(
                   'getpubliccoin:\n${getPublicCoin(1, "aaaaaaaaaaaaaaaa", 0)}'),
-              const SizedBox(
-                height: 10,
-              ),
-              Text('${testy(lep)}'),
               const SizedBox(
                 height: 10,
               ),

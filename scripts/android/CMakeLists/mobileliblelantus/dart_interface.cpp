@@ -22,10 +22,6 @@ const char *CMS(uint64_t value,
                     const char *keydata,
                     int32_t index,
                     const char *seedID){
-    __android_log_print(ANDROID_LOG_DEBUG, "flutter", "%d", value);
-    __android_log_print(ANDROID_LOG_DEBUG, "flutter", "%s", keydata);
-    __android_log_print(ANDROID_LOG_DEBUG, "flutter", "%d", index);
-    __android_log_print(ANDROID_LOG_DEBUG, "flutter", "%s", seedID);
     const char * return_this = CreateMintScript(
             value,
             keydata,
@@ -35,6 +31,17 @@ const char *CMS(uint64_t value,
     return return_this;
 }
 
+extern "C" __attribute__((visibility("default"))) __attribute__((used))
+const char * CT(const char *keydata,
+                 int32_t index,
+                 const char *seedID){
+    const char * return_this = CreateTag(
+		keydata,
+		index,
+		seedID
+);
+    return return_this;
+}
 
 extern "C" __attribute__((visibility("default"))) __attribute__((used))
 const char *GPC(uint64_t value,
@@ -46,6 +53,12 @@ const char *GPC(uint64_t value,
             index
     );
     return return_this;
+}
+
+extern "C" __attribute__((visibility("default"))) __attribute__((used))
+char** allocate_anonymity_set(int32_t size){
+    char ** anonymity_set_list = (char **) malloc(sizeof(char *) * size);
+    return anonymity_set_list;
 }
 
 extern "C" __attribute__((visibility("default"))) __attribute__((used))
@@ -62,27 +75,23 @@ LelantusEntry* create_entry(bool isUsed,
     entry->amount = amount;
     entry->index = index;
     entry->keydata = keydata;
-    __android_log_print(ANDROID_LOG_DEBUG, "flutter", "original address %p", entry);
-    __android_log_print(ANDROID_LOG_DEBUG, "flutter", "original isUsed %d", entry->isUsed);
-    __android_log_print(ANDROID_LOG_DEBUG, "flutter", "original height %d", entry->height);
-    __android_log_print(ANDROID_LOG_DEBUG, "flutter", "original anonymitySetId %d", entry->anonymitySetId);
-    __android_log_print(ANDROID_LOG_DEBUG, "flutter", "original amount %d", entry->amount);
-    __android_log_print(ANDROID_LOG_DEBUG, "flutter", "original index %d", entry->index);
-    __android_log_print(ANDROID_LOG_DEBUG, "flutter", "original address %s", entry->keydata);
     return entry;
 }
 
 extern "C" __attribute__((visibility("default"))) __attribute__((used))
 uint64_t testy(LelantusEntry ** coins){
-    __android_log_print(ANDROID_LOG_DEBUG, "flutter", "ad1 %p", coins);
-    __android_log_print(ANDROID_LOG_DEBUG, "flutter", "ads1 %p", coins[0]);
-    __android_log_print(ANDROID_LOG_DEBUG, "flutter", "isUsed %d", ( (LelantusEntry *)coins[0])->isUsed);
-    __android_log_print(ANDROID_LOG_DEBUG, "flutter", "height %d", ( (LelantusEntry *)coins[0])->height);
-    __android_log_print(ANDROID_LOG_DEBUG, "flutter", "anonymitySetId %d", ( (LelantusEntry *)coins[0])->anonymitySetId);
-    __android_log_print(ANDROID_LOG_DEBUG, "flutter", "amount %d", ( (LelantusEntry *)coins[0])->amount);
-    __android_log_print(ANDROID_LOG_DEBUG, "flutter", "index %d", ( (LelantusEntry *)coins[0])->index);
-    __android_log_print(ANDROID_LOG_DEBUG, "flutter", "keydata %s", ( (LelantusEntry *)coins[0])->keydata);
     return 0;
+}
+
+extern "C" __attribute__((visibility("default"))) __attribute__((used))
+const char * GSN(uint64_t value,
+              const char *keydata,
+              int32_t index){
+    const char * return_this = GetSerialNumber(
+		value,
+		keydata,
+		index);
+    return return_this;
 }
 
 extern "C" __attribute__((visibility("default"))) __attribute__((used))
@@ -90,9 +99,9 @@ uint64_t EF(uint64_t spendAmount,
             bool subtractFeeFromAmount,
             LelantusEntry ** coins,
             int32_t coins_length,
-            uint64_t changeToMint,
+            uint64_t * changeToMint,
             int32_t * spendCoinIndexes,
-            int32_t spendCoinIndexes_length
+            int32_t * spendCoinIndexes_length
             ){
     std::list<LelantusEntry> list_coins;
     for(int i = 0; i < coins_length; i++){
@@ -100,19 +109,21 @@ uint64_t EF(uint64_t spendAmount,
     }
 
     std::vector<int32_t> list_spendCoinIndexes;
-    for(int i = 0; i < spendCoinIndexes_length; i++){
-        list_spendCoinIndexes.emplace_back(spendCoinIndexes[i]);
-    }
 
 
     uint64_t return_this = EstimateFee(
             spendAmount,
             subtractFeeFromAmount,
             list_coins,
-            changeToMint,
+            *changeToMint,
             list_spendCoinIndexes
     );
+    for(int i = 0; i < list_spendCoinIndexes.size(); i++){
+        spendCoinIndexes[i] = list_spendCoinIndexes[i];
+    }
+    spendCoinIndexes_length[0] = list_spendCoinIndexes.size();
     return return_this;
+    
 }
 
 extern "C" __attribute__((visibility("default"))) __attribute__((used))
@@ -124,6 +135,12 @@ uint32_t GMKP(uint64_t value,
             keydata,
             index
     );
+    return return_this;
+}
+
+extern "C" __attribute__((visibility("default"))) __attribute__((used))
+uint32_t GAKP(const char *serializedCoin){
+    uint32_t return_this = GetAesKeyPath(serializedCoin);
     return return_this;
 }
 
@@ -160,66 +177,63 @@ const char *CJSS(
     int32_t anonymitySetHashes_length,
     const char ** groupBlockHashes,
     int32_t groupBlockHashes_length){
-    __android_log_print(ANDROID_LOG_DEBUG, "flutter", "txHash %s", txHash);
-    __android_log_print(ANDROID_LOG_DEBUG, "flutter", "spendAmount %d", spendAmount);
-    __android_log_print(ANDROID_LOG_DEBUG, "flutter", "subtractFeeFromAmount %d", subtractFeeFromAmount);
-    __android_log_print(ANDROID_LOG_DEBUG, "flutter", "keydata %s", keydata);
-    __android_log_print(ANDROID_LOG_DEBUG, "flutter", "index %d", index);
 
-    
     std::list<LelantusEntry> list_coins;
     for(int i = 0; i < coins_length; i++){
-        list_coins.emplace_back(*(coins[i]));
-
-        __android_log_print(ANDROID_LOG_DEBUG, "flutter", "ad1 %p", coins);
-        __android_log_print(ANDROID_LOG_DEBUG, "flutter", "ads1 %p", coins[0]);
-        __android_log_print(ANDROID_LOG_DEBUG, "flutter", "isUsed %d", ( (LelantusEntry *)coins[0])->isUsed);
-        __android_log_print(ANDROID_LOG_DEBUG, "flutter", "height %d", ( (LelantusEntry *)coins[0])->height);
-        __android_log_print(ANDROID_LOG_DEBUG, "flutter", "anonymitySetId %d", ( (LelantusEntry *)coins[0])->anonymitySetId);
-        __android_log_print(ANDROID_LOG_DEBUG, "flutter", "amount %d", ( (LelantusEntry *)coins[0])->amount);
-        __android_log_print(ANDROID_LOG_DEBUG, "flutter", "index %d", ( (LelantusEntry *)coins[0])->index);
-        __android_log_print(ANDROID_LOG_DEBUG, "flutter", "keydata %s", ( (LelantusEntry *)coins[0])->keydata);
+        list_coins.push_back(*((LelantusEntry *)coins[i]));
     }
 
     std::vector<uint32_t> list_setIds;
     for(int i = 0; i < setIds_length; i++){
         list_setIds.emplace_back(setIds[i]);
-        __android_log_print(ANDROID_LOG_DEBUG, "flutter", "setIds1 %d", setIds[i]);
     }
 
     std::vector<std::vector<const char *>> list_anonymitySets;
     for(int i = 0; i < anonymitySets_length; i++){
         std::vector<const char *> anonymitySet;
+        anonymitySet.reserve(anonymitySets_lengths[i]);
         int32_t anonymitySet_length = anonymitySets_lengths[i];
         for(int j = 0; j < anonymitySet_length; j++){
-            anonymitySet.emplace_back( ((anonymitySets[i]))[j] );
-            __android_log_print(ANDROID_LOG_DEBUG, "flutter", "anonymitySet %s", ((anonymitySets[i]))[j]);
+            anonymitySet.push_back( ((anonymitySets[i]))[j] );
         }
         list_anonymitySets.emplace_back(anonymitySet);
     }
 
     std::vector<const char *> list_anonymitySetHashes;
     for(int i = 0; i < anonymitySetHashes_length; i++){
-        list_anonymitySetHashes.emplace_back(anonymitySetHashes[i]);
-        __android_log_print(ANDROID_LOG_DEBUG, "flutter", "anonymitySetHashes %s", anonymitySetHashes[i]);
+        list_anonymitySetHashes.push_back(anonymitySetHashes[i]);
     }
 
     std::vector<const char *> list_groupBlockHashes;
     for(int i = 0; i < groupBlockHashes_length; i++){
-        list_groupBlockHashes.emplace_back(groupBlockHashes[i]);
-        __android_log_print(ANDROID_LOG_DEBUG, "flutter", "groupBlockHashes %s", groupBlockHashes[i]);
+        list_groupBlockHashes.push_back(groupBlockHashes[i]);
     }
 
-    const char * return_this = CreateJoinSplitScript(
-            txHash,
-            spendAmount,
-            subtractFeeFromAmount,
-            keydata,
-            index,
-            list_coins,
-            list_setIds,
-            list_anonymitySets,
-            list_anonymitySetHashes,
-            list_groupBlockHashes);
-    return return_this;
+    try{
+        const char * return_this = CreateJoinSplitScript(
+                txHash,
+                spendAmount,
+                subtractFeeFromAmount,
+                keydata,
+                index,
+                list_coins,
+                list_setIds,
+                list_anonymitySets,
+                list_anonymitySetHashes,
+                list_groupBlockHashes);
+        return return_this;
+    }catch(exception& e){
+        __android_log_print(ANDROID_LOG_DEBUG, "CreateJoinSplitScript Error: ", "%s", e.what());
+        return "Error";
+    }
+}
+
+
+extern "C" __attribute__((visibility("default"))) __attribute__((used))
+uint64_t DMA(const char *privateKeyAES,
+             const char *encryptedValue){
+    uint64_t return_this = DecryptMintAmount(
+		privateKeyAES,
+		encryptedValue);
+	return return_this;
 }

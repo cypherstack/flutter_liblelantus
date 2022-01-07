@@ -77,6 +77,31 @@ String getMintScript(
     ).toDartString();
 
 final Pointer<Utf8> Function(
+  Pointer<Utf8>, // keydata
+  int, // index
+  Pointer<Utf8>, // seedID
+) _CreateTag = nativeAddLib
+    .lookup<
+        NativeFunction<
+            Pointer<Utf8> Function(
+      Pointer<Utf8>, // keydata
+      Int32, // index
+      Pointer<Utf8>, // seedID
+    )>>('CT')
+    .asFunction();
+
+String CreateTag(
+  String keydata,
+  int index,
+  String seedID,
+) =>
+    _CreateTag(
+      keydata.toNativeUtf8(),
+      index,
+      seedID.toNativeUtf8(),
+    ).toDartString();
+
+final Pointer<Utf8> Function(
   int, // value
   Pointer<Utf8>, //keydata
   int, //index
@@ -101,14 +126,39 @@ String getPublicCoin(
       index,
     ).toDartString();
 
+final Pointer<Utf8> Function(
+  int, // value
+  Pointer<Utf8>, // keydata
+  int, // index
+) _GetSerialNumber = nativeAddLib
+    .lookup<
+        NativeFunction<
+            Pointer<Utf8> Function(
+      Uint64, // value
+      Pointer<Utf8>, // keydata
+      Int32, // index
+    )>>('GSN')
+    .asFunction();
+
+String GetSerialNumber(
+  int value,
+  String keydata,
+  int index,
+) =>
+    _GetSerialNumber(
+      value,
+      keydata.toNativeUtf8(),
+      index,
+    ).toDartString();
+
 final int Function(
   int, // spendAmount
   int, // subtractFeeFromAmount
   Pointer<Pointer<LelantusEntry>>, // coins
   int, // coins_length
-  int, // changeToMint
+  Pointer<Uint64>, // changeToMint
   Pointer<Int32>, // spendCoinIndexes
-  int, // spendCoinIndexes_length
+  Pointer<Int32>, // spendCoinIndexes_length
 ) _estimateFee = nativeAddLib
     .lookup<
         NativeFunction<
@@ -117,9 +167,9 @@ final int Function(
       Int8, // subtractFeeFromAmount
       Pointer<Pointer<LelantusEntry>>, // coins
       Int32, // coins_length
-      Uint64, // changeToMint
+      Pointer<Uint64>, // changeToMint
       Pointer<Int32>, // spendCoinIndexes
-      Int32, // spendCoinIndexes_length
+      Pointer<Int32>, // spendCoinIndexes_length
     )>>('EF')
     .asFunction();
 
@@ -127,7 +177,7 @@ int estimateFee(
   int spendAmount,
   bool subtractFeeFromAmount,
   List<Pointer<LelantusEntry>> coins,
-  int changeToMint,
+  List<int> changeToMint,
   List<int> spendCoinIndexes,
 ) {
   var memory_coins =
@@ -136,23 +186,28 @@ int estimateFee(
     memory_coins[i] = coins[i];
   }
 
-  var memory_spendCoinIndexes =
-      pkgffi.malloc.allocate<Int32>(spendCoinIndexes.length);
-  for (int i = 0; i < spendCoinIndexes.length; i++) {
-    memory_spendCoinIndexes[i] = spendCoinIndexes[i];
-  }
+  var memory_changeToMint = pkgffi.malloc.allocate<Uint64>(1);
+
+  var memory_spendCoinIndexes = pkgffi.malloc.allocate<Int32>(coins.length);
+  var memory_spendCoinIndexes_length = pkgffi.malloc.allocate<Int32>(1);
   int result = _estimateFee(
     spendAmount,
     subtractFeeFromAmount ? 1 : 0,
     memory_coins,
     coins.length,
-    changeToMint,
+    memory_changeToMint,
     memory_spendCoinIndexes,
-    spendCoinIndexes.length,
+    memory_spendCoinIndexes_length,
   );
+  changeToMint.add(memory_changeToMint[0]);
+  for (int i = 0; i < memory_spendCoinIndexes_length[0]; i++) {
+    spendCoinIndexes.add(memory_spendCoinIndexes[i]);
+  }
 
   pkgffi.malloc.free(memory_coins);
+  pkgffi.malloc.free(memory_changeToMint);
   pkgffi.malloc.free(memory_spendCoinIndexes);
+  pkgffi.malloc.free(memory_spendCoinIndexes_length);
   return result;
 }
 
@@ -179,6 +234,23 @@ int getMintKeyPath(
       value,
       keydata.toNativeUtf8(),
       index,
+    );
+
+final int Function(
+  Pointer<Utf8>, // serializedCoin
+) _GetAesKeyPath = nativeAddLib
+    .lookup<
+        NativeFunction<
+            Uint32 Function(
+      Pointer<Utf8>, // serializedCoin
+    )>>('GAKP')
+    .asFunction();
+
+int GetAesKeyPath(
+  String serializedCoin,
+) =>
+    _GetAesKeyPath(
+      serializedCoin.toNativeUtf8(),
     );
 
 final Pointer<Utf8> Function(
@@ -266,75 +338,111 @@ String createJoinSplitScript(
   List<String> anonymitySetHashes,
   List<String> groupBlockHashes,
 ) {
-  var memory_coins =
-      pkgffi.malloc.allocate<Pointer<LelantusEntry>>(coins.length);
-  for (int i = 0; i < coins.length; i++) {
-    memory_coins[i] = coins[i];
-  }
-
-  var set_ids = pkgffi.malloc.allocate<Uint32>(setIds.length);
-  for (int i = 0; i < setIds.length; i++) {
-    set_ids[i] = setIds[i];
-  }
-  var anonymity_sets =
-      pkgffi.malloc.allocate<Pointer<Pointer<Utf8>>>(anonymitySets.length);
-  var anonymity_sets_lengths =
-      pkgffi.malloc.allocate<Int32>(anonymitySets.length);
-  for (int i = 0; i < anonymitySets.length; i++) {
-    var anonymity_set =
-        pkgffi.malloc.allocate<Pointer<Utf8>>(anonymitySets[i].length);
-    for (int j = 0; j < anonymitySets[i].length; j++) {
-      anonymity_set[j] = anonymitySets[i][j].toNativeUtf8();
+  try {
+    var memory_coins =
+        pkgffi.malloc.allocate<Pointer<LelantusEntry>>(coins.length);
+    for (int i = 0; i < coins.length; i++) {
+      memory_coins[i] = coins[i];
     }
-    anonymity_sets[i] = anonymity_set;
-    anonymity_sets_lengths[i] = anonymitySets[i].length;
-  }
-  var anonymity_set_hashes =
-      pkgffi.malloc.allocate<Pointer<Utf8>>(anonymitySetHashes.length);
-  for (int i = 0; i < anonymitySetHashes.length; i++) {
-    anonymity_set_hashes[i] = anonymitySetHashes[i].toNativeUtf8();
-  }
-  var group_block_hashes =
-      pkgffi.malloc.allocate<Pointer<Utf8>>(groupBlockHashes.length);
-  for (int i = 0; i < groupBlockHashes.length; i++) {
-    group_block_hashes[i] = groupBlockHashes[i].toNativeUtf8();
-  }
-  String result = _createJoinSplitScript(
-          txHash.toNativeUtf8(),
-          spendAmount,
-          subtractFeeFromAmount ? 1 : 0,
-          keydata.toNativeUtf8(),
-          index,
-          memory_coins,
-          coins.length,
-          set_ids,
-          setIds.length,
-          anonymity_sets,
-          anonymity_sets_lengths,
-          anonymitySets.length,
-          anonymity_set_hashes,
-          anonymitySetHashes.length,
-          group_block_hashes,
-          groupBlockHashes.length)
-      .toDartString();
 
-  pkgffi.malloc.free(memory_coins);
-  pkgffi.malloc.free(set_ids);
-  for (int i = 0; i < anonymitySets.length; i++) {
-    pkgffi.malloc.free(anonymity_sets[i]);
+    var set_ids = pkgffi.malloc.allocate<Uint32>(setIds.length);
+    for (int i = 0; i < setIds.length; i++) {
+      set_ids[i] = setIds[i];
+    }
+    var anonymity_sets =
+        pkgffi.malloc.allocate<Pointer<Pointer<Utf8>>>(anonymitySets.length);
+    var anonymity_sets_lengths =
+        pkgffi.malloc.allocate<Int32>(anonymitySets.length);
+    for (int i = 0; i < anonymitySets.length; i++) {
+      var anonymity_set = allocateAnonymitySet(anonymitySets[i].length);
+      for (int j = 0; j < anonymitySets[i].length; j++) {
+        anonymity_set[j] = anonymitySets[i][j].toNativeUtf8();
+        if (anonymitySets[i][j].length != 68) {
+          print("$j ${anonymitySets[i][j]}");
+        }
+      }
+      anonymity_sets[i] = anonymity_set;
+      anonymity_sets_lengths[i] = anonymitySets[i].length;
+    }
+
+    var anonymity_set_hashes =
+        pkgffi.malloc.allocate<Pointer<Utf8>>(anonymitySetHashes.length);
+    for (int i = 0; i < anonymitySetHashes.length; i++) {
+      print(anonymitySetHashes[i]);
+      anonymity_set_hashes[i] = anonymitySetHashes[i].toNativeUtf8();
+    }
+
+    var group_block_hashes =
+        pkgffi.malloc.allocate<Pointer<Utf8>>(groupBlockHashes.length);
+    for (int i = 0; i < groupBlockHashes.length; i++) {
+      print(groupBlockHashes[i]);
+      group_block_hashes[i] = groupBlockHashes[i].toNativeUtf8();
+    }
+
+    String result = _createJoinSplitScript(
+            txHash.toNativeUtf8(),
+            spendAmount,
+            subtractFeeFromAmount ? 1 : 0,
+            keydata.toNativeUtf8(),
+            index,
+            memory_coins,
+            coins.length,
+            set_ids,
+            setIds.length,
+            anonymity_sets,
+            anonymity_sets_lengths,
+            anonymitySets.length,
+            anonymity_set_hashes,
+            anonymitySetHashes.length,
+            group_block_hashes,
+            groupBlockHashes.length)
+        .toDartString();
+
+    pkgffi.malloc.free(memory_coins);
+    pkgffi.malloc.free(set_ids);
+    for (int i = 0; i < anonymitySets.length; i++) {
+      pkgffi.malloc.free(anonymity_sets[i]);
+    }
+    pkgffi.malloc.free(anonymity_sets);
+    pkgffi.malloc.free(anonymity_sets_lengths);
+    pkgffi.malloc.free(anonymity_set_hashes);
+    pkgffi.malloc.free(group_block_hashes);
+    return result;
+  } catch (e) {
+    print(e);
+    return "dud";
   }
-  pkgffi.malloc.free(anonymity_sets);
-  pkgffi.malloc.free(anonymity_sets_lengths);
-  pkgffi.malloc.free(anonymity_set_hashes);
-  pkgffi.malloc.free(group_block_hashes);
-  return result;
 }
 
-//
-//
-//
-//
-// TODO: Test methods, remove
+final int Function(
+  Pointer<Utf8>, // privateKeyAES
+  Pointer<Utf8>, // encryptedValue
+) _decryptMintAmount = nativeAddLib
+    .lookup<
+        NativeFunction<
+            Uint64 Function(
+      Pointer<Utf8>, // privateKeyAES
+      Pointer<Utf8>, // encryptedValue
+    )>>('DMA')
+    .asFunction();
+
+int decryptMintAmount(
+  String privateKeyAES,
+  String encryptedValue,
+) =>
+    _decryptMintAmount(
+      privateKeyAES.toNativeUtf8(),
+      encryptedValue.toNativeUtf8(),
+    );
+
+final Pointer<Pointer<Utf8>> Function(int) allocateAnonymitySet = nativeAddLib
+    .lookup<
+        NativeFunction<
+            Pointer<Pointer<Utf8>> Function(
+      Int32,
+    )>>('allocate_anonymity_set')
+    .asFunction();
+
 final Pointer<LelantusEntry> Function(
   int,
   int,
@@ -354,15 +462,3 @@ final Pointer<LelantusEntry> Function(
       Pointer<Utf8>,
     )>>('create_entry')
     .asFunction();
-
-final int Function(
-  Pointer<Pointer<LelantusEntry>>,
-) _testy = nativeAddLib
-    .lookup<
-        NativeFunction<
-            Uint64 Function(
-      Pointer<Pointer<LelantusEntry>>,
-    )>>('testy')
-    .asFunction();
-
-int testy(Pointer<Pointer<LelantusEntry>> ent) => _testy(ent);
