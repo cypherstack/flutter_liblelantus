@@ -1,6 +1,7 @@
 // https://github.com/firoorg/mobile/tree/main/react-native-lelantus/android/src/main/jniLibs
 #include "Utils.h"
 #include <iostream>
+#include <iomanip>
 #include <sstream>
 #include <utility>
 
@@ -63,6 +64,21 @@ const char *CreateMintScript(
 	return bin2hex(script, script.size());
 }
 
+const char *CreateTag(
+		const char *keydata,
+		int32_t index,
+		const char *seedID
+) {
+	auto *seed = hex2bin(seedID);
+	std::vector<unsigned char> seedVector(seed, seed + 20);
+
+	uint256 tag = CreateMintTag(hex2bin(keydata), index, uint160(seedVector));
+	const std::string &tagHex = tag.GetHex();
+    char *new_str = new char[std::strlen(tagHex.c_str()) + 1];
+    std::strcpy(new_str, tagHex.c_str());
+	return new_str;
+}
+
 const char *GetPublicCoin(
 		uint64_t value,
 		const char *keydata,
@@ -74,6 +90,19 @@ const char *GetPublicCoin(
 	const lelantus::PublicCoin &publicCoin = privateCoin.getPublicCoin();
 	return bin2hex(publicCoin.getValue().getvch().data(),
 				   publicCoin.getValue().getvch().size());
+}
+
+const char *GetSerialNumber(
+		uint64_t value,
+		const char *keydata,
+		int32_t index) {
+	uint32_t keyPathOut;
+	lelantus::PrivateCoin privateCoin = CreateMintPrivateCoin(
+			value, hex2bin(keydata), index, keyPathOut
+	);
+	auto* buffer = new unsigned char[32];
+	privateCoin.getSerialNumber().serialize(buffer);
+	return bin2hex(buffer, 32);
 }
 
 uint64_t EstimateFee(
@@ -143,6 +172,13 @@ uint32_t GetMintKeyPath(
 	uint32_t keyPathOut;
 	CreateMintPrivateCoin(value, hex2bin(keydata), index, keyPathOut);
 	return keyPathOut;
+}
+
+uint32_t GetAesKeyPath(
+		const char *serializedCoin
+) {
+	uint32_t aesKeyPath = GenerateAESKeyPath(serializedCoin);
+	return aesKeyPath;
 }
 
 const char *CreateJMintScript(
@@ -255,4 +291,16 @@ const char *CreateJoinSplitScript(
 	CreateJoinSplit(_txHash, privateCoin, spendAmount, fee, coinsToBeSpent, anonymity_sets,
 					_anonymitySetHashes, group_block_hashes, script);
 	return bin2hex(script, script.size());
+}
+
+uint64_t DecryptMintAmount(
+		const char *privateKeyAES,
+		const char *encryptedValueHex
+) {
+	auto *encryptedValue = hex2bin(encryptedValueHex);
+	std::vector<unsigned char> encryptedValueVector(encryptedValue, encryptedValue + 48);
+
+	uint64_t amount;
+	DecryptMintAmount(hex2bin(privateKeyAES), encryptedValueVector, amount);
+	return amount;
 }
