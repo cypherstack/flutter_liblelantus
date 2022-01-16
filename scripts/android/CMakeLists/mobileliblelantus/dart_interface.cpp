@@ -116,6 +116,36 @@ extern "C" __attribute__((visibility("default"))) __attribute__((used)) char **a
     }
 }
 
+extern "C" __attribute__((visibility("default"))) __attribute__((used)) char **allocate_anonymity_sets(int32_t size)
+{
+    try
+    {
+        char **anonymity_set_list = (char **)calloc(size, sizeof(char *));
+        return anonymity_set_list;
+    }
+    catch (exception e)
+    {
+        __android_log_print(ANDROID_LOG_DEBUG, "allocate_anonymity_set: ", "%s", e.what());
+        char **anonymity_set_list;
+        return anonymity_set_list;
+    }
+}
+
+extern "C" __attribute__((visibility("default"))) __attribute__((used)) char ***allocate_string_array(int32_t size)
+{
+    try
+    {
+        char ***anonymity_set_list = (char ***)calloc(size, sizeof(char *));
+        return anonymity_set_list;
+    }
+    catch (exception e)
+    {
+        __android_log_print(ANDROID_LOG_DEBUG, "allocate_anonymity_set: ", "%s", e.what());
+        char ***anonymity_set_list;
+        return anonymity_set_list;
+    }
+}
+
 extern "C" __attribute__((visibility("default"))) __attribute__((used))
 LelantusEntry *
 create_entry(bool isUsed,
@@ -148,6 +178,30 @@ LelantusEntry **
 make_entry_array(int32_t size)
 {
     LelantusEntry **entryarray = (LelantusEntry **)calloc(size, sizeof(LelantusEntry *));
+    return entryarray;
+}
+
+extern "C" __attribute__((visibility("default"))) __attribute__((used))
+uint64_t *
+uint64_t_array(int32_t size)
+{
+    uint64_t * entryarray = (uint64_t *)calloc(size, sizeof(uint64_t));
+    return entryarray;
+}
+
+extern "C" __attribute__((visibility("default"))) __attribute__((used))
+uint32_t *
+uint32_t_array(int32_t size)
+{
+    uint32_t * entryarray = (uint32_t *)calloc(size, sizeof(uint32_t));
+    return entryarray;
+}
+
+extern "C" __attribute__((visibility("default"))) __attribute__((used))
+int32_t *
+int32_t_array(int32_t size)
+{
+    int32_t * entryarray = (int32_t *)calloc(size, sizeof(int32_t));
     return entryarray;
 }
 
@@ -191,7 +245,6 @@ EF(uint64_t spendAmount,
 {
     try
     {
-        __android_log_print(ANDROID_LOG_DEBUG, "Estimate Fee : ", "%s", "hello");
         std::list<LelantusEntry> list_coins;
         for (int i = 0; i < coins_length; i++)
         {

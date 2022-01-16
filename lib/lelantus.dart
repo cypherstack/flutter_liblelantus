@@ -203,10 +203,10 @@ int estimateFee(
         coin.amount, coin.index, coin.keydata);
   }
 
-  var memory_changeToMint = pkgffi.calloc.allocate<Uint64>(1);
+  var memory_changeToMint = uint64_t_array(1);
 
-  var memory_spendCoinIndexes = pkgffi.calloc.allocate<Int32>(coins.length);
-  var memory_spendCoinIndexes_length = pkgffi.calloc.allocate<Int32>(1);
+  var memory_spendCoinIndexes = int32_t_array(coins.length);
+  var memory_spendCoinIndexes_length = int32_t_array(1);
   int result = _estimateFee(
     spendAmount,
     subtractFeeFromAmount ? 1 : 0,
@@ -362,14 +362,12 @@ String createJoinSplitScript(
           coin.amount, coin.index, coin.keydata);
     }
 
-    var set_ids = pkgffi.calloc.allocate<Uint32>(setIds.length);
+    var set_ids = uint32_t_array(setIds.length);
     for (int i = 0; i < setIds.length; i++) {
       set_ids[i] = setIds[i];
     }
-    var anonymity_sets =
-        pkgffi.calloc.allocate<Pointer<Pointer<Utf8>>>(anonymitySets.length);
-    var anonymity_sets_lengths =
-        pkgffi.calloc.allocate<Int32>(anonymitySets.length);
+    var anonymity_sets = allocate_string_array(anonymitySets.length);
+    var anonymity_sets_lengths = int32_t_array(anonymitySets.length);
     for (int i = 0; i < anonymitySets.length; i++) {
       var anonymity_set = allocateAnonymitySet(anonymitySets[i].length);
       for (int j = 0; j < anonymitySets[i].length; j++) {
@@ -382,15 +380,13 @@ String createJoinSplitScript(
       anonymity_sets_lengths[i] = anonymitySets[i].length;
     }
 
-    var anonymity_set_hashes =
-        pkgffi.calloc.allocate<Pointer<Utf8>>(anonymitySetHashes.length);
+    var anonymity_set_hashes = allocateAnonymitySet(anonymitySetHashes.length);
     for (int i = 0; i < anonymitySetHashes.length; i++) {
       print(anonymitySetHashes[i]);
       anonymity_set_hashes[i] = anonymitySetHashes[i].toNativeUtf8();
     }
 
-    var group_block_hashes =
-        pkgffi.calloc.allocate<Pointer<Utf8>>(groupBlockHashes.length);
+    var group_block_hashes = allocateAnonymitySet(groupBlockHashes.length);
     for (int i = 0; i < groupBlockHashes.length; i++) {
       print(groupBlockHashes[i]);
       group_block_hashes[i] = groupBlockHashes[i].toNativeUtf8();
@@ -460,6 +456,15 @@ final Pointer<Pointer<Utf8>> Function(int) allocateAnonymitySet = nativeAddLib
     )>>('allocate_anonymity_set')
     .asFunction();
 
+final Pointer<Pointer<Pointer<Utf8>>> Function(int) allocate_string_array =
+    nativeAddLib
+        .lookup<
+            NativeFunction<
+                Pointer<Pointer<Pointer<Utf8>>> Function(
+          Int32,
+        )>>('allocate_string_array')
+        .asFunction();
+
 final Pointer<Pointer<LelantusEntry>> Function(int) make_entry_array =
     nativeAddLib
         .lookup<
@@ -468,6 +473,30 @@ final Pointer<Pointer<LelantusEntry>> Function(int) make_entry_array =
           Int32,
         )>>('make_entry_array')
         .asFunction();
+
+final Pointer<Uint64> Function(int) uint64_t_array = nativeAddLib
+    .lookup<
+        NativeFunction<
+            Pointer<Uint64> Function(
+      Int32,
+    )>>('uint64_t_array')
+    .asFunction();
+
+final Pointer<Uint32> Function(int) uint32_t_array = nativeAddLib
+    .lookup<
+        NativeFunction<
+            Pointer<Uint32> Function(
+      Int32,
+    )>>('uint32_t_array')
+    .asFunction();
+
+final Pointer<Int32> Function(int) int32_t_array = nativeAddLib
+    .lookup<
+        NativeFunction<
+            Pointer<Int32> Function(
+      Int32,
+    )>>('int32_t_array')
+    .asFunction();
 
 final Pointer<LelantusEntry> Function(
   int,
@@ -499,12 +528,4 @@ Pointer<LelantusEntry> createEntry(
 ) {
   return _createEntry(
       isUsed, height, anonymitySetId, amount, index, keydata.toNativeUtf8());
-  // var entry = pkgffi.calloc.allocate<LelantusEntry>(1);
-  // entry.ref.isUsed = isUsed;
-  // entry.ref.height = height;
-  // entry.ref.anonymitySetId = anonymitySetId;
-  // entry.ref.amount = amount;
-  // entry.ref.index = index;
-  // entry.ref.keydata = keydata.toNativeUtf8();
-  // return entry;
 }
