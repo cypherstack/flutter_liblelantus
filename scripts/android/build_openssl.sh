@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 . ./config.sh
 OPENSSL_FILENAME=openssl-1.1.1k.tar.gz
