@@ -16,7 +16,7 @@ class Lelantus {
   }
 }
 
-final DynamicLibrary nativeAddLib = Platform.isAndroid
+final DynamicLibrary nativeAddLib = Platform.isAndroid || Platform.isLinux
     ? DynamicLibrary.open('libmobileliblelantus.so')
     : DynamicLibrary.process();
 
