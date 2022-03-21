@@ -1,4 +1,5 @@
 import 'dart:ffi';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -51,10 +52,10 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    Pointer<LelantusEntry> le =
-        createEntry(0, 1, 2, 3, 4, "aaa".toNativeUtf8());
+    Pointer<LelantusEntry> le = createEntry(0, 1, 2, 3, 4, "aaa");
     List<Pointer<LelantusEntry>> coins = List.empty(growable: true);
     coins.add(le);
+    // print("leddle ${Platform.environment['PWD']/../}");
 
     List<int> changeToMint = List.empty(growable: true);
     List<int> spendCoinIndexes = List.empty(growable: true);
@@ -62,7 +63,7 @@ class _MyAppState extends State<MyApp> {
     var lep = pkgffi.malloc.allocate<Pointer<LelantusEntry>>(1);
     lep[0] = le;
 
-    int fee = estimateFee(2, true, coins, changeToMint, spendCoinIndexes);
+    // int fee = estimateFee(2, true, coins, changeToMint, spendCoinIndexes);
 
     List<int> setIds = List.empty(growable: true);
     setIds.add(0);
@@ -115,10 +116,10 @@ class _MyAppState extends State<MyApp> {
               const SizedBox(
                 height: 10,
               ),
-              Text('fee: $fee changeToMint: $changeToMint'),
-              const SizedBox(
-                height: 10,
-              ),
+              // Text('fee: $fee changeToMint: $changeToMint'),
+              // const SizedBox(
+              //   height: 10,
+              // ),
               Text(
                   'getMintKeyPath: ${getMintKeyPath(1, "aaaaaaaaaaaaaaaa", 0)}'),
               const SizedBox(
