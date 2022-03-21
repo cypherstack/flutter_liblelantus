@@ -16,9 +16,13 @@ class Lelantus {
   }
 }
 
-final DynamicLibrary nativeAddLib = Platform.isAndroid || Platform.isLinux
-    ? DynamicLibrary.open('libmobileliblelantus.so')
-    : DynamicLibrary.process();
+final DynamicLibrary nativeAddLib = Platform.environment
+        .containsKey('FLUTTER_TEST')
+    ? DynamicLibrary.open(
+        'crypto_plugins/flutter_liblelantus/scripts/linux/build/libmobileliblelantus.so')
+    : Platform.isAndroid
+        ? DynamicLibrary.open('libmobileliblelantus.so')
+        : DynamicLibrary.process();
 
 class LelantusEntry extends Struct {
   @Int8()
