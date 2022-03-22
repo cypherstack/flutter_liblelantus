@@ -371,6 +371,7 @@
 					"$(BUILD_PRODUCTS_DIR)/../../scripts/ios/mobileliblelantus/**",
 				);
 				INFOPLIST_FILE = Runner/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -507,6 +508,7 @@
 					"$(BUILD_PRODUCTS_DIR)/../../scripts/ios/mobileliblelantus/**",
 				);
 				INFOPLIST_FILE = Runner/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -537,6 +539,7 @@
 					"$(BUILD_PRODUCTS_DIR)/../../scripts/ios/mobileliblelantus/**",
 				);
 				INFOPLIST_FILE = Runner/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
