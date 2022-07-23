@@ -67,6 +67,23 @@ class DartLelantusEntry {
 // String bin2Hex(String bin) =>
 //     _bin2Hex(bin.toNativeUtf8(), bin.length).toDartString();
 
+final void Function(
+  int, // value
+) _setTestnet = nativeAddLib
+    .lookup<
+        NativeFunction<
+            Void Function(
+      Int8, // value
+    )>>('ST')
+    .asFunction();
+
+void setTestnet(
+  bool isTestnet,
+) =>
+    _setTestnet(
+      isTestnet ? 1 : 0,
+    );
+
 final Pointer<Utf8> Function(
   int, // value
   Pointer<Utf8>, // keydata

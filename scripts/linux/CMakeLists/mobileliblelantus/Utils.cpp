@@ -5,6 +5,10 @@
 #include <sstream>
 #include <utility>
 
+void setTestnet(bool isTestnet_){
+    SetTestnet(isTestnet_);
+}
+
 unsigned char *hex2bin(const char *hexstr) {
 	size_t length = strlen(hexstr) / 2;
 	auto *chrs = (unsigned char *) malloc((length + 1) * sizeof(unsigned char));

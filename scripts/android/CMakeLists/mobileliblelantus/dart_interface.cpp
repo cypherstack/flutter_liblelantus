@@ -5,6 +5,18 @@
 
 using namespace lelantus;
 
+extern "C" __attribute__((visibility("default"))) __attribute__((used)) void ST(bool isTestnet_)
+{
+    try
+    {
+        setTestnet(isTestnet_);
+    }
+    catch (exception e)
+    {
+        __android_log_print(ANDROID_LOG_DEBUG, "set testnet error: ", "%s", e.what());
+    }
+}
+
 extern "C" __attribute__((visibility("default"))) __attribute__((used)) unsigned char *H2B(const char *str)
 {
     try

@@ -4,6 +4,18 @@
 
 using namespace lelantus;
 
+extern "C" __attribute__((visibility("default"))) __attribute__((used)) void ST(bool isTestnet_)
+{
+    try
+    {
+        setTestnet(isTestnet_);
+    }
+    catch (exception e)
+    {
+        int a = 0;
+    }
+}
+
 extern "C" __attribute__((visibility("default"))) __attribute__((used)) unsigned char *H2B(const char *str)
 {
     try
