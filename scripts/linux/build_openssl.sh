@@ -22,11 +22,13 @@ make
 curl https://www.openssl.org/source/$OPENSSL_FILENAME -o $OPENSSL_FILE_PATH
 echo $OPENSSL_SHA256 $OPENSSL_FILE_PATH | sha256sum -c - || exit 1
 
-for arch in "aarch64"
+for arch in $TYPES_OF_BUILD
 do
+echo "Building $TYPES_OF_BUILD"
 PREFIX=$WORKDIR/prefix_${arch}
 
 case $arch in
+	"x86_64")  X_ARCH="linux-x86_64";;
 	"aarch64")  X_ARCH="linux-aarch64";;
 	*)	   X_ARCH="linux-x86_64";;
 esac
