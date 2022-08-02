@@ -6,7 +6,7 @@
 #include <utility>
 
 void setTestnet(bool isTestnet_){
-    SetTestnet(isTestnet_);
+    // SetTestnet(isTestnet_);
 }
 
 unsigned char *hex2bin(const char *hexstr) {

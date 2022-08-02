@@ -15,13 +15,14 @@ ADD_DEFINITIONS(-DUSE_ENDOMORPHISM=1)
 ADD_DEFINITIONS(-DUSE_NUM_NONE=1)
 ADD_DEFINITIONS(-DUSE_FIELD_INV_BUILTIN=1)
 ADD_DEFINITIONS(-DUSE_SCALAR_INV_BUILTIN=1)
+ADD_DEFINITIONS(-fPIC)
 
 LINK_DIRECTORIES(${OPENSSL_LIBRARIES_DIR})
 
 # TODO: change this to include when possible
 include_directories(. include src/modules/ecdh src)
 
-add_library(secp256k1 SHARED src/secp256k1.c src/cpp/GroupElement.cpp src/cpp/MultiExponent.cpp src/cpp/Scalar.cpp src/modules/ecdh/main_impl.h include/secp256k1_ecdh.h src/scratch_impl.h src/scratch.h)
+add_library(secp256k1 src/secp256k1.c src/cpp/GroupElement.cpp src/cpp/MultiExponent.cpp src/cpp/Scalar.cpp src/modules/ecdh/main_impl.h include/secp256k1_ecdh.h src/scratch_impl.h src/scratch.h)
 
 # We need to link in GMP
 find_package(GMP)

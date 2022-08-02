@@ -20,9 +20,7 @@ final DynamicLibrary nativeAddLib = Platform.environment
         .containsKey('FLUTTER_TEST')
     ? DynamicLibrary.open(
         'crypto_plugins/flutter_liblelantus/scripts/linux/build/libmobileliblelantus.so')
-    : Platform.isLinux
-        ? DynamicLibrary.open('libmobileliblelantus.so')
-        : Platform.isAndroid
+    : Platform.isAndroid || Platform.isLinux
             ? DynamicLibrary.open('libmobileliblelantus.so')
             : DynamicLibrary.process();
 
