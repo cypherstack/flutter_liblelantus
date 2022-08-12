@@ -33,25 +33,29 @@ const char *CreateMintScript(
 		uint64_t value,
 		const char *keydata,
 		int32_t index,
-		const char *seedID
+		const char *seedID,
+		bool isTestnet_ = false
 );
 
 const char *CreateTag(
 		const char *keydata,
 		int32_t index,
-		const char *seedID
+		const char *seedID,
+        bool isTestnet_ = false
 );
 
 const char *GetPublicCoin(
 		uint64_t value,
 		const char *keydata,
-		int32_t index
+		int32_t index,
+        bool isTestnet_ = false
 );
 
 const char *GetSerialNumber(
 		uint64_t value,
 		const char *keydata,
-		int32_t index
+		int32_t index,
+        bool isTestnet_ = false
 );
 
 uint64_t EstimateFee(
@@ -59,13 +63,15 @@ uint64_t EstimateFee(
 		bool subtractFeeFromAmount,
 		std::list<LelantusEntry> coins,
 		uint64_t &changeToMint,
-		std::vector<int32_t> &spendCoinIndexes
+		std::vector<int32_t> &spendCoinIndexes,
+        bool isTestnet_ = false
 );
 
 uint32_t GetMintKeyPath(
 		uint64_t value,
 		const char *keydata,
-		int32_t index
+		int32_t index,
+        bool isTestnet_ = false
 );
 
 uint32_t GetAesKeyPath(
@@ -77,7 +83,8 @@ const char *CreateJMintScript(
 		const char *keydata,
 		int32_t index,
 		const char *seedID,
-		const char *AESkeydata);
+		const char *AESkeydata,
+		bool isTestnet_ = false);
 
 const char *CreateJoinSplitScript(
 		const char *txHash,
@@ -89,7 +96,8 @@ const char *CreateJoinSplitScript(
 		std::vector<uint32_t> setIds,
 		std::vector<std::vector<const char *>> anonymitySets,
 		const std::vector<const char *> &anonymitySetHashes,
-		std::vector<const char *> groupBlockHashes
+		std::vector<const char *> groupBlockHashes,
+		bool isTestnet_ = false
 );
 
 uint64_t DecryptMintAmount(

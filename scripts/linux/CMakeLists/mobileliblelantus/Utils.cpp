@@ -59,24 +59,24 @@ const char *CreateMintScript(
 		uint64_t value,
 		const char *keydata,
 		int32_t index,
-		const char *seedID) {
+		const char *seedID, bool isTestnet_) {
 	auto *seed = hex2bin(seedID);
 	std::vector<unsigned char> seedVector(seed, seed + 20);
 
 	std::vector<unsigned char> script = std::vector<unsigned char>();
-	CreateMintScript(value, hex2bin(keydata), index, uint160(seedVector), script);
+	CreateMintScript(value, hex2bin(keydata), index, uint160(seedVector), script, isTestnet_);
 	return bin2hex(script, script.size());
 }
 
 const char *CreateTag(
 		const char *keydata,
 		int32_t index,
-		const char *seedID
+		const char *seedID, bool isTestnet_
 ) {
 	auto *seed = hex2bin(seedID);
 	std::vector<unsigned char> seedVector(seed, seed + 20);
 
-	uint256 tag = CreateMintTag(hex2bin(keydata), index, uint160(seedVector));
+	uint256 tag = CreateMintTag(hex2bin(keydata), index, uint160(seedVector), isTestnet_);
 	const std::string &tagHex = tag.GetHex();
     char *new_str = new char[std::strlen(tagHex.c_str()) + 1];
     std::strcpy(new_str, tagHex.c_str());
@@ -86,10 +86,10 @@ const char *CreateTag(
 const char *GetPublicCoin(
 		uint64_t value,
 		const char *keydata,
-		int32_t index) {
+		int32_t index, bool isTestnet_) {
 	uint32_t keyPathOut;
 	lelantus::PrivateCoin privateCoin = CreateMintPrivateCoin(
-			value, hex2bin(keydata), index, keyPathOut
+			value, hex2bin(keydata), index, keyPathOut, isTestnet_
 	);
 	const lelantus::PublicCoin &publicCoin = privateCoin.getPublicCoin();
 	return bin2hex(publicCoin.getValue().getvch().data(),
@@ -99,10 +99,10 @@ const char *GetPublicCoin(
 const char *GetSerialNumber(
 		uint64_t value,
 		const char *keydata,
-		int32_t index) {
+		int32_t index, bool isTestnet_) {
 	uint32_t keyPathOut;
 	lelantus::PrivateCoin privateCoin = CreateMintPrivateCoin(
-			value, hex2bin(keydata), index, keyPathOut
+			value, hex2bin(keydata), index, keyPathOut, isTestnet_
 	);
 	auto* buffer = new unsigned char[32];
 	privateCoin.getSerialNumber().serialize(buffer);
@@ -114,7 +114,7 @@ uint64_t EstimateFee(
 		bool subtractFeeFromAmount,
 		std::list<LelantusEntry> coins,
 		uint64_t &changeToMint,
-		std::vector<int32_t> &spendCoinIndexes
+		std::vector<int32_t> &spendCoinIndexes, bool isTestnet_
 ) {
 	std::list<lelantus::CLelantusEntry> coinsl;
 	std::list<LelantusEntry>::iterator it;
@@ -124,7 +124,7 @@ uint64_t EstimateFee(
 				it->amount,
 				hex2bin(it->keydata),
 				it->index,
-				keyPathOut
+				keyPathOut, isTestnet_
 		);
 		lelantus::CLelantusEntry lelantusEntry;
 		lelantusEntry.value = coin.getPublicCoin().getValue();
@@ -157,7 +157,7 @@ uint64_t EstimateFee(
 					it->amount,
 					hex2bin(it->keydata),
 					it->index,
-					keyPathOut
+					keyPathOut, isTestnet_
 			);
 			if (coin.getSerialNumber() == entry.serialNumber) {
 				spendCoinIndexes.push_back(it->index);
@@ -171,10 +171,10 @@ uint64_t EstimateFee(
 uint32_t GetMintKeyPath(
 		uint64_t value,
 		const char *keydata,
-		int32_t index
+		int32_t index, bool isTestnet_
 ) {
 	uint32_t keyPathOut;
-	CreateMintPrivateCoin(value, hex2bin(keydata), index, keyPathOut);
+	CreateMintPrivateCoin(value, hex2bin(keydata), index, keyPathOut, isTestnet_);
 	return keyPathOut;
 }
 
@@ -190,13 +190,13 @@ const char *CreateJMintScript(
 		const char *keydata,
 		int32_t index,
 		const char *seedID,
-		const char *AESkeydata) {
+		const char *AESkeydata, bool isTestnet_) {
 	auto *seed = hex2bin(seedID);
 	std::vector<unsigned char> seedVector(seed, seed + 20);
 
 	uint32_t keyPathOut;
 	lelantus::PrivateCoin privateCoin = CreateMintPrivateCoin(value, hex2bin(keydata), index,
-															  keyPathOut);
+															  keyPathOut, isTestnet_);
 
 	std::vector<unsigned char> script = std::vector<unsigned char>();
 	CreateJMintScriptFromPrivateCoin(
@@ -204,7 +204,7 @@ const char *CreateJMintScript(
 			value,
 			uint160(seedVector),
 			hex2bin(AESkeydata),
-			script
+			script, isTestnet_
 	);
 	return bin2hex(script, script.size());
 }
@@ -219,7 +219,7 @@ const char *CreateJoinSplitScript(
 		std::vector<uint32_t> setIds,
 		std::vector<std::vector<const char *>> anonymitySets,
 		const std::vector<const char *> &anonymitySetHashes,
-		std::vector<const char *> groupBlockHashes) {
+		std::vector<const char *> groupBlockHashes, bool isTestnet_) {
 	std::list<lelantus::CLelantusEntry> coinsl;
 	std::list<LelantusEntry>::iterator it;
 	for (it = coins.begin(); it != coins.end(); ++it) {
@@ -228,7 +228,7 @@ const char *CreateJoinSplitScript(
 				it->amount,
 				hex2bin(it->keydata),
 				it->index,
-				keyPathOut
+				keyPathOut, isTestnet_
 		);
 		lelantus::CLelantusEntry lelantusEntry;
 		lelantusEntry.value = coin.getPublicCoin().getValue();
@@ -261,7 +261,7 @@ const char *CreateJoinSplitScript(
 
 	uint32_t keyPathOut;
 	lelantus::PrivateCoin privateCoin = CreateMintPrivateCoin(changeToMint, hex2bin(keydata), index,
-															  keyPathOut);
+															  keyPathOut, isTestnet_);
 
 	std::map<uint32_t, std::vector<lelantus::PublicCoin>> anonymity_sets;
 	std::vector<std::vector<unsigned char>> _anonymitySetHashes;
@@ -293,7 +293,7 @@ const char *CreateJoinSplitScript(
 
 	std::vector<unsigned char> script = std::vector<unsigned char>();
 	CreateJoinSplit(_txHash, privateCoin, spendAmount, fee, coinsToBeSpent, anonymity_sets,
-					_anonymitySetHashes, group_block_hashes, script);
+					_anonymitySetHashes, group_block_hashes, script, isTestnet_);
 	return bin2hex(script, script.size());
 }
 

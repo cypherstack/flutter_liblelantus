@@ -50,7 +50,8 @@ const char *
 CMS(uint64_t value,
     const char *keydata,
     int32_t index,
-    const char *seedID)
+    const char *seedID,
+   bool isTestnet_)
 {
     try
     {
@@ -58,7 +59,8 @@ CMS(uint64_t value,
             value,
             keydata,
             index,
-            seedID);
+            seedID,
+            isTestnet_);
         return return_this;
     }
     catch (exception e)
@@ -71,14 +73,16 @@ extern "C" __attribute__((visibility("default"))) __attribute__((used))
 const char *
 CT(const char *keydata,
    int32_t index,
-   const char *seedID)
+   const char *seedID,
+   bool isTestnet_)
 {
     try
     {
         const char *return_this = CreateTag(
             keydata,
             index,
-            seedID);
+            seedID,
+            isTestnet_);
         return return_this;
     }
     catch (exception e)
@@ -91,14 +95,16 @@ extern "C" __attribute__((visibility("default"))) __attribute__((used))
 const char *
 GPC(uint64_t value,
     const char *keydata,
-    int32_t index)
+    int32_t index,
+    bool isTestnet_)
 {
     try
     {
         const char *return_this = GetPublicCoin(
             value,
             keydata,
-            index);
+            index,
+            isTestnet_);
         return return_this;
     }
     catch (exception e)
@@ -218,14 +224,16 @@ extern "C" __attribute__((visibility("default"))) __attribute__((used))
 const char *
 GSN(uint64_t value,
     const char *keydata,
-    int32_t index)
+    int32_t index,
+    bool isTestnet_)
 {
     try
     {
         const char *return_this = GetSerialNumber(
             value,
             keydata,
-            index);
+            index,
+            isTestnet_);
         return return_this;
     }
     catch (exception e)
@@ -242,7 +250,8 @@ EF(uint64_t spendAmount,
    int32_t coins_length,
    uint64_t *changeToMint,
    int32_t *spendCoinIndexes,
-   int32_t *spendCoinIndexes_length)
+   int32_t *spendCoinIndexes_length,
+   bool isTestnet_)
 {
     try
     {
@@ -259,7 +268,8 @@ EF(uint64_t spendAmount,
             subtractFeeFromAmount,
             list_coins,
             *changeToMint,
-            list_spendCoinIndexes);
+            list_spendCoinIndexes,
+            isTestnet_);
         for (int i = 0; i < list_spendCoinIndexes.size(); i++)
         {
             spendCoinIndexes[i] = list_spendCoinIndexes[i];
@@ -277,14 +287,16 @@ extern "C" __attribute__((visibility("default"))) __attribute__((used))
 uint32_t
 GMKP(uint64_t value,
      const char *keydata,
-     int32_t index)
+     int32_t index,
+     bool isTestnet_)
 {
     try
     {
         uint32_t return_this = GetMintKeyPath(
             value,
             keydata,
-            index);
+            index,
+            isTestnet_);
         return return_this;
     }
     catch (exception e)
@@ -314,7 +326,8 @@ CJMS(uint64_t value,
      const char *keydata,
      int32_t index,
      const char *seedID,
-     const char *AESkeydata)
+     const char *AESkeydata,
+     bool isTestnet_)
 {
     try
     {
@@ -323,7 +336,8 @@ CJMS(uint64_t value,
             keydata,
             index,
             seedID,
-            AESkeydata);
+            AESkeydata,
+            isTestnet_);
         return return_this;
     }
     catch (exception e)
@@ -350,7 +364,8 @@ CJSS(
     const char **anonymitySetHashes,
     int32_t anonymitySetHashes_length,
     const char **groupBlockHashes,
-    int32_t groupBlockHashes_length)
+    int32_t groupBlockHashes_length,
+    bool isTestnet_)
 {
     try
     {
@@ -404,7 +419,8 @@ CJSS(
                 list_setIds,
                 list_anonymitySets,
                 list_anonymitySetHashes,
-                list_groupBlockHashes);
+                list_groupBlockHashes,
+                isTestnet_);
             return return_this;
         }
         catch (exception &e)
