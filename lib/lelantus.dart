@@ -1,11 +1,10 @@
 import 'dart:async';
-
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'dart:io';
 import 'dart:ffi';
+import 'dart:io';
+
 import 'package:ffi/ffi.dart';
 import 'package:ffi/ffi.dart' as pkgffi;
+import 'package:flutter/services.dart';
 
 class Lelantus {
   static const MethodChannel _channel = MethodChannel('lelantus');
@@ -89,6 +88,7 @@ final Pointer<Utf8> Function(
   Pointer<Utf8>, // keydata
   int, // index
   Pointer<Utf8>, // seedID
+  int, // isTestnet
 ) _getMintScript = nativeAddLib
     .lookup<
         NativeFunction<
@@ -97,26 +97,25 @@ final Pointer<Utf8> Function(
       Pointer<Utf8>, // keydata
       Int32, // index
       Pointer<Utf8>, // seedID
+      Int8, // isTestnet
     )>>('CMS')
     .asFunction();
 
-String getMintScript(
-  int value,
-  String keydata,
-  int index,
-  String seedID,
-) =>
+String getMintScript(int value, String keydata, int index, String seedID,
+        {bool isTestnet = false}) =>
     _getMintScript(
       value,
       keydata.toNativeUtf8(),
       index,
       seedID.toNativeUtf8(),
+      isTestnet ? 1 : 0,
     ).toDartString();
 
 final Pointer<Utf8> Function(
   Pointer<Utf8>, // keydata
   int, // index
   Pointer<Utf8>, // seedID
+  int, // isTestnet
 ) _CreateTag = nativeAddLib
     .lookup<
         NativeFunction<
@@ -124,24 +123,24 @@ final Pointer<Utf8> Function(
       Pointer<Utf8>, // keydata
       Int32, // index
       Pointer<Utf8>, // seedID
+      Int8, // isTestnet
     )>>('CT')
     .asFunction();
 
-String CreateTag(
-  String keydata,
-  int index,
-  String seedID,
-) =>
+String CreateTag(String keydata, int index, String seedID,
+        {bool isTestnet = false}) =>
     _CreateTag(
       keydata.toNativeUtf8(),
       index,
       seedID.toNativeUtf8(),
+      isTestnet ? 1 : 0,
     ).toDartString();
 
 final Pointer<Utf8> Function(
   int, // value
   Pointer<Utf8>, //keydata
   int, //index
+  int, // isTestnet
 ) _getPublicCoin = nativeAddLib
     .lookup<
         NativeFunction<
@@ -149,24 +148,24 @@ final Pointer<Utf8> Function(
       Uint64, // value
       Pointer<Utf8>, // keydata
       Int32, // index
+      Int8, // isTestnet
     )>>('GPC')
     .asFunction();
 
-String getPublicCoin(
-  int value,
-  String keydata,
-  int index,
-) =>
+String getPublicCoin(int value, String keydata, int index,
+        {bool isTestnet = false}) =>
     _getPublicCoin(
       value,
       keydata.toNativeUtf8(),
       index,
+      isTestnet ? 1 : 0,
     ).toDartString();
 
 final Pointer<Utf8> Function(
   int, // value
   Pointer<Utf8>, // keydata
   int, // index
+  int, // isTestnet
 ) _GetSerialNumber = nativeAddLib
     .lookup<
         NativeFunction<
@@ -174,18 +173,17 @@ final Pointer<Utf8> Function(
       Uint64, // value
       Pointer<Utf8>, // keydata
       Int32, // index
+      Int8, // isTestnet
     )>>('GSN')
     .asFunction();
 
-String GetSerialNumber(
-  int value,
-  String keydata,
-  int index,
-) =>
+String GetSerialNumber(int value, String keydata, int index,
+        {bool isTestnet = false}) =>
     _GetSerialNumber(
       value,
       keydata.toNativeUtf8(),
       index,
+      isTestnet ? 1 : 0,
     ).toDartString();
 
 final int Function(
@@ -196,6 +194,7 @@ final int Function(
   Pointer<Uint64>, // changeToMint
   Pointer<Int32>, // spendCoinIndexes
   Pointer<Int32>, // spendCoinIndexes_length
+  int, // isTestnet
 ) _estimateFee = nativeAddLib
     .lookup<
         NativeFunction<
@@ -207,16 +206,17 @@ final int Function(
       Pointer<Uint64>, // changeToMint
       Pointer<Int32>, // spendCoinIndexes
       Pointer<Int32>, // spendCoinIndexes_length
+      Int8, // isTestnet
     )>>('EF')
     .asFunction();
 
 int estimateFee(
-  int spendAmount,
-  bool subtractFeeFromAmount,
-  List<DartLelantusEntry> coins,
-  List<int> changeToMint,
-  List<int> spendCoinIndexes,
-) {
+    int spendAmount,
+    bool subtractFeeFromAmount,
+    List<DartLelantusEntry> coins,
+    List<int> changeToMint,
+    List<int> spendCoinIndexes,
+    {bool isTestnet = false}) {
   Pointer<Pointer<LelantusEntry>> entries = make_entry_array(coins.length);
   for (int i = 0; i < coins.length; i++) {
     DartLelantusEntry coin = coins[i];
@@ -236,6 +236,7 @@ int estimateFee(
     memory_changeToMint,
     memory_spendCoinIndexes,
     memory_spendCoinIndexes_length,
+    isTestnet ? 1 : 0,
   );
   changeToMint.add(memory_changeToMint[0]);
   for (int i = 0; i < memory_spendCoinIndexes_length[0]; i++) {
@@ -252,6 +253,7 @@ final int Function(
   int, // value
   Pointer<Utf8>, // keydata
   int, // index
+  int, // isTestnet
 ) _getMintKeyPath = nativeAddLib
     .lookup<
         NativeFunction<
@@ -259,18 +261,17 @@ final int Function(
       Uint64, // value
       Pointer<Utf8>, // keydata
       Int32, //index
+      Int8, // isTestnet
     )>>('GMKP')
     .asFunction();
 
-int getMintKeyPath(
-  int value,
-  String keydata,
-  int index,
-) =>
+int getMintKeyPath(int value, String keydata, int index,
+        {bool isTestnet = false}) =>
     _getMintKeyPath(
       value,
       keydata.toNativeUtf8(),
       index,
+      isTestnet ? 1 : 0,
     );
 
 final int Function(
@@ -296,6 +297,7 @@ final Pointer<Utf8> Function(
   int, // index
   Pointer<Utf8>, // seedID
   Pointer<Utf8>, // AESkeydata
+  int, // isTestnet
 ) _createJMintScript = nativeAddLib
     .lookup<
         NativeFunction<
@@ -305,22 +307,20 @@ final Pointer<Utf8> Function(
       Int32, // index
       Pointer<Utf8>, // seedID
       Pointer<Utf8>, // AESkeydata
+      Int8, // isTestnet
     )>>('CJMS')
     .asFunction();
 
 String createJMintScript(
-  int value,
-  String keydata,
-  int index,
-  String seedID,
-  String AESkeydata,
-) =>
+        int value, String keydata, int index, String seedID, String AESkeydata,
+        {bool isTestnet = false}) =>
     _createJMintScript(
       value,
       keydata.toNativeUtf8(),
       index,
       seedID.toNativeUtf8(),
       AESkeydata.toNativeUtf8(),
+      isTestnet ? 1 : 0,
     ).toDartString();
 
 final Pointer<Utf8> Function(
@@ -340,6 +340,7 @@ final Pointer<Utf8> Function(
   int,
   Pointer<Pointer<Utf8>>,
   int,
+  int, // isTestnet
 ) _createJoinSplitScript = nativeAddLib
     .lookup<
         NativeFunction<
@@ -360,21 +361,22 @@ final Pointer<Utf8> Function(
       Int32, // anonymitySetHashes_length
       Pointer<Pointer<Utf8>>, // groupBlockHashes
       Int32, // groupBlockHashes_length
+      Int8, // isTestnet
     )>>('CJSS')
     .asFunction();
 
 String createJoinSplitScript(
-  String txHash,
-  int spendAmount,
-  bool subtractFeeFromAmount,
-  String keydata,
-  int index,
-  List<DartLelantusEntry> coins,
-  List<int> setIds,
-  List<List<String>> anonymitySets,
-  List<String> anonymitySetHashes,
-  List<String> groupBlockHashes,
-) {
+    String txHash,
+    int spendAmount,
+    bool subtractFeeFromAmount,
+    String keydata,
+    int index,
+    List<DartLelantusEntry> coins,
+    List<int> setIds,
+    List<List<String>> anonymitySets,
+    List<String> anonymitySetHashes,
+    List<String> groupBlockHashes,
+    {bool isTestnet = false}) {
   try {
     Pointer<Pointer<LelantusEntry>> entries = make_entry_array(coins.length);
     for (int i = 0; i < coins.length; i++) {
@@ -414,23 +416,24 @@ String createJoinSplitScript(
     }
 
     String result = _createJoinSplitScript(
-            txHash.toNativeUtf8(),
-            spendAmount,
-            subtractFeeFromAmount ? 1 : 0,
-            keydata.toNativeUtf8(),
-            index,
-            entries,
-            coins.length,
-            set_ids,
-            setIds.length,
-            anonymity_sets,
-            anonymity_sets_lengths,
-            anonymitySets.length,
-            anonymity_set_hashes,
-            anonymitySetHashes.length,
-            group_block_hashes,
-            groupBlockHashes.length)
-        .toDartString();
+      txHash.toNativeUtf8(),
+      spendAmount,
+      subtractFeeFromAmount ? 1 : 0,
+      keydata.toNativeUtf8(),
+      index,
+      entries,
+      coins.length,
+      set_ids,
+      setIds.length,
+      anonymity_sets,
+      anonymity_sets_lengths,
+      anonymitySets.length,
+      anonymity_set_hashes,
+      anonymitySetHashes.length,
+      group_block_hashes,
+      groupBlockHashes.length,
+      isTestnet ? 1 : 0,
+    ).toDartString();
 
     pkgffi.calloc.free(entries);
     pkgffi.calloc.free(set_ids);

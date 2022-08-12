@@ -1,24 +1,27 @@
-#!/bin/bash
+#!/bin/sh
+
+set -e
 
 . ./config.sh
-OPENSSL_FILENAME=openssl-1.1.1k.tar.gz
+OPENSSL_FILENAME=openssl-1.1.1q.tar.gz
 OPENSSL_FILE_PATH=$WORKDIR/$OPENSSL_FILENAME
-OPENSSL_SRC_DIR=$WORKDIR/openssl-1.1.1k
-OPENSSL_SHA256="892a0875b9872acd04a9fde79b1f943075d5ea162415de3047c327df33fbaee5"
-ZLIB_FILENAME=zlib-1.2.12.tar.gz
-ZLIB_FILE_PATH=$WORKDIR/$ZLIB_FILENAME
-ZLIB_SRC_DIR=$WORKDIR/zlib-1.2.12
-ZLIB_SHA256="91844808532e5ce316b3c010929493c0244f3d37593afd6de04f71821d5136d9"
+OPENSSL_SRC_DIR=$WORKDIR/openssl-1.1.1q
+OPENSSL_SHA256="d7939ce614029cdff0b6c20f0e2e5703158a489a72b2507b8bd51bf8c8fd10ca"
+ZLIB_DIR=$WORKDIR/zlib
+ZLIB_TAG=v1.2.11
+ZLIB_COMMIT_HASH="cacf7f1d4e3d44d871b605da3b647f07d718623f"
 
-curl https://zlib.net/$ZLIB_FILENAME -o $ZLIB_FILE_PATH
-echo $ZLIB_SHA256 $ZLIB_FILE_PATH | sha256sum -c - || exit 1
-
-tar -xzf $ZLIB_FILE_PATH -C $WORKDIR
-cd $ZLIB_SRC_DIR
+rm -rf $ZLIB_DIR
+git clone -b $ZLIB_TAG --depth 1 https://github.com/madler/zlib $ZLIB_DIR
+cd $ZLIB_DIR
+git reset --hard $ZLIB_COMMIT_HASH
 CC=clang CXX=clang++ ./configure --static
 make
 
-curl https://www.openssl.org/source/$OPENSSL_FILENAME -o $OPENSSL_FILE_PATH
+if [ ! -e "$OPENSSL_FILE_PATH" ]; then
+  curl https://www.openssl.org/source/$OPENSSL_FILENAME -o $OPENSSL_FILE_PATH
+fi
+
 echo $OPENSSL_SHA256 $OPENSSL_FILE_PATH | sha256sum -c - || exit 1
 
 for arch in "aarch" "aarch64" "i686" "x86_64"
@@ -41,14 +44,14 @@ case $arch in
 	*)	   CLANG=${arch}-linux-android${API}-clang
 		   CXXLANG=${arch}-linux-android${API}-clang++
 		   X_ARCH="android-${arch}";;
-esac 	
+esac
 
 cd $WORKDIR
 rm -rf $OPENSSL_SRC_DIR
 tar -xzf $OPENSSL_FILE_PATH -C $WORKDIR
 cd $OPENSSL_SRC_DIR
 ./Configure CC=${CLANG} CXX=${CXXLANG} ${X_ARCH} \
-	no-asm no-shared --static \
+	no-asm no-shared no-tests --static \
 	--with-zlib-include=${PREFIX}/include \
 	--with-zlib-lib=${PREFIX}/lib \
 	--prefix=${PREFIX} \
@@ -56,6 +59,6 @@ cd $OPENSSL_SRC_DIR
 	-D__ANDROID_API__=$API
 sed -i 's/CNF_EX_LIBS=-ldl -pthread//g;s/BIN_CFLAGS=-pie $(CNF_CFLAGS) $(CFLAGS)//g' Makefile
 make -j16
-make install
+make install_sw
 
 done
