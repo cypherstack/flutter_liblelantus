@@ -1,3 +1,4 @@
 [submodule "ios/Classes/mobileliblelantus"]
 	path = mobileliblelantus
-	url = https://github.com/firoorg/mobileliblelantus.git
+	url = https://github.com/cypherstack/mobileliblelantus.git
+    branch = testnetfix
