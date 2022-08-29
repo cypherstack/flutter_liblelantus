@@ -6,7 +6,8 @@
 #include <utility>
 
 void setTestnet(bool isTestnet_){
-    SetTestnet(isTestnet_);
+    //SetTestnet(isTestnet_);
+    int a = 1;
 }
 
 unsigned char *hex2bin(const char *hexstr) {
@@ -64,7 +65,7 @@ const char *CreateMintScript(
 	std::vector<unsigned char> seedVector(seed, seed + 20);
 
 	std::vector<unsigned char> script = std::vector<unsigned char>();
-	CreateMintScript(value, hex2bin(keydata), index, uint160(seedVector), script, isTestnet_);
+	CreateMintScript(value, hex2bin(keydata), index, uint160(seedVector), script);
 	return bin2hex(script, script.size());
 }
 
@@ -76,7 +77,7 @@ const char *CreateTag(
 	auto *seed = hex2bin(seedID);
 	std::vector<unsigned char> seedVector(seed, seed + 20);
 
-	uint256 tag = CreateMintTag(hex2bin(keydata), index, uint160(seedVector), isTestnet_);
+	uint256 tag = CreateMintTag(hex2bin(keydata), index, uint160(seedVector));
 	const std::string &tagHex = tag.GetHex();
     char *new_str = new char[std::strlen(tagHex.c_str()) + 1];
     std::strcpy(new_str, tagHex.c_str());
@@ -89,7 +90,7 @@ const char *GetPublicCoin(
 		int32_t index, bool isTestnet_) {
 	uint32_t keyPathOut;
 	lelantus::PrivateCoin privateCoin = CreateMintPrivateCoin(
-			value, hex2bin(keydata), index, keyPathOut, isTestnet_
+			value, hex2bin(keydata), index, keyPathOut
 	);
 	const lelantus::PublicCoin &publicCoin = privateCoin.getPublicCoin();
 	return bin2hex(publicCoin.getValue().getvch().data(),
@@ -102,7 +103,7 @@ const char *GetSerialNumber(
 		int32_t index, bool isTestnet_) {
 	uint32_t keyPathOut;
 	lelantus::PrivateCoin privateCoin = CreateMintPrivateCoin(
-			value, hex2bin(keydata), index, keyPathOut, isTestnet_
+			value, hex2bin(keydata), index, keyPathOut
 	);
 	auto* buffer = new unsigned char[32];
 	privateCoin.getSerialNumber().serialize(buffer);
@@ -124,7 +125,7 @@ uint64_t EstimateFee(
 				it->amount,
 				hex2bin(it->keydata),
 				it->index,
-				keyPathOut, isTestnet_
+				keyPathOut
 		);
 		lelantus::CLelantusEntry lelantusEntry;
 		lelantusEntry.value = coin.getPublicCoin().getValue();
@@ -157,7 +158,7 @@ uint64_t EstimateFee(
 					it->amount,
 					hex2bin(it->keydata),
 					it->index,
-					keyPathOut, isTestnet_
+					keyPathOut
 			);
 			if (coin.getSerialNumber() == entry.serialNumber) {
 				spendCoinIndexes.push_back(it->index);
@@ -174,7 +175,7 @@ uint32_t GetMintKeyPath(
 		int32_t index, bool isTestnet_
 ) {
 	uint32_t keyPathOut;
-	CreateMintPrivateCoin(value, hex2bin(keydata), index, keyPathOut, isTestnet_);
+	CreateMintPrivateCoin(value, hex2bin(keydata), index, keyPathOut);
 	return keyPathOut;
 }
 
@@ -196,7 +197,7 @@ const char *CreateJMintScript(
 
 	uint32_t keyPathOut;
 	lelantus::PrivateCoin privateCoin = CreateMintPrivateCoin(value, hex2bin(keydata), index,
-															  keyPathOut, isTestnet_);
+															  keyPathOut);
 
 	std::vector<unsigned char> script = std::vector<unsigned char>();
 	CreateJMintScriptFromPrivateCoin(
@@ -204,7 +205,7 @@ const char *CreateJMintScript(
 			value,
 			uint160(seedVector),
 			hex2bin(AESkeydata),
-			script, isTestnet_
+			script
 	);
 	return bin2hex(script, script.size());
 }
@@ -228,7 +229,7 @@ const char *CreateJoinSplitScript(
 				it->amount,
 				hex2bin(it->keydata),
 				it->index,
-				keyPathOut, isTestnet_
+				keyPathOut
 		);
 		lelantus::CLelantusEntry lelantusEntry;
 		lelantusEntry.value = coin.getPublicCoin().getValue();
@@ -261,7 +262,7 @@ const char *CreateJoinSplitScript(
 
 	uint32_t keyPathOut;
 	lelantus::PrivateCoin privateCoin = CreateMintPrivateCoin(changeToMint, hex2bin(keydata), index,
-															  keyPathOut, isTestnet_);
+															  keyPathOut);
 
 	std::map<uint32_t, std::vector<lelantus::PublicCoin>> anonymity_sets;
 	std::vector<std::vector<unsigned char>> _anonymitySetHashes;
@@ -293,7 +294,7 @@ const char *CreateJoinSplitScript(
 
 	std::vector<unsigned char> script = std::vector<unsigned char>();
 	CreateJoinSplit(_txHash, privateCoin, spendAmount, fee, coinsToBeSpent, anonymity_sets,
-					_anonymitySetHashes, group_block_hashes, script, isTestnet_);
+					_anonymitySetHashes, group_block_hashes, script);
 	return bin2hex(script, script.size());
 }
 
