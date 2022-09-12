@@ -28,3 +28,4 @@ scripts/linux_arm64/mobileliblelantus/
 scripts/linux_arm64/android_on_mac/build/
 
 .idea
+lib/git_versions.dart
