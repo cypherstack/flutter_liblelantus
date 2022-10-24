@@ -85,10 +85,10 @@ foreach($arch in $env:TYPES_OF_BUILD) {
     nmake install_sw DESTDIR=..\openssl # -j${env:THREADS} # Must install to destination directory, installing by default places files in C:\Program Files\OpenSLL, which requires administrator privileges
     Write-Output "openssl installed"
     if ((Test-Path -Path ".\build\openssl\Program Files")) {
-        Copy-Item ".\build\openssl\Program Files\OpenSSL" -Destination .\build\openssl -Force -Recurse # TODO add \bin to PATH?
+        Copy-Item ".\build\openssl\Program Files\OpenSSL\*" -Destination ".\build\openssl" -Force -Recurse # TODO add \bin to PATH?
     }
     if ((Test-Path -Path ".\build\openssl\OpenSSL")) {
-        Copy-Item ".\build\openssl\OpenSSL" -Destination .\build\openssl -Force -Recurse # TODO add \bin to PATH?
+        Copy-Item ".\build\openssl\OpenSSL\*" -Destination ".\build\openssl" -Force -Recurse # TODO add \bin to PATH?
     }
 }
 
