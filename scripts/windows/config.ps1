@@ -1,4 +1,4 @@
-#!/bin/pwsh
+# !/bin/pwsh
 
 $env:API=21
 $dir = (Get-Item .).FullName
