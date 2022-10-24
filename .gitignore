@@ -29,3 +29,6 @@ scripts/linux_arm64/android_on_mac/build/
 
 .idea
 lib/git_versions.dart
+scripts/windows/CMakeLists/mobileliblelantus/CMakeLists.txt
+
+scripts/windows/CMakeLists/secp256k1/CMakeLists.txt
