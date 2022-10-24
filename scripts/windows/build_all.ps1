@@ -1,3 +1,3 @@
 #! /usr/bin/pwsh
 
-mkdir build
+New-Item -ItemType Directory -Force -Path build
