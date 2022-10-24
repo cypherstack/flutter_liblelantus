@@ -5,13 +5,13 @@ project(mobileliblelantus)
 set(OPENSSL_USE_STATIC_LIBS OFF CACHE BOOL "" FORCE)
 
 SET(distribution_DIR /opt/android)
-SET(OPENSSL_ROOT_DIR ${distribution_DIR}/prefix_${ANDROID_ABI})
+SET(OPENSSL_ROOT_DIR ${env:distribution_DIR}/prefix_${env:ANDROID_ABI})
 
-SET(OPENSSL_LIBRARIES_DIR "${OPENSSL_ROOT_DIR}/lib")
-SET(OPENSSL_INCLUDE_DIR ${OPENSSL_ROOT_DIR}/include)
+SET(OPENSSL_LIBRARIES_DIR "${env:OPENSSL_ROOT_DIR}/lib")
+SET(OPENSSL_INCLUDE_DIR ${env:OPENSSL_ROOT_DIR}/include)
 SET(OPENSSL_LIBRARIES "ssl" "crypto")
 
-LINK_DIRECTORIES(${OPENSSL_LIBRARIES_DIR})
+LINK_DIRECTORIES(${env:OPENSSL_LIBRARIES_DIR})
 
 add_subdirectory(secp256k1)
 
@@ -74,8 +74,8 @@ add_library(mobileliblelantus SHARED
     src/Utils.cpp
     src/dart_interface.cpp)
 
-target_link_libraries(mobileliblelantus ${OPENSSL_LIBRARIES} secp256k1)
+target_link_libraries(mobileliblelantus ${env:OPENSSL_LIBRARIES} secp256k1)
 
 add_dependencies(mobileliblelantus secp256k1)
 
-target_include_directories(mobileliblelantus PUBLIC secp256k1 ${OPENSSL_INCLUDE_DIR})
+target_include_directories(mobileliblelantus PUBLIC secp256k1 ${env:OPENSSL_INCLUDE_DIR})

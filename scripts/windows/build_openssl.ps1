@@ -57,7 +57,7 @@ foreach($arch in $env:TYPES_OF_BUILD) {
     }
 
     cd $env:WORKDIR
-    if ((Test-Path $env:OPENSSL_SRC_DIR -PathType Leaf)) {
+    if ((Test-Path $env:OPENSSL_SRC_DIR -PathType Leaf)) { # TODO detect if built and installed, if so skip
         Write-Output "${env:OPENSSL_SRC_DIR} exists, deleting it"
         Remove-Item $env:OPENSSL_SRC_DIR -Recurse
     }
@@ -84,6 +84,12 @@ foreach($arch in $env:TYPES_OF_BUILD) {
     Write-Output "installing openssl"
     nmake install_sw DESTDIR=..\openssl # -j${env:THREADS} # Must install to destination directory, installing by default places files in C:\Program Files\OpenSLL, which requires administrator privileges
     Write-Output "openssl installed"
+    if ((Test-Path -Path ".\build\openssl\Program Files")) {
+        Copy-Item ".\build\openssl\Program Files\OpenSSL" -Destination .\build\openssl -Force -Recurse # TODO add \bin to PATH?
+    }
+    if ((Test-Path -Path ".\build\openssl\OpenSSL")) {
+        Copy-Item ".\build\openssl\OpenSSL" -Destination .\build\openssl -Force -Recurse # TODO add \bin to PATH?
+    }
 }
 
 cd ..

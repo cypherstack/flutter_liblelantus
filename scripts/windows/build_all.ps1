@@ -6,3 +6,4 @@ New-Item -ItemType Directory -Force -Path build
 ./build_openssl.ps1
 ./copymobile.ps1
 ./linkDistros.ps1
+./copyCMakeLists.ps1
