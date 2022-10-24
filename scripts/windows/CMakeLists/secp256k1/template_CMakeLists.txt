@@ -4,10 +4,10 @@ cmake_minimum_required(VERSION 3.1)
 project(secp256k1)
 
 SET(distribution_DIR /opt/android)
-SET(OPENSSL_ROOT_DIR ${env:distribution_DIR}/prefix_${env:ANDROID_ABI})
+SET(OPENSSL_ROOT_DIR ${distribution_DIR}/prefix_${ANDROID_ABI})
 
-SET(OPENSSL_LIBRARIES_DIR "${env:OPENSSL_ROOT_DIR}/lib")
-SET(OPENSSL_INCLUDE_DIR ${env:OPENSSL_ROOT_DIR}/include)
+SET(OPENSSL_LIBRARIES_DIR "${OPENSSL_ROOT_DIR}/lib")
+SET(OPENSSL_INCLUDE_DIR ${OPENSSL_ROOT_DIR}/include)
 SET(OPENSSL_LIBRARIES "ssl" "crypto")
 SET(ENABLE_MODULE_ECDH 1)
 ADD_DEFINITIONS(-DENABLE_MODULE_ECDH=1)
@@ -17,7 +17,7 @@ ADD_DEFINITIONS(-DUSE_FIELD_INV_BUILTIN=1)
 ADD_DEFINITIONS(-DUSE_SCALAR_INV_BUILTIN=1)
 ADD_DEFINITIONS(-fPIC)
 
-LINK_DIRECTORIES(${env:OPENSSL_LIBRARIES_DIR})
+LINK_DIRECTORIES(${OPENSSL_LIBRARIES_DIR})
 
 # TODO: change this to include when possible
 include_directories(. include src/modules/ecdh src)
@@ -27,8 +27,8 @@ add_library(secp256k1 src/secp256k1.c src/cpp/GroupElement.cpp src/cpp/MultiExpo
 # We need to link in GMP
 find_package(GMP)
 if(GMP_INCLUDE_DIR AND GMP_LIBRARIES)
-	target_include_directories(secp256k1 PUBLIC ${env:GMP_INCLUDE_DIR})
-	target_link_libraries(secp256k1 ${env:GMP_LIBRARIES})
+	target_include_directories(secp256k1 PUBLIC ${GMP_INCLUDE_DIR})
+	target_link_libraries(secp256k1 ${GMP_LIBRARIES})
 	target_compile_definitions(secp256k1
 		PUBLIC
 			HAVE_LIBGMP
@@ -75,6 +75,6 @@ endif()
 # TODO: emult static precomputation
 # TODO: ecdh module
 # TODO: RECOVERY module
-TARGET_INCLUDE_DIRECTORIES(secp256k1 PUBLIC ${env:OPENSSL_INCLUDE_DIR})
-TARGET_LINK_LIBRARIES(secp256k1 ${env:OPENSSL_LIBRARIES})
-#target_link_libraries(secp256k1 ${env:OPENSSL_LIBRARIES})
+TARGET_INCLUDE_DIRECTORIES(secp256k1 PUBLIC ${OPENSSL_INCLUDE_DIR})
+TARGET_LINK_LIBRARIES(secp256k1 ${OPENSSL_LIBRARIES})
+#target_link_libraries(secp256k1 ${OPENSSL_LIBRARIES})
