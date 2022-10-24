@@ -1,6 +1,5 @@
 #! /usr/bin/pwsh
 
-./config.ps1
 $env:OPENSSL_FILENAME = "openssl-1.1.1k.tar.gz"
 $env:OPENSSL_FILE_PATH = "${env:WORKDIR}\${env:OPENSSL_FILENAME}"
 $env:OPENSSL_SRC_DIR = "${env:WORKDIR}\openssl-1.1.1k"
