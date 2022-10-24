@@ -37,5 +37,54 @@ if ($hash -eq $env:OPENSSL_SHA256) {
     exit
 }
 
+foreach($arch in $env:TYPES_OF_BUILD) {
+    Write-Output "Building ${arch}"
+    $env:PREFIX="${env:WORKDIR}/prefix_${arch}"
+
+    Switch ($arch) {
+        "x86_64" {
+            $env:X_ARCH="windows-x86_64"
+            VsDevCmd.bat -host_arch=amd64 -arch=amd64
+        }
+        "aarch64" {
+            $env:X_ARCH="windows-aarch64"
+            VsDevCmd.bat -host_arch=arm64 -arch=arm64
+        }
+        default {
+            $env:X_ARCH="windows-x86_64"
+            VsDevCmd.bat -host_arch=amd64 -arch=amd64
+        }
+    }
+
+    cd $env:WORKDIR
+    if ((Test-Path $env:OPENSSL_SRC_DIR -PathType Leaf)) {
+        Write-Output "${env:OPENSSL_SRC_DIR} exists, deleting it"
+        Remove-Item $env:OPENSSL_SRC_DIR -Recurse
+    }
+    Write-Output "extracting ${env:OPENSSL_FILE_PATH} to ${env:WORKDIR}"
+    tar -xzf $env:OPENSSL_FILE_PATH -C $env:WORKDIR
+    cd $env:OPENSSL_SRC_DIR
+    Write-Output "extracted"
+
+    <#
+    #sed -i -e "s/mandroid/target\ ${TARGET}\-linux\-android/" Configure
+        ./Configure ${X_ARCH} \
+        no-asm no-shared \
+        --with-zlib-include=${PREFIX}/include \
+        --with-zlib-lib=${PREFIX}/lib \
+        --prefix=${PREFIX} \
+        --openssldir=${PREFIX}
+    #>
+    Write-Output "configuring openssl"
+    perl Configure VC-WIN64A no-shared no-idea # This and the next two functional lines require these scripts to be ran from a Visual Studio x64 Native Tools Command Prompt
+    Write-Output "openssl configured"
+    Write-Output "building openssl"
+    nmake clean # -j${env:THREADS}
+    Write-Output "openssl built"
+    Write-Output "installing openssl"
+    nmake install_sw DESTDIR=..\openssl # -j${env:THREADS} # Must install to destination directory, installing by default places files in C:\Program Files\OpenSLL, which requires administrator privileges
+    Write-Output "openssl installed"
+}
+
 cd ..
 cd ..
