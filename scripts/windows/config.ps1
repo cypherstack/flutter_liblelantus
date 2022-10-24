@@ -1,13 +1,14 @@
 #!/bin/pwsh
 
 $env:API=21
-$env:WORKDIR="${(Get-Item .).FullName}/build"
-$env:ANDROID_NDK_ZIP="${WORKDIR}/android-ndk-r17c.zip"
-$env:ANDROID_NDK_ROOT="${WORKDIR}/android-ndk-r17c"
-$env:ANDROID_NDK_HOME="$ANDROID_NDK_ROOT"
-$env:TOOLCHAIN_DIR="${WORKDIR}/toolchain"
-$env:TOOLCHAIN_BASE_DIR="$TOOLCHAIN_DIR"
-$env:ORIGINAL_PATH="$PATH"
+$dir = (Get-Item .).FullName
+$env:WORKDIR="${dir}\build"
+$env:ANDROID_NDK_ZIP="${env:WORKDIR}\android-ndk-r17c.zip"
+$env:ANDROID_NDK_ROOT="${env:WORKDIR}\android-ndk-r17c"
+$env:ANDROID_NDK_HOME="${env:ANDROID_NDK_ROOT}"
+$env:TOOLCHAIN_DIR="${env:WORKDIR}\toolchain"
+$env:TOOLCHAIN_BASE_DIR="${env:TOOLCHAIN_DIR}"
+$env:ORIGINAL_PATH="${env:PATH}"
 $env:THREADS=8
 $env:TYPES_OF_BUILD="x86_64"
 
