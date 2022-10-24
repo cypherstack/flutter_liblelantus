@@ -2,4 +2,4 @@
 
 Write-Output "installing missing headers"
 
-Copy-Item "CMakeLists\missingheader\endian.h" -Destination "build\secp256k1\include\"
+Copy-Item "CMakeLists\missingheader\endian.h" -Destination "build\openssl\include\"
