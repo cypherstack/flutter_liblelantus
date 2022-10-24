@@ -7,6 +7,7 @@ $env:EXAMPLE_VERSIONS_FILE = "..\..\lib\git_versions_example.dart"
 Copy-Item $env:EXAMPLE_VERSIONS_FILE -Destination $env:VERSIONS_FILE
 $env:OS = "WINDOWS"
 (Get-Content $env:VERSIONS_FILE).replace('WINDOWS_VERSION = ""', "WINDOWS_VERSION = ""${env:COMMIT}""") | Set-Content $env:VERSIONS_FILE
-cd build
-cmake mobileliblelantus
-msbuild mobileliblelantus.sln
+# Disabled because final build needs to be done by MSYS2
+#cd build
+#cmake mobileliblelantus
+#msbuild mobileliblelantus.sln

@@ -74,6 +74,8 @@ foreach($arch in $env:TYPES_OF_BUILD) {
         --prefix=${PREFIX} \
         --openssldir=${PREFIX}
     #>
+    # Need to build in MSYS2
+    <#
     Write-Output "configuring openssl"
     perl Configure VC-WIN64A no-shared no-idea # This and the next two functional lines require these scripts to be ran from a Visual Studio x64 Native Tools Command Prompt
     Write-Output "openssl configured"
@@ -89,6 +91,7 @@ foreach($arch in $env:TYPES_OF_BUILD) {
     if ((Test-Path -Path ".\build\openssl\OpenSSL")) {
         Copy-Item ".\build\openssl\OpenSSL\*" -Destination ".\build\openssl" -Force -Recurse # TODO add \bin to PATH?
     }
+    #>
 }
 
 cd ..
