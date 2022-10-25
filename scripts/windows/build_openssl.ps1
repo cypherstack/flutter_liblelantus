@@ -75,7 +75,7 @@ foreach($arch in $env:TYPES_OF_BUILD) {
         --openssldir=${PREFIX}
     #>
     # Need to build in MSYS2
-    Write-Output "Continue build process in MSYS2 (Build OpenSSL then run prep_sharedfile.ps1)"
+    Write-Output "Continue build process in MSYS2 MINGW64 (Build OpenSSL then run prep_sharedfile.ps1)"
     <#
     Write-Output "configuring openssl"
     perl Configure VC-WIN64A no-shared no-idea # This and the next two functional lines require these scripts to be ran from a Visual Studio x64 Native Tools Command Prompt
