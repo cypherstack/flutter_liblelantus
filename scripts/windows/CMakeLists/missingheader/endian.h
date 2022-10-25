@@ -14,7 +14,7 @@
 #ifndef PORTABLE_ENDIAN_H__
 #define PORTABLE_ENDIAN_H__
 
-#if (defined(_WIN16) || defined(_WIN32) || defined(_WIN64)) && !defined(__WINDOWS__)
+#if (defined(_WIN16) || defined(_WIN32) || defined(_WIN64) || defined(__MSYS__)) && !defined(__WINDOWS__)
 
 #   define __WINDOWS__
 
@@ -82,9 +82,9 @@
 #       define be32toh(x) ntohl(x)
 #       define le32toh(x) (x)
 
-#       define htobe64(x) htonll(x)
+#       define htobe64(x) htonl(x)
 #       define htole64(x) (x)
-#       define be64toh(x) ntohll(x)
+#       define be64toh(x) ntohl(x)
 #       define le64toh(x) (x)
 
 #   elif BYTE_ORDER == BIG_ENDIAN
