@@ -15,8 +15,8 @@ if (!(Test-Path -Path $env:ZLIB_DIR)) {
 cd $env:ZLIB_DIR
 git reset --hard $env:ZLIB_COMMIT_HASH
 #./configure --static # TODO translate to PowerShell
-cmake # This and the next line require these scripts to be ran from a Visual Studio Developer PowerShell (or cmake and msbuild need to be in PATH)
-msbuild zlib.sln
+cmake -A x64 -DCMAKE_GENERATOR_PLATFORM=x64 -DCMAKE_CL_64=1 # This and the next line require these scripts to be ran from a Visual Studio Developer PowerShell (or cmake and msbuild need to be in PATH)
+msbuild zlib.sln /property:Configuration=Release /property:Platform=x64
 
 if (!(Test-Path $env:OPENSSL_FILE_PATH -PathType Leaf)) {
     Write-Output "${$env:OPENSSL_FILE_PATH} doesn't exist, downloading it"
@@ -32,7 +32,7 @@ if ($hash -eq $env:OPENSSL_SHA256) {
     Remove-Item -Path ${env:OPENSSL_FILE_PATH}
     cd ..
     cd ..
-    ./build_openssl.ps1
+    ./build_openssl.ps1 # Restart; redownload
     exit
 }
 
@@ -75,12 +75,13 @@ foreach($arch in $env:TYPES_OF_BUILD) {
         --openssldir=${PREFIX}
     #>
     # Need to build in MSYS2
+    Write-Output "Continue build process in MSYS2 (Build OpenSSL then run prep_sharedfile.ps1)"
     <#
     Write-Output "configuring openssl"
     perl Configure VC-WIN64A no-shared no-idea # This and the next two functional lines require these scripts to be ran from a Visual Studio x64 Native Tools Command Prompt
     Write-Output "openssl configured"
     Write-Output "building openssl"
-    nmake clean # -j${env:THREADS}
+    nmake # -j${env:THREADS}
     Write-Output "openssl built"
     Write-Output "installing openssl"
     nmake install_sw DESTDIR=..\openssl # -j${env:THREADS} # Must install to destination directory, installing by default places files in C:\Program Files\OpenSLL, which requires administrator privileges
