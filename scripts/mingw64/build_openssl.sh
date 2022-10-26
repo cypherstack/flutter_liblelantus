@@ -32,10 +32,20 @@ do
 		*)	   X_ARCH="linux-x86_64";;
 	esac
 
+	cd $WORKDIR
+	rm -rf $OPENSSL_SRC_DIR
+	tar -xzf $OPENSSL_FILE_PATH -C $WORKDIR
+	cd $OPENSSL_SRC_DIR
+
 	./Configure ${X_ARCH} no-asm no-shared --with-zlib-include=${PREFIX}/include --with-zlib-lib=${PREFIX}/lib --prefix=${PREFIX} --openssldir=${PREFIX}
 	make
 done'
 
-perl Configure mingw64 no-shared no-asm --with-zlib-include=${PREFIX}/include --with-zlib-lib=${PREFIX}/lib --prefix=${PREFIX} --openssldir=${PREFIX}
+cd $WORKDIR
+rm -rf $OPENSSL_SRC_DIR
+tar -xzf $OPENSSL_FILE_PATH -C $WORKDIR
+cd $OPENSSL_SRC_DIR
+
+./Configure mingw64 no-shared no-asm --with-zlib-include=${PREFIX}/include --with-zlib-lib=${PREFIX}/lib --prefix=${PREFIX} --openssldir=${PREFIX}
 make -j$THREADS
 make -j$THREADS install_sw
