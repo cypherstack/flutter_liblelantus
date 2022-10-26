@@ -3,6 +3,7 @@
 ./mingw64deps.sh
 
 mkdir build
+mkdir cache
 ./install_missing_headers.sh
 ./build_openssl.sh
 ./copymobile.sh

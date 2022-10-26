@@ -40,3 +40,5 @@ windows/CMakeFiles/cmake.check_cache
 scripts/mingw64/CMakeLists/mobileliblelantus/CMakeLists.txt
 
 scripts/mingw64/CMakeLists/secp256k1/CMakeLists.txt
+
+scripts/mingw64/cache/
