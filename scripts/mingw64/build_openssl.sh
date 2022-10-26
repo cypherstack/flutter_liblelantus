@@ -47,5 +47,5 @@ tar -xzf $OPENSSL_FILE_PATH -C $WORKDIR
 cd $OPENSSL_SRC_DIR
 
 ./Configure mingw64 no-shared no-asm --with-zlib-include=${PREFIX}/include --with-zlib-lib=${PREFIX}/lib --prefix=${PREFIX} --openssldir=${PREFIX}
-make -j$THREADS
-make -j$THREADS install_sw
+mingw32-make -j$THREADS
+mingw32-make -j$THREADS install_sw

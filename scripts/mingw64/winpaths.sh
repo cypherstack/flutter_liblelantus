@@ -16,6 +16,6 @@ export OPENSSL_SRC_DIR=$WORKDIR/openssl-1.1.1k
 export ZLIB_DIR=$WORKDIR/zlib
 
 export SEDWORKDIR=$(echo $WORKDIR | sed 's/\//\\\//g')
-export SEDWORKDIR=${SEDWORKDIR//"\/c\"/"C:"/}
+export SEDWORKDIR=${SEDWORKDIR//"/c/"/"C:/"/}
 
-echo "Configured variables for build"
+echo "Configured variables for build on windows"
