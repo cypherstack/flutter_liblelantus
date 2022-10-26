@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
@@ -23,7 +23,7 @@ cmake --build . --config Release
 if [ ! -f "$OPENSSL_FILE_PATH" ] ; then
 	curl https://www.openssl.org/source/$OPENSSL_FILENAME -o $OPENSSL_FILE_PATH
 fi
-if [ $OPENSSL_SHA256 == $OPENSSL_FILE_PATH | sha256sum -c ] ; then
+if [ "$OPENSSL_SHA256" = "$(sha256sum $OPENSSL_FILE_PATH)" ] ; then
 	rm $OPENSSL_FILE_PATH
 	exit 1
 fi
@@ -43,8 +43,8 @@ do
 	make
 done'
 
+PREFIX=$WORKDIR/prefix_mingw64
+
 perl Configure mingw64 no-shared no-asm --with-zlib-include=${PREFIX}/include --with-zlib-lib=${PREFIX}/lib --prefix=${PREFIX} --openssldir=${PREFIX}
 make -j$THREADS
 make -j$THREADS install_sw
-
-done

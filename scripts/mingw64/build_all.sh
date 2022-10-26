@@ -1,5 +1,7 @@
 #!/bin/bash
 
+./mingw64deps.sh
+
 mkdir build
 ./build_openssl.sh
 ./copymobile.sh
