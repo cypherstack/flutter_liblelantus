@@ -28,5 +28,8 @@ export ZLIB_TAG=v1.2.11
 export ZLIB_COMMIT_HASH="cacf7f1d4e3d44d871b605da3b647f07d718623f"
 
 export SEDWORKDIR=$(echo $WORKDIR | sed 's/\//\\\//g')
+export SEDWORKDIR=${SEDWORKDIR//'\/c'/"C:"/}
 
-echo "Configured variables for build"
+export VERSIONS_FILE=../../lib/git_versions.dart
+export EXAMPLE_VERSIONS_FILE=../../lib/git_versions_example.dart
+export OS="MINGW64"
