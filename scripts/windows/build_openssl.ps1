@@ -1,5 +1,7 @@
 #! /usr/bin/pwsh
 
+./config.ps1
+
 if (!(Test-Path -Path $env:ZLIB_DIR)) {
     Write-Output "${env:ZLIB_DIR} doesn't exist, cloning github.com/madler/zlib"
     git clone -b $env:ZLIB_TAG --depth 1 https://github.com/madler/zlib $env:ZLIB_DIR
@@ -67,7 +69,6 @@ foreach($arch in $env:TYPES_OF_BUILD) {
         --openssldir=${PREFIX}
     #>
     Write-Output "configuring openssl"
-    VsDevCmd.bat -host_arch=amd64 -arch=amd64
     perl Configure VC-WIN64A no-shared no-idea # This and the next two functional lines require these scripts to be ran from a Visual Studio x64 Native Tools Command Prompt
     Write-Output "openssl configured"
     Write-Output "building openssl"
