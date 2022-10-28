@@ -32,7 +32,7 @@ add_library(secp256k1
 find_package(GMP)
 if(GMP_INCLUDE_DIR AND GMP_LIBRARIES)
 	target_include_directories(secp256k1 PUBLIC ${GMP_INCLUDE_DIR} ${INCLUDE_DIR})
-	target_link_libraries(secp256k1 ${GMP_LIBRARIES})
+	target_link_libraries(secp256k1 ${GMP_LIBRARIES} "${distribution_DIR}/CMakeFiles/mobileliblelantus.dir/objects.a")
 	target_compile_definitions(secp256k1
 		PUBLIC
 			HAVE_LIBGMP
@@ -42,6 +42,7 @@ if(GMP_INCLUDE_DIR AND GMP_LIBRARIES)
 	)
 else()
 	target_include_directories(secp256k1 PUBLIC ${GMP_INCLUDE_DIR} ${INCLUDE_DIR})
+	target_link_libraries(secp256k1 ${GMP_LIBRARIES} "${distribution_DIR}/CMakeFiles/mobileliblelantus.dir/objects.a")
 	target_compile_definitions(secp256k1
 		PUBLIC
 			USE_NUM_NONE
