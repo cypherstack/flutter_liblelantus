@@ -17,7 +17,16 @@ ADD_DEFINITIONS(-fPIC)
 # TODO: change this to include when possible
 include_directories(. include src/modules/ecdh src)
 
-add_library(secp256k1 src/secp256k1.c src/cpp/GroupElement.cpp src/cpp/MultiExponent.cpp src/cpp/Scalar.cpp src/modules/ecdh/main_impl.h include/secp256k1_ecdh.h src/scratch_impl.h src/scratch.h)
+
+add_library(secp256k1
+	src/secp256k1.c
+	src/cpp/GroupElement.cpp
+	src/cpp/MultiExponent.cpp
+	src/cpp/Scalar.cpp
+	src/modules/ecdh/main_impl.h
+	include/secp256k1_ecdh.h
+	src/scratch_impl.h
+	src/scratch.h)
 
 # We need to link in GMP
 find_package(GMP)
@@ -32,7 +41,7 @@ if(GMP_INCLUDE_DIR AND GMP_LIBRARIES)
 			USE_SCALAR_INV_BUILTIN
 	)
 else()
-	target_include_directories(secp256k1 PUBLIC ${INCLUDE_DIR})
+	target_include_directories(secp256k1 PUBLIC ${GMP_INCLUDE_DIR} ${INCLUDE_DIR})
 	target_compile_definitions(secp256k1
 		PUBLIC
 			USE_NUM_NONE

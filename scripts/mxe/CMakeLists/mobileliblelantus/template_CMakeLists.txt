@@ -8,10 +8,11 @@ SET(distribution_DIR /opt/android)
 SET(OPENSSL_ROOT_DIR ${distribution_DIR})
 
 SET(INCLUDE_DIR ${distribution_DIR}/include)
+
 #SET(OPENSSL_LIBRARIES_DIR "${OPENSSL_ROOT_DIR}/lib")
 #SET(OPENSSL_LIBRARIES "ssl" "crypto")
 
-LINK_DIRECTORIES(${OPENSSL_LIBRARIES_DIR}/*)
+LINK_DIRECTORIES(${INCLUDE_DIR})
 
 add_subdirectory(secp256k1)
 
