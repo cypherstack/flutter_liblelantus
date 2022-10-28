@@ -1,94 +1,125 @@
-/* Copyright (C) 1992-2018 Free Software Foundation, Inc.
-   This file is part of the GNU C Library.
-   The GNU C Library is free software; you can redistribute it and/or
-   modify it under the terms of the GNU Lesser General Public
-   License as published by the Free Software Foundation; either
-   version 2.1 of the License, or (at your option) any later version.
-   The GNU C Library is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-   Lesser General Public License for more details.
-   You should have received a copy of the GNU Lesser General Public
-   License along with the GNU C Library; if not, see
-   <http://www.gnu.org/licenses/>.  */
+//
+// endian.h
+//
+// https://gist.github.com/panzi/6856583
+//
+// I, Mathias Panzenböck, place this file hereby into the public domain. Use
+// it at your own risk for whatever you like. In case there are
+// jurisdictions that don't support putting things in the public domain you
+// can also consider it to be "dual licensed" under the BSD, MIT and Apache
+// licenses, if you want to. This code is trivial anyway. Consider it an
+// example on how to get the endian conversion functions on different
+// platforms.
 
-#ifndef	_ENDIAN_H
-#define	_ENDIAN_H	1
+#ifndef PORTABLE_ENDIAN_H__
+#define PORTABLE_ENDIAN_H__
 
-#include <features.h>
+#if (defined(_WIN16) || defined(_WIN32) || defined(_WIN64)) && !defined(__WINDOWS__)
 
-/* Definitions for byte order, according to significance of bytes,
-   from low addresses to high addresses.  The value is what you get by
-   putting '4' in the most significant byte, '3' in the second most
-   significant byte, '2' in the second least significant byte, and '1'
-   in the least significant byte, and then writing down one digit for
-   each byte, starting with the byte at the lowest address at the left,
-   and proceeding to the byte with the highest address at the right.  */
+#  define __WINDOWS__
 
-#define	__LITTLE_ENDIAN	1234
-#define	__BIG_ENDIAN	4321
-#define	__PDP_ENDIAN	3412
-
-/* This file defines `__BYTE_ORDER' for the particular machine.  */
-#include <bits/endian.h>
-
-/* Some machines may need to use a different endianness for floating point
-   values.  */
-#ifndef __FLOAT_WORD_ORDER
-# define __FLOAT_WORD_ORDER __BYTE_ORDER
 #endif
 
-#ifdef	__USE_MISC
-# define LITTLE_ENDIAN	__LITTLE_ENDIAN
-# define BIG_ENDIAN	__BIG_ENDIAN
-# define PDP_ENDIAN	__PDP_ENDIAN
-# define BYTE_ORDER	__BYTE_ORDER
+#if defined(__linux__) || defined(__CYGWIN__)
+
+#  include <endian.h>
+
+#elif defined(__APPLE__)
+
+#  include <libkern/OSByteOrder.h>
+
+#  define htobe16(x) OSSwapHostToBigInt16(x)
+#  define htole16(x) OSSwapHostToLittleInt16(x)
+#  define be16toh(x) OSSwapBigToHostInt16(x)
+#  define le16toh(x) OSSwapLittleToHostInt16(x)
+
+#  define htobe32(x) OSSwapHostToBigInt32(x)
+#  define htole32(x) OSSwapHostToLittleInt32(x)
+#  define be32toh(x) OSSwapBigToHostInt32(x)
+#  define le32toh(x) OSSwapLittleToHostInt32(x)
+
+#  define htobe64(x) OSSwapHostToBigInt64(x)
+#  define htole64(x) OSSwapHostToLittleInt64(x)
+#  define be64toh(x) OSSwapBigToHostInt64(x)
+#  define le64toh(x) OSSwapLittleToHostInt64(x)
+
+#  define __BYTE_ORDER    BYTE_ORDER
+#  define __BIG_ENDIAN    BIG_ENDIAN
+#  define __LITTLE_ENDIAN LITTLE_ENDIAN
+#  define __PDP_ENDIAN    PDP_ENDIAN
+
+#elif defined(__OpenBSD__)
+
+#  include <sys/endian.h>
+
+#elif defined(__NetBSD__) || defined(__FreeBSD__) || defined(__DragonFly__)
+
+#  include <sys/endian.h>
+
+#  define be16toh(x) betoh16(x)
+#  define le16toh(x) letoh16(x)
+
+#  define be32toh(x) betoh32(x)
+#  define le32toh(x) letoh32(x)
+
+#  define be64toh(x) betoh64(x)
+#  define le64toh(x) letoh64(x)
+
+#elif defined(__WINDOWS__)
+
+#  include <winsock2.h>
+#  include <sys/param.h>
+
+#  if BYTE_ORDER == LITTLE_ENDIAN
+
+#     define htobe16(x) htons(x)
+#     define htole16(x) (x)
+#     define be16toh(x) ntohs(x)
+#     define le16toh(x) (x)
+
+#     define htobe32(x) htonl(x)
+#     define htole32(x) (x)
+#     define be32toh(x) ntohl(x)
+#     define le32toh(x) (x)
+
+#     define htobe64(x) htonl(x)
+#     define htole64(x) (x)
+#     define be64toh(x) ntohl(x)
+#     define le64toh(x) (x)
+
+#  elif BYTE_ORDER == BIG_ENDIAN
+
+      /* that would be xbox 360 */
+#     define htobe16(x) (x)
+#     define htole16(x) __builtin_bswap16(x)
+#     define be16toh(x) (x)
+#     define le16toh(x) __builtin_bswap16(x)
+
+#     define htobe32(x) (x)
+#     define htole32(x) __builtin_bswap32(x)
+#     define be32toh(x) (x)
+#     define le32toh(x) __builtin_bswap32(x)
+
+#     define htobe64(x) (x)
+#     define htole64(x) __builtin_bswap64(x)
+#     define be64toh(x) (x)
+#     define le64toh(x) __builtin_bswap64(x)
+
+#  else
+
+#     error byte order not supported
+
+#  endif
+
+#  define __BYTE_ORDER    BYTE_ORDER
+#  define __BIG_ENDIAN    BIG_ENDIAN
+#  define __LITTLE_ENDIAN LITTLE_ENDIAN
+#  define __PDP_ENDIAN    PDP_ENDIAN
+
+#else
+
+#  error platform not supported
+
 #endif
 
-#if __BYTE_ORDER == __LITTLE_ENDIAN
-# define __LONG_LONG_PAIR(HI, LO) LO, HI
-#elif __BYTE_ORDER == __BIG_ENDIAN
-# define __LONG_LONG_PAIR(HI, LO) HI, LO
 #endif
-
-
-#if defined __USE_MISC && !defined __ASSEMBLER__
-/* Conversion interfaces.  */
-# include <bits/byteswap.h>
-# include <bits/uintn-identity.h>
-
-# if __BYTE_ORDER == __LITTLE_ENDIAN
-#  define htobe16(x) __bswap_16 (x)
-#  define htole16(x) __uint16_identity (x)
-#  define be16toh(x) __bswap_16 (x)
-#  define le16toh(x) __uint16_identity (x)
-
-#  define htobe32(x) __bswap_32 (x)
-#  define htole32(x) __uint32_identity (x)
-#  define be32toh(x) __bswap_32 (x)
-#  define le32toh(x) __uint32_identity (x)
-
-#  define htobe64(x) __bswap_64 (x)
-#  define htole64(x) __uint64_identity (x)
-#  define be64toh(x) __bswap_64 (x)
-#  define le64toh(x) __uint64_identity (x)
-
-# else
-#  define htobe16(x) __uint16_identity (x)
-#  define htole16(x) __bswap_16 (x)
-#  define be16toh(x) __uint16_identity (x)
-#  define le16toh(x) __bswap_16 (x)
-
-#  define htobe32(x) __uint32_identity (x)
-#  define htole32(x) __bswap_32 (x)
-#  define be32toh(x) __uint32_identity (x)
-#  define le32toh(x) __bswap_32 (x)
-
-#  define htobe64(x) __uint64_identity (x)
-#  define htole64(x) __bswap_64 (x)
-#  define be64toh(x) __uint64_identity (x)
-#  define le64toh(x) __bswap_64 (x)
-# endif
-#endif
-
-#endif	/* endian.h */
