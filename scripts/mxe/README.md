@@ -17,6 +17,9 @@ fi
 make cmake openssl MXE_TARGETS='x86_64-w64-mingw32.static'
 # TODO git clone
 cd ~/src/flutter_liblelantus
-cd scripts/mxe/build
-x86_64-w64-mingw32.static-cmake ./mobileliblelantus/ -DCMAKE_BUILD_TYPE=RelWithDebInfo
+cd scripts/mxe
+./prep_sharedfile.sh
+cd build
+x86_64-w64-mingw32.static-cmake . -DCMAKE_BUILD_TYPE=RelWithDebInfo
+make -j$(nproc)
 ```
