@@ -48,3 +48,7 @@ scripts/crosscompile/cache/
 scripts/crosscompile/CMakeLists/mobileliblelantus/CMakeLists.txt
 
 scripts/crosscompile/CMakeLists/secp256k1/CMakeLists.txt
+
+scripts/mxe/CMakeLists/mobileliblelantus/CMakeLists.txt
+
+scripts/mxe/CMakeLists/secp256k1/CMakeLists.txt
