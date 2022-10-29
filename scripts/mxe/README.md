@@ -21,13 +21,16 @@ make cmake MXE_TARGETS='x86_64-w64-mingw32.static'
 
 Build mobileliblelantus
 ```bash
-cd ~
+mkdir ~/src
+cd ~/src
 git clone https://github.com/cypherstack/flutter_liblelantus
 cd flutter_liblelantus
-git reset baf1f7c4028f4697c2c3dfed6357a1367cd3999b --hard
+git checkout build/mxe
+#git reset af6c304fd02b145d1d5e21e6341f9a71f756c09f --hard
 cd scripts/mxe
 ./prep_sharedfile.sh # Copies mobileliblelantus repo, some headers and includes, and CMakeLists
 cd build
+rm CMakeCache.txt
 x86_64-w64-mingw32.static-cmake . -DCMAKE_BUILD_TYPE=RelWithDebInfo
 make -j$(nproc)
 ```
