@@ -11,9 +11,10 @@ if ! [[ $PATH == *"/mxe"* ]]; then
 	source ~/.bashrc
 fi
 make cmake openssl MXE_TARGETS='x86_64-w64-mingw32.static'
+cd ~
 git clone https://github.com/cypherstack/flutter_liblelantus
-git reset 849a7efe0488b1ce6bb173397fb8b13d7a7da922 --hard
-cd ~/src/flutter_liblelantus
+cd flutter_liblelantus
+git reset baf1f7c4028f4697c2c3dfed6357a1367cd3999b --hard
 cd scripts/mxe
 ./prep_sharedfile.sh
 cd build
