@@ -19,3 +19,4 @@ cp ./CMakeLists/secp256k1/CMakeLists.txt             ./build/secp256k1/CMakeList
 cp ./CMakeLists/missingheader/endian.h               ./build/include/endian.h
 cp ./CMakeLists/missingheader/endian.h            	 ./build/secp256k1/include/endian.h
 cp ./CMakeLists/missingheader/features.h             ./build/include/features.h
+cp ./CMakeLists/missingheader/windows.h             ./build/include/windows.h
