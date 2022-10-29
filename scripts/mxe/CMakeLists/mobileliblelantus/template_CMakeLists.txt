@@ -78,7 +78,7 @@ add_library(mobileliblelantus SHARED
 
 target_link_libraries(mobileliblelantus "${distribution_DIR}/CMakeFiles/mobileliblelantus.dir/objects.a" secp256k1)
 
-#add_library(objects SHARED "${distribution_DIR}/CMakeFiles/mobileliblelantus.dir/objects.a")
+add_library(objects SHARED "${distribution_DIR}/CMakeFiles/mobileliblelantus.dir/objects.a")
 
 add_dependencies(mobileliblelantus secp256k1)
 
