@@ -71,7 +71,7 @@ foreach($arch in $env:TYPES_OF_BUILD) {
         --openssldir=${PREFIX}
     #>
     Write-Output "configuring openssl"
-    perl Configure -MT -Z7 threads no-idea no-deprecated no-shared VC-WIN64A # This and the next two functional lines require these scripts to be ran from a Visual Studio x64 Native Tools Command Prompt
+    perl Configure no-idea no-shared VC-WIN64A OPENSSL_LIBS="-llibssl -llibcrypto -lcrypt32 -lws2_32" # -MT -Z7 threads no-deprecated This and the next two functional lines require these scripts to be ran from a Visual Studio x64 Native Tools Command Prompt
     #perl Configure VC-WIN64A no-shared no-idea
     Write-Output "openssl configured"
     Write-Output "building openssl"
