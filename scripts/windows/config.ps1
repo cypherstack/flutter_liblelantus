@@ -19,6 +19,7 @@ if (Test-Path 'env:IS_ARM ') {
 }
 
 $env:OPENSSL_FILENAME = "openssl-1.1.1k.tar.gz"
+$env:OPENSSL_FILE_DIR = "${env:dir}\cache\"
 $env:OPENSSL_FILE_PATH = "${env:dir}\cache\${env:OPENSSL_FILENAME}"
 $env:OPENSSL_SRC_DIR = "${env:WORKDIR}\openssl-1.1.1k"
 $env:OPENSSL_SHA256 = "892a0875b9872acd04a9fde79b1f943075d5ea162415de3047c327df33fbaee5"
