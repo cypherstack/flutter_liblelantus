@@ -9,7 +9,7 @@ if (!(Test-Path -Path $env:ZLIB_DIR)) {
 cd $env:ZLIB_DIR
 git reset --hard $env:ZLIB_COMMIT_HASH
 #./configure --static # TODO translate to PowerShell
-cmake . -A x64 -DCMAKE_GENERATOR_PLATFORM=x64 -DCMAKE_CL_64=1 # This and the next line require these scripts to be ran from a Visual Studio Developer PowerShell (or cmake and msbuild need to be in PATH)
+cmake . -A x64 -DCMAKE_GENERATOR_PLATFORM=x64 -DCMAKE_CL_64=1 -DCMAKE_C_COMPILER:PATH="C:\Program Files\LLVM\bin\clang.exe" -DCMAKE_CXX_COMPILER:PATH="C:\Program Files\LLVM\bin\clang.exe" -DCMAKE_C_COMPILER_ID="Clang" -DCMAKE_CXX_COMPILER_ID="Clang" -DCMAKE_SYSTEM_NAME="Generic" -T ClangCL,host=x64 # This and the next line require these scripts to be ran from a Visual Studio Developer PowerShell (or cmake and msbuild need to be in PATH)
 msbuild zlib.sln /property:Configuration=Release /property:Platform=x64
 
 if (!(Test-Path $env:OPENSSL_FILE_PATH -PathType Leaf)) {
