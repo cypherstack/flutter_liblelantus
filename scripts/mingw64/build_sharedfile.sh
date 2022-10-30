@@ -2,6 +2,9 @@
 
 . ./config.sh
 
+./linkDistros.sh
+./copyCMakeLists.sh
+
 echo ''$(git log -1 --pretty=format:"%H")' '$(date) >> build/git_commit_version.txt
 if [ ! -f "$VERSIONS_FILE" ]; then
     cp $EXAMPLE_VERSIONS_FILE $VERSIONS_FILE
@@ -11,5 +14,5 @@ sed -i "/\/\*${OS}_VERSION/c\\/\*${OS}_VERSION\*\/ const ${OS}_VERSION = \"$COMM
 #./winpaths.sh
 cd build
 # May have to rm CMakeCache.txt
-cmake ./mobileliblelantus -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=RelWithDebInfo
+cmake ./mobileliblelantus -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=RelWithDebInfo 
 mingw32-make -j$(nproc) # or use `cmd //c mklink make mingw32-make.exe` in MSYS2 to use just use make
