@@ -11,7 +11,9 @@ git submodule update --recursive --init
 There are three approaches to building for Windows: just using Visual Studio and clang, just using MSYS2/MinGW64 (recommended) and using Visual Studio/msbuild and MSYS2/MinGW64 together:
 
 #### Visual Studio and clang
-Use a Visual Studio Developer Console to run `build_all.ps1`
+Use a Visual Studio x64 Native Tools Command Prompt to run `scripts/windows/build_all.ps1`
+
+<!-- https://iocafe-doc.readthedocs.io/en/latest/dev-tools/windows/200111-building-with-opensll-on-windows.html -->
 
 #### MSYS2/MinGW64
 This approach builds everything in MSYS2/MinGW64.  Open a MinGW 64-bit shell (MINGW64), navigate to `/scripts/windows/build` (use `cd /c/` to navigate to C:\), and run `scripts/mingw64/build_all.sh`
