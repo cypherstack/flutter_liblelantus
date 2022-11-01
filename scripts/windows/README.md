@@ -1,5 +1,6 @@
 ### flutter_liblelantus
 Install [LLVM for Windows](https://llvm.org/builds/) and add it to PATH
+Use install script in https://github.com/zufuliu/llvm-utils to add LLVM_141
 
 Clone [cypherstack/flutter_liblelantus](https://github.com/cypherstack/flutter_liblelantus) and init the mobilelelantus submodule:
 ```shell
