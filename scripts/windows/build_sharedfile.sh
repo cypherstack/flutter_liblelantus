@@ -2,9 +2,6 @@
 
 . ./config.sh
 
-./linkDistros.sh
-./copyCMakeLists.sh
-
 echo ''$(git log -1 --pretty=format:"%H")' '$(date) >> build/git_commit_version.txt
 if [ ! -f "$VERSIONS_FILE" ]; then
     cp $EXAMPLE_VERSIONS_FILE $VERSIONS_FILE
