@@ -14,7 +14,7 @@
 #ifndef PORTABLE_ENDIAN_H__
 #define PORTABLE_ENDIAN_H__
 
-#if (defined(_WIN16) || defined(_WIN32) || defined(_WIN64) || defined(__MSYS__)) && !defined(__WINDOWS__)
+#if (defined(_WIN16) || defined(_WIN32) || defined(_WIN64) || defined(__MSYS__) || defined(__MINGW32__) || defined(__MINGW64__)) && !defined(__WINDOWS__)
 
 #   define __WINDOWS__
 

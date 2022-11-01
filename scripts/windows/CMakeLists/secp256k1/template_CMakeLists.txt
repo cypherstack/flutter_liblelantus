@@ -3,8 +3,8 @@
 cmake_minimum_required(VERSION 3.1)
 project(secp256k1)
 
-SET(distribution_DIR /opt/android)
-SET(OPENSSL_ROOT_DIR ${distribution_DIR}/openssl)
+SET(distribution_DIR c:/src/flutter_liblelantus/scripts/mingw64/build)
+SET(OPENSSL_ROOT_DIR ${distribution_DIR}/prefix_mingw64)
 
 SET(OPENSSL_LIBRARIES_DIR "${OPENSSL_ROOT_DIR}/lib")
 SET(OPENSSL_INCLUDE_DIR ${OPENSSL_ROOT_DIR}/include)
@@ -17,7 +17,7 @@ ADD_DEFINITIONS(-DUSE_FIELD_INV_BUILTIN=1)
 ADD_DEFINITIONS(-DUSE_SCALAR_INV_BUILTIN=1)
 ADD_DEFINITIONS(-fPIC)
 link_libraries(ws2_32 wsock32)
-link_libraries(crypto crypto32)
+link_libraries(crypto crypt32)
 
 LINK_DIRECTORIES(${OPENSSL_LIBRARIES_DIR})
 

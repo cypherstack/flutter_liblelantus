@@ -42,3 +42,5 @@ scripts/mingw64/CMakeLists/mobileliblelantus/CMakeLists.txt
 scripts/mingw64/CMakeLists/secp256k1/CMakeLists.txt
 
 scripts/mingw64/cache/
+
+scripts/windows/cache/openssl-1.1.1k.tar.gz
