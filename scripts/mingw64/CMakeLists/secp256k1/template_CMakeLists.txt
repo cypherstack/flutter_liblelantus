@@ -16,8 +16,10 @@ ADD_DEFINITIONS(-DUSE_NUM_NONE=1)
 ADD_DEFINITIONS(-DUSE_FIELD_INV_BUILTIN=1)
 ADD_DEFINITIONS(-DUSE_SCALAR_INV_BUILTIN=1)
 ADD_DEFINITIONS(-fPIC)
+link_libraries(ws2_32 wsock32)
+link_libraries(crypto crypt32)
 
-LINK_DIRECTORIES(${OPENSSL_LIBRARIES_DIR}/)
+LINK_DIRECTORIES(${OPENSSL_LIBRARIES_DIR})
 
 # TODO: change this to include when possible
 include_directories(. include src/modules/ecdh src)

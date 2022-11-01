@@ -4,9 +4,6 @@
 
 mkdir build
 mkdir cache
-./build_openssl.sh
-./install_missing_headers.sh
-./copymobile.sh
-./linkDistros.sh
-./copyCMakeLists.sh
+#./build_openssl.sh
+./prep_sharedfile.sh
 ./build_sharedfile.sh
