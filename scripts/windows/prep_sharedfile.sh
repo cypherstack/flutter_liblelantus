@@ -3,6 +3,7 @@
 . ./config.sh
 
 cp CMakeLists/missingheader/endian.h ${PREFIX}/include/endian.h
+cp CMakeLists/missingheader/endian.h $$WORKDIR/mobileliblelantus/bitcoin/crypto/endian.h
 
 echo "Installed missing headers"
 
