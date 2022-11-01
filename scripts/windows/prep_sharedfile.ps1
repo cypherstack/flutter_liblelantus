@@ -2,10 +2,6 @@
 
 ./config.ps1
 
-if ((Test-Path -Path "${env:CWORKDIR}/openssl/Program Files")) {
-    Copy-Item "${env:CWORKDIR}/openssl/Program Files/OpenSSL/*" -Destination "${env:CWORKDIR}/openssl" -Force -Recurse # TODO add \bin to PATH?
-}
-
 New-Item -ItemType Directory -Force -Path build
 New-Item -ItemType Directory -Force -Path build\bitcoin
 New-Item -ItemType Directory -Force -Path build\include

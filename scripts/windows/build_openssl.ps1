@@ -2,6 +2,7 @@
 
 ./config.ps1
 
+# zlib
 if (!(Test-Path -Path $env:ZLIB_DIR)) {
     Write-Output "${env:ZLIB_DIR} doesn't exist, cloning github.com/madler/zlib"
     git clone -b $env:ZLIB_TAG --depth 1 https://github.com/madler/zlib $env:ZLIB_DIR
@@ -9,9 +10,10 @@ if (!(Test-Path -Path $env:ZLIB_DIR)) {
 cd $env:ZLIB_DIR
 git reset --hard $env:ZLIB_COMMIT_HASH
 #./configure --static # TODO translate to PowerShell
-cmake . -A x64 -DCMAKE_GENERATOR_PLATFORM=x64 -DCMAKE_CL_64=1 -DCMAKE_C_COMPILER:PATH="C:\Program Files\LLVM\bin\clang.exe" -DCMAKE_CXX_COMPILER:PATH="C:\Program Files\LLVM\bin\clang.exe" -DCMAKE_C_COMPILER_ID="Clang" -DCMAKE_CXX_COMPILER_ID="Clang" -DCMAKE_SYSTEM_NAME="Generic" -T ClangCL,host=x64 # This and the next line require these scripts to be ran from a Visual Studio Developer PowerShell (or cmake and msbuild need to be in PATH)
+cmake . -A x64 -DCMAKE_GENERATOR_PLATFORM=x64 -DCMAKE_CL_64=1 # -DCMAKE_C_COMPILER:PATH="C:\Program Files\LLVM\bin\clang.exe" -DCMAKE_CXX_COMPILER:PATH="C:\Program Files\LLVM\bin\clang.exe" -DCMAKE_C_COMPILER_ID="Clang" -DCMAKE_CXX_COMPILER_ID="Clang" -DCMAKE_SYSTEM_NAME="Generic" -T ClangCL,host=x64 # This and the next line require these scripts to be ran from a Visual Studio Developer PowerShell (or cmake and msbuild need to be in PATH)
 msbuild zlib.sln /property:Configuration=Release /property:Platform=x64
 
+# openssl
 cd ${env:dir}
 New-Item -ItemType Directory -Force -Path ${env:OPENSSL_FILE_DIR}
 if (!(Test-Path $env:OPENSSL_FILE_PATH -PathType Leaf)) {
@@ -61,25 +63,20 @@ foreach($arch in $env:TYPES_OF_BUILD) {
     cd $env:OPENSSL_SRC_DIR
     Write-Output "extracted"
 
-    <#
-    #sed -i -e "s/mandroid/target\ ${TARGET}\-linux\-android/" Configure
-        ./Configure ${X_ARCH} \
-        no-asm no-shared \
-        --with-zlib-include=${PREFIX}/include \
-        --with-zlib-lib=${PREFIX}/lib \
-        --prefix=${PREFIX} \
-        --openssldir=${PREFIX}
-    #>
     Write-Output "configuring openssl"
-    perl Configure no-idea no-shared VC-WIN64A OPENSSL_LIBS="-llibssl -llibcrypto -lcrypt32 -lws2_32" # -MT -Z7 threads no-deprecated This and the next two functional lines require these scripts to be ran from a Visual Studio x64 Native Tools Command Prompt
     #perl Configure VC-WIN64A no-shared no-idea
+    perl Configure no-idea no-shared VC-WIN64A OPENSSL_LIBS="-llibssl -llibcrypto -lcrypt32 -lws2_32" # -MT -Z7 threads no-deprecated This and the next two functional lines require these scripts to be ran from a Visual Studio x64 Native Tools Command Prompt
     Write-Output "openssl configured"
     Write-Output "building openssl"
     nmake # -j${env:THREADS}
     Write-Output "openssl built"
     Write-Output "installing openssl"
-    nmake install_sw DESTDIR=${env:WORKDIR}\openssl # -j${env:THREADS} # Must install to destination directory, installing by default places files in C:\Program Files\OpenSLL, which requires administrator privileges
+    nmake install DESTDIR=${env:WORKDIR}\openssl # -j${env:THREADS} # Must install to destination directory, installing by default places files in C:\Program Files\OpenSLL, which requires administrator privileges
     Write-Output "openssl installed"
+    if ((Test-Path -Path "${env:CWORKDIR}/openssl/Program Files")) {
+        Copy-Item "${env:CWORKDIR}/openssl/Program Files/OpenSSL/*" -Destination "${env:CWORKDIR}/openssl" -Force -Recurse # TODO add \bin to PATH?
+        Write-Output "openssl moved"
+    }
 }
 
 cd ..
