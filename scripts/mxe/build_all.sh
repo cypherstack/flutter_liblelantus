@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mkdir ~/development
+mkdir -p ~/development
 cd ~/development
 git clone https://github.com/mxe/mxe.git
 cd mxe
