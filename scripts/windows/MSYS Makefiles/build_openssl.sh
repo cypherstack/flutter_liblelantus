@@ -10,7 +10,7 @@ fi
 cd $ZLIB_DIR
 
 git reset --hard $ZLIB_COMMIT_HASH
-cmake -G "MinGW Makefiles" -DBUILD_STATIC=$STATIC -DBUILD_TESTS=ON
+cmake -G "MSYS Makefiles" -DBUILD_STATIC=$STATIC -DBUILD_TESTS=ON
 cmake --build . --config Release
 
 if [ ! -f "$OPENSSL_FILE_PATH" ] ; then
@@ -46,7 +46,6 @@ rm -rf $OPENSSL_SRC_DIR
 tar -xzf $OPENSSL_FILE_PATH -C $WORKDIR
 cd $OPENSSL_SRC_DIR
 
-mkdir $PREFIX
 perl ./Configure mingw64 no-shared no-asm --with-zlib-include=${PREFIX}/include --with-zlib-lib=${PREFIX}/lib --prefix=${PREFIX} --openssldir=${PREFIX} # OPENSSL_LIBS="-llibssl -llibcrypto -lcrypt32 -lws2_32"
 make -j$THREADS
 make -j$THREADS install_sw

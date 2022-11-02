@@ -1,4 +1,4 @@
-# flutter_liblelantus
+# `flutter_liblelantus` Windows scripts
 ## Prerequisites
 Windows:
  - [MSYS2](https://www.msys2.org/)
