@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.1)
 project(secp256k1)
 
 SET(distribution_DIR /opt/android)
-SET(INCLUDE_DIR ${distribution_DIR}/include)
+SET(OPENSSL_ROOT_DIR ${distribution_DIR}/openssl)
 
 SET(OPENSSL_LIBRARIES_DIR "${OPENSSL_ROOT_DIR}/lib")
 SET(OPENSSL_INCLUDE_DIR ${OPENSSL_ROOT_DIR}/include)
@@ -18,19 +18,11 @@ ADD_DEFINITIONS(-DUSE_SCALAR_INV_BUILTIN=1)
 ADD_DEFINITIONS(-fPIC)
 
 LINK_DIRECTORIES(${OPENSSL_LIBRARIES_DIR})
+
 # TODO: change this to include when possible
 include_directories(. include src/modules/ecdh src)
 
-
-add_library(secp256k1
-	src/secp256k1.c
-	src/cpp/GroupElement.cpp
-	src/cpp/MultiExponent.cpp
-	src/cpp/Scalar.cpp
-	src/modules/ecdh/main_impl.h
-	include/secp256k1_ecdh.h
-	src/scratch_impl.h
-	src/scratch.h)
+add_library(secp256k1 src/secp256k1.c src/cpp/GroupElement.cpp src/cpp/MultiExponent.cpp src/cpp/Scalar.cpp src/modules/ecdh/main_impl.h include/secp256k1_ecdh.h src/scratch_impl.h src/scratch.h)
 
 # We need to link in GMP
 find_package(GMP)

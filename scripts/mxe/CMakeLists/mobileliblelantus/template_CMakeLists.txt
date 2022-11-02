@@ -5,7 +5,7 @@ project(mobileliblelantus)
 set(OPENSSL_USE_STATIC_LIBS OFF CACHE BOOL "" FORCE)
 
 SET(distribution_DIR /opt/android)
-SET(OPENSSL_ROOT_DIR ${distribution_DIR})
+SET(OPENSSL_ROOT_DIR ${distribution_DIR}/openssl)
 
 SET(INCLUDE_DIR ${distribution_DIR}/include)
 
