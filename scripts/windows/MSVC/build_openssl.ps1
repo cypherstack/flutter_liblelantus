@@ -75,7 +75,7 @@ foreach($arch in $env:TYPES_OF_BUILD) {
     nmake # -j${env:THREADS}
     Write-Output "openssl built"
     Write-Output "installing openssl"
-    nmake install_sw DESTDIR=${env:WORKDIR}\openssl # -j${env:THREADS} # Must install to destination directory, installing by default places files in C:\Program Files\OpenSLL, which requires administrator privileges
+    nmake install_sw DESTDIR=${env:PREFIX}\openssl # -j${env:THREADS} # Must install to destination directory, installing by default places files in C:\Program Files\OpenSLL, which requires administrator privileges
     Write-Output "openssl installed"
 }
 
