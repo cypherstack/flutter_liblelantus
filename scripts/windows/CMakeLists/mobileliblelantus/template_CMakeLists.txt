@@ -4,7 +4,7 @@ project(mobileliblelantus)
 
 set(OPENSSL_USE_STATIC_LIBS OFF CACHE BOOL "" FORCE)
 
-SET(distribution_DIR c:/src/flutter_liblelantus/scripts/mingw64/build)
+SET(distribution_DIR /opt/android)
 SET(OPENSSL_ROOT_DIR ${distribution_DIR}/prefix_mingw64)
 
 SET(OPENSSL_LIBRARIES_DIR "${OPENSSL_ROOT_DIR}/lib")
