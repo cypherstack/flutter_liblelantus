@@ -69,7 +69,7 @@ foreach($arch in $env:TYPES_OF_BUILD) {
         --openssldir=${PREFIX}
     #>
     Write-Output "configuring openssl"
-    perl Configure VC-WIN64A no-shared no-idea # This and the next two functional lines require these scripts to be ran from a Visual Studio x64 Native Tools Command Prompt
+    perl Configure VC-WIN64A no-shared no-asm --with-zlib-include=${env:PREFIX}/include --with-zlib-lib=${env:PREFIX}/lib --prefix=${env:PREFIX} --openssldir=${env:PREFIX} # This and the next two functional lines require these scripts to be ran from a Visual Studio x64 Native Tools Command Prompt
     Write-Output "openssl configured"
     Write-Output "building openssl"
     nmake # -j${env:THREADS}

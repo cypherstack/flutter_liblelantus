@@ -3,6 +3,7 @@
 $env:API=21
 $env:dir = (Get-Item .).FullName
 $env:WORKDIR="${env:dir}\build"
+$env:PREFIX="${env:WORKDIR}\prefix_x86_64"
 $env:ANDROID_NDK_ZIP="${env:WORKDIR}\android-ndk-r17c.zip"
 $env:ANDROID_NDK_ROOT="${env:WORKDIR}\android-ndk-r17c"
 $env:ANDROID_NDK_HOME="${env:ANDROID_NDK_ROOT}"

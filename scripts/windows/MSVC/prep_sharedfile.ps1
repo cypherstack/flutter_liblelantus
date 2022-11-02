@@ -3,7 +3,7 @@
 ./config.ps1
 
 if ((Test-Path -Path "${env:CWORKDIR}/openssl/Program Files")) {
-    Copy-Item "${env:CWORKDIR}/openssl/Program Files/OpenSSL/*" -Destination "${env:CWORKDIR}/openssl" -Force -Recurse # TODO add \bin to PATH?
+    Copy-Item "${env:CWORKDIR}/openssl/Program Files/OpenSSL/*" -Destination "${env:PREFIX}/openssl" -Force -Recurse # TODO add \bin to PATH?
 }
 
 New-Item -ItemType Directory -Force -Path build
