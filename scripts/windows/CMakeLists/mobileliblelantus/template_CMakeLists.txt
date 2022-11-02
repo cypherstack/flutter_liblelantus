@@ -11,9 +11,6 @@ SET(OPENSSL_LIBRARIES_DIR "${OPENSSL_ROOT_DIR}/lib")
 SET(OPENSSL_INCLUDE_DIR ${OPENSSL_ROOT_DIR}/include)
 SET(OPENSSL_LIBRARIES "ssl" "crypto")
 
-link_libraries(ws2_32 wsock32)
-link_libraries(crypto crypt32)
-
 LINK_DIRECTORIES(${OPENSSL_LIBRARIES_DIR})
 
 add_subdirectory(secp256k1)
