@@ -17,15 +17,14 @@ else
   export TYPES_OF_BUILD="aarch64"
 fi
 
-export PREFIX=$WORKDIR/prefix_mingw64
-
+export ZLIB_DIR=$WORKDIR/zlib
+export ZLIB_TAG=v1.2.11
+export ZLIB_COMMIT_HASH="cacf7f1d4e3d44d871b605da3b647f07d718623f"
 export OPENSSL_FILENAME=openssl-1.1.1k.tar.gz
 export OPENSSL_FILE_PATH="$(pwd)/"/cache/$OPENSSL_FILENAME
 export OPENSSL_SRC_DIR=$WORKDIR/openssl-1.1.1k
 export OPENSSL_SHA256="892a0875b9872acd04a9fde79b1f943075d5ea162415de3047c327df33fbaee5"
-export ZLIB_DIR=$WORKDIR/zlib
-export ZLIB_TAG=v1.2.11
-export ZLIB_COMMIT_HASH="cacf7f1d4e3d44d871b605da3b647f07d718623f"
+export OPENSSL_IMPORT_DIR=$WORKDIR/openssl
 
 #export SEDWORKDIR=${WORKDIR//'/c/'/"C:"/}
 export SEDWORKDIR=$(echo $WORKDIR | sed 's/\//\\\//g')
