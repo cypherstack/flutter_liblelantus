@@ -47,6 +47,8 @@ tar -xzf $OPENSSL_FILE_PATH -C $WORKDIR
 cd $OPENSSL_SRC_DIR
 
 mkdir -p $OPENSSL_IMPORT_DIR
-perl ./Configure mingw64 no-shared no-asm --with-zlib-include=${WORKDIR}/zlib/include --with-zlib-lib=${WORKDIR}/zlib/lib --prefix=${OPENSSL_IMPORT_DIR} --openssldir=${OPENSSL_IMPORT_DIR} # OPENSSL_LIBS="-llibssl -llibcrypto -lcrypt32 -lws2_32"
+perl ./Configure mingw64 no-shared no-asm --with-zlib-include=${WORKDIR}/zlib/include --with-zlib-lib=${WORKDIR}/zlib/lib --prefix=${OPENSSL_IMPORT_DIR} --openssldir=${OPENSSL_IMPORT_DIR} OPENSSL_LIBS="-lcrypt32 -lws2_32 -lwsock32"
 mingw32-make -j$THREADS
 mingw32-make -j$THREADS install_sw
+
+cd $WORKDIR
