@@ -74,7 +74,7 @@ add_library(mobileliblelantus SHARED
     src/Utils.cpp
     src/dart_interface.cpp)
 
-target_link_libraries(mobileliblelantus ws2_32 crypt32 ${OPENSSL_LIBRARIES} secp256k1)
+target_link_libraries(mobileliblelantus ${OPENSSL_LIBRARIES} secp256k1 ws2_32)
 
 add_dependencies(mobileliblelantus secp256k1)
 
