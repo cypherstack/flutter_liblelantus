@@ -76,7 +76,7 @@ add_library(mobileliblelantus SHARED
     src/dart_interface.cpp)
 
 
-target_link_libraries(mobileliblelantus "${distribution_DIR}/CMakeFiles/mobileliblelantus.dir/objects.a" ws2_32 "${distribution_DIR}/lib/libssl.a" secp256k1)
+target_link_libraries(mobileliblelantus ${OPENSSL_LIBRARIES} ws2_32 secp256k1)
 
 #add_library(objects SHARED "${distribution_DIR}/CMakeFiles/mobileliblelantus.dir/objects.a")
 

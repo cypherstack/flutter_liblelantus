@@ -6,6 +6,9 @@ project(secp256k1)
 SET(distribution_DIR /opt/android)
 SET(INCLUDE_DIR ${distribution_DIR}/include)
 
+SET(OPENSSL_LIBRARIES_DIR "${OPENSSL_ROOT_DIR}/lib")
+SET(OPENSSL_INCLUDE_DIR ${OPENSSL_ROOT_DIR}/include)
+SET(OPENSSL_LIBRARIES "ssl" "crypto")
 SET(ENABLE_MODULE_ECDH 1)
 ADD_DEFINITIONS(-DENABLE_MODULE_ECDH=1)
 ADD_DEFINITIONS(-DUSE_ENDOMORPHISM=1)
@@ -14,6 +17,7 @@ ADD_DEFINITIONS(-DUSE_FIELD_INV_BUILTIN=1)
 ADD_DEFINITIONS(-DUSE_SCALAR_INV_BUILTIN=1)
 ADD_DEFINITIONS(-fPIC)
 
+LINK_DIRECTORIES(${OPENSSL_LIBRARIES_DIR})
 # TODO: change this to include when possible
 include_directories(. include src/modules/ecdh src)
 
@@ -31,8 +35,7 @@ add_library(secp256k1
 # We need to link in GMP
 find_package(GMP)
 if(GMP_INCLUDE_DIR AND GMP_LIBRARIES)
-	target_include_directories(secp256k1 PUBLIC ${GMP_INCLUDE_DIR} ${INCLUDE_DIR})
-	#target_link_libraries(secp256k1 ${GMP_LIBRARIES} "${distribution_DIR}/CMakeFiles/mobileliblelantus.dir/objects.a") # Not built by this point on a fresh build
+	target_include_directories(secp256k1 PUBLIC ${GMP_INCLUDE_DIR})
 	target_link_libraries(secp256k1 ${GMP_LIBRARIES})
 	target_compile_definitions(secp256k1
 		PUBLIC
@@ -42,9 +45,6 @@ if(GMP_INCLUDE_DIR AND GMP_LIBRARIES)
 			USE_SCALAR_INV_BUILTIN
 	)
 else()
-	target_include_directories(secp256k1 PUBLIC ${GMP_INCLUDE_DIR} ${INCLUDE_DIR})
-	#target_link_libraries(secp256k1 ${GMP_LIBRARIES} "${distribution_DIR}/CMakeFiles/mobileliblelantus.dir/objects.a") # Not built by this point on a fresh build
-	target_link_libraries(secp256k1 ${GMP_LIBRARIES})
 	target_compile_definitions(secp256k1
 		PUBLIC
 			USE_NUM_NONE
@@ -83,3 +83,6 @@ endif()
 # TODO: emult static precomputation
 # TODO: ecdh module
 # TODO: RECOVERY module
+TARGET_INCLUDE_DIRECTORIES(secp256k1 PUBLIC ${OPENSSL_INCLUDE_DIR})
+TARGET_LINK_LIBRARIES(secp256k1 ${OPENSSL_LIBRARIES})
+#target_link_libraries(secp256k1 ${OPENSSL_LIBRARIES})
