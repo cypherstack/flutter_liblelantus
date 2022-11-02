@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Install MXE
 mkdir -p ~/development
 cd ~/development
 git clone https://github.com/mxe/mxe.git
@@ -10,18 +11,20 @@ if ! [[ $PATH == *"/mxe"* ]]; then
 	source ~/.bashrc
 fi
 make cmake openssl MXE_TARGETS='x86_64-w64-mingw32.static'
-mkdir ~/src
+
+# Clone flutter_liblelantus
+mkdir -p ~/src
 cd ~/src
-#git clone https://github.com/cypherstack/flutter_liblelantus
+git clone https://github.com/cypherstack/flutter_liblelantus
 cd flutter_liblelantus
 #git checkout build/mxe
 #git reset af6c304fd02b145d1d5e21e6341f9a71f756c09f --hard
-cd scripts/mxe
 
+cd scripts/windows
 cp ./CMakeLists/missingheader/windows.h              ./build/include/windows.h
-
 ./build_openssl.sh
-cd ~/src/flutter_liblelantus/scripts/mxe
+
+cd ~/src/flutter_liblelantus/scripts/windows
 ./prep_sharedfile.sh
 cd build
 rm CMakeCache.txt

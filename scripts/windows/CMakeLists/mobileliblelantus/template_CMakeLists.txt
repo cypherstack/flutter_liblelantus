@@ -74,8 +74,11 @@ add_library(mobileliblelantus SHARED
     src/Utils.cpp
     src/dart_interface.cpp)
 
-target_link_libraries(mobileliblelantus ${OPENSSL_LIBRARIES} secp256k1)
+
+target_link_libraries(mobileliblelantus crypt32 ws2_32 ${OPENSSL_LIBRARIES} secp256k1)
+
+#add_library(objects SHARED "${distribution_DIR}/CMakeFiles/mobileliblelantus.dir/objects.a")
 
 add_dependencies(mobileliblelantus secp256k1)
 
-target_include_directories(mobileliblelantus PUBLIC secp256k1 ${OPENSSL_INCLUDE_DIR})
+target_include_directories(mobileliblelantus PUBLIC secp256k1 secp256k1/include ${INCLUDE_DIR})
