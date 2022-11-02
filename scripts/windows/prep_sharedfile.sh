@@ -2,17 +2,17 @@
 
 . ./config.sh
 
-cp CMakeLists/missingheader/endian.h ${PREFIX}/include/endian.h
-cp CMakeLists/missingheader/endian.h $$WORKDIR/mobileliblelantus/bitcoin/crypto/endian.h
+cp CMakeLists/missingheader/endian.h ${OPENSSL_IMPORT_DIR}/include/endian.h
+cp CMakeLists/missingheader/endian.h $WORKDIR/mobileliblelantus/bitcoin/crypto/endian.h
 
 echo "Installed missing headers"
 
-mkdir $WORKDIR/mobileliblelantus
-mkdir $WORKDIR/mobileliblelantus/bitcoin
-mkdir $WORKDIR/mobileliblelantus/include
-mkdir $WORKDIR/mobileliblelantus/secp256k1
-mkdir $WORKDIR/mobileliblelantus/src
-mkdir $WORKDIR/mobileliblelantus/tests
+mkdir -p $WORKDIR/mobileliblelantus
+mkdir -p $WORKDIR/mobileliblelantus/bitcoin
+mkdir -p $WORKDIR/mobileliblelantus/include
+mkdir -p $WORKDIR/mobileliblelantus/secp256k1
+mkdir -p $WORKDIR/mobileliblelantus/src
+mkdir -p $WORKDIR/mobileliblelantus/tests
 cp -r ../../mobileliblelantus ./build
 
 echo "Copied mobileliblelantus"
