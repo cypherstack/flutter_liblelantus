@@ -17,8 +17,13 @@ cd flutter_liblelantus
 git checkout build/mxe
 #git reset af6c304fd02b145d1d5e21e6341f9a71f756c09f --hard
 cd scripts/mxe
+
+cp ./CMakeLists/missingheader/windows.h              ./build/include/windows.h
+
+./build_openssl.sh
+cd ~/src/flutter_liblelantus/scripts/mxe
 ./prep_sharedfile.sh
 cd build
 rm CMakeCache.txt
-x86_64-w64-mingw32.static-cmake . -DCMAKE_BUILD_TYPE=RelWithDebInfo
+x86_64-w64-mingw32.static-cmake ./mobileliblelantus -DCMAKE_BUILD_TYPE=RelWithDebInfo
 make -j$(nproc)
