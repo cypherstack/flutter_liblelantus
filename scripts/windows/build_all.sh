@@ -8,7 +8,7 @@ git clone https://github.com/cypherstack/flutter_liblelantus
 cd flutter_liblelantus
 git submodule update --init --recursive
 #git checkout build/mxe
-#git reset af6c304fd02b145d1d5e21e6341f9a71f756c09f --hard
+#git reset 89220d289e016c89a9e8c6be232a98f65f582e37 --hard
 
 cd scripts/windows'
 cp ./CMakeLists/missingheader/windows.h              ./build/include/windows.h
