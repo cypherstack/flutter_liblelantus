@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # MXE dependencies
-sudo apt-get install p7zip-full autoconf automake autopoint bash bison bzip2 cmake flex gettext git g++ gperf intltool libffi-dev libtool libtool-bin libltdl-dev libssl-dev libxml-parser-perl make openssl patch perl pkg-config python ruby scons sed unzip wget xz-utils g++-multilib libc6-dev-i386 lzip -y
+sudo apt-get install -y p7zip-full autoconf automake autopoint bash bison bzip2 cmake flex gettext git g++ gperf intltool libffi-dev libtool libtool-bin libltdl-dev libssl-dev libxml-parser-perl make openssl patch perl pkg-config python ruby scons sed unzip wget xz-utils g++-multilib libc6-dev-i386 lzip
 
 # Install MXE
 mkdir -p ~/development
@@ -14,3 +14,5 @@ if ! [[ $PATH == *"/mxe"* ]]; then
   source ~/.bashrc
 fi
 make cmake openssl MXE_TARGETS='x86_64-w64-mingw32.static'
+
+sudo apt-get install -y gcc-mingw-w64-x86-64
