@@ -27,6 +27,10 @@ scripts/linux_arm64/CMakeLists/secp256k1/CMakeLists.txt
 scripts/linux_arm64/mobileliblelantus/
 scripts/linux_arm64/android_on_mac/build/
 
+scripts/windows/CMakeLists/mobileliblelantus/CMakeLists.txt
+scripts/windows/CMakeLists/secp256k1/CMakeLists.txt
+scripts/windows/build/
+
 .idea
 lib/git_versions.dart
 scripts/windows/CMakeLists/mobileliblelantus/CMakeLists.txt
@@ -36,19 +40,3 @@ scripts/windows/CMakeLists/secp256k1/CMakeLists.txt
 windows/CMakeCache.txt
 
 windows/CMakeFiles/cmake.check_cache
-
-scripts/mingw64/CMakeLists/mobileliblelantus/CMakeLists.txt
-
-scripts/mingw64/CMakeLists/secp256k1/CMakeLists.txt
-
-scripts/mingw64/cache/
-
-scripts/crosscompile/cache/
-
-scripts/crosscompile/CMakeLists/mobileliblelantus/CMakeLists.txt
-
-scripts/crosscompile/CMakeLists/secp256k1/CMakeLists.txt
-
-scripts/mxe/CMakeLists/mobileliblelantus/CMakeLists.txt
-
-scripts/mxe/CMakeLists/secp256k1/CMakeLists.txt
