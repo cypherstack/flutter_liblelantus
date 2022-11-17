@@ -3,6 +3,7 @@
 set -e
 
 . ./config.sh
+
 OPENSSL_FILENAME=openssl-1.1.1k.tar.gz
 OPENSSL_FILE_PATH=$WORKDIR/$OPENSSL_FILENAME
 OPENSSL_SRC_DIR=$WORKDIR/openssl-1.1.1k
