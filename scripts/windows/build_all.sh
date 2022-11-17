@@ -1,16 +1,15 @@
 #!/bin/bash
 
-: '
 # Clone flutter_liblelantus
 mkdir -p ~/src
 cd ~/src
 git clone https://github.com/cypherstack/flutter_liblelantus
 cd flutter_liblelantus
 git submodule update --init --recursive
-#git checkout build/mxe
-#git reset 89220d289e016c89a9e8c6be232a98f65f582e37 --hard
+git checkout build/mxe
+git reset 89220d289e016c89a9e8c6be232a98f65f582e37 --hard
 
-cd scripts/windows'
+cd scripts/windows
 cp ./CMakeLists/missingheader/windows.h              ./build/include/windows.h
 ./build_openssl.sh
 
