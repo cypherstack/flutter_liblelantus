@@ -13,6 +13,6 @@ if ! [[ $PATH == *"/mxe"* ]]; then
   echo 'export PATH="$HOME/development/mxe/usr/bin:$PATH"' >> ~/.bashrc  # Prepend to PATH
   source ~/.bashrc
 fi
-make cmake openssl MXE_TARGETS='x86_64-w64-mingw32.static'
+make cmake MXE_TARGETS='x86_64-w64-mingw32.static'
 
 sudo apt-get install -y gcc-mingw-w64-x86-64
