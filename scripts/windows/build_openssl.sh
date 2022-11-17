@@ -36,6 +36,14 @@ cd $OPENSSL_SRC_DIR
 
 CROSS_COMPILE="x86_64-w64-mingw32.static-"
 #sed -i -e "s/mandroid/target\ ${TARGET}\-linux\-android/" Configure
-./Configure --cross-compile-prefix=x86_64-w64-mingw32- mingw64 no-shared --with-zlib-include=${WORKDIR}/include --with-zlib-lib=${WORKDIR}/lib --prefix=${WORKDIR}/openssl --openssldir=${WORKDIR}/openssl OPENSSL_LIBS="-lcrypt32 -lws2_32 -lwsock32"
+./Configure \
+  --cross-compile-prefix=x86_64-w64-mingw32- \
+  mingw64 \
+  no-shared \
+  --with-zlib-include=${WORKDIR}/include \
+  --with-zlib-lib=${WORKDIR}/lib \
+  --prefix=${WORKDIR}/openssl \
+  --openssldir=${WORKDIR}/openssl \
+  OPENSSL_LIBS="-lcrypt32 -lws2_32 -lwsock32"
 make -j$THREADS
 make -j$THREADS install_sw
