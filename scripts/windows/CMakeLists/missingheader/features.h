@@ -1,12 +1,6 @@
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=windows-1252">
-<title>features.h</title>
-<meta name="generator" content="c2html 0.9.6">
-<meta name="date" content="2011-01-23T20:25:23+00:00">
-</head>
 
-<body bgcolor="#FFFFFF">
-<pre width="80"><font color="#B22222">/* Copyright (C) 1991-1993,1995-2006,2007,2009 Free Software Foundation, Inc.
+
+/* Copyright (C) 1991-1993,1995-2006,2007,2009 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -22,22 +16,22 @@
    You should have received a copy of the GNU Lesser General Public
    License along with the GNU C Library; if not, write to the Free
    Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
-   02111-1307 USA.  */</font>
+   02111-1307 USA.  */
 
-<font color="#A020F0">#ifndef        _FEATURES_H</font>
-<strong><font color="#228B22">#define        _FEATURES_H        1</font></strong>
+#ifndef        _FEATURES_H
+#define        _FEATURES_H        1
 
-<font color="#B22222">/* These are defined by the user (or the compiler)
+/* These are defined by the user (or the compiler)
    to specify the desired environment:
 
    __STRICT_ANSI__        ISO Standard C.
    _ISOC99_SOURCE        Extensions to ISO C89 from ISO C99.
    _POSIX_SOURCE        IEEE Std 1003.1.
-   _POSIX_C_SOURCE        If ==1, like _POSIX_SOURCE; if &gt;=2 add IEEE Std 1003.2;
-                        if &gt;=199309L, add IEEE Std 1003.1b-1993;
-                        if &gt;=199506L, add IEEE Std 1003.1c-1995;
-                        if &gt;=200112L, all of IEEE 1003.1-2004
-                        if &gt;=200809L, all of IEEE 1003.1-2008
+   _POSIX_C_SOURCE        If ==1, like _POSIX_SOURCE; if >=2 add IEEE Std 1003.2;
+                        if >=199309L, add IEEE Std 1003.1b-1993;
+                        if >=199506L, add IEEE Std 1003.1c-1995;
+                        if >=200112L, all of IEEE 1003.1-2004
+                        if >=200809L, all of IEEE 1003.1-2008
    _XOPEN_SOURCE        Includes POSIX and XPG things.  Set to 500 if
                         Single Unix conformance is wanted, to 600 for the
                         sixth revision, to 700 for the seventh revision.
@@ -51,7 +45,7 @@
    _GNU_SOURCE                All of the above, plus GNU extensions.
    _REENTRANT                Select additionally reentrant object.
    _THREAD_SAFE                Same as _REENTRANT, often used by other systems.
-   _FORTIFY_SOURCE        If set to numeric value &gt; 0 additional security
+   _FORTIFY_SOURCE        If set to numeric value > 0 additional security
                         measures are defined, according to level.
 
    The `-ansi' switch to the GNU C compiler defines __STRICT_ANSI__.
@@ -96,299 +90,295 @@
    explicitly undefined if they are not explicitly defined.
    Feature-test macros that are not defined by the user or compiler
    but are implied by the other feature-test macros defined (or by the
-   lack of any definitions) are defined by the file.  */</font>
+   lack of any definitions) are defined by the file.  */
 
 
-<font color="#B22222">/* Undefine everything, so we get a clean slate.  */</font>
-<strong><font color="#228B22">#undef        __USE_ISOC99</font></strong>
-<strong><font color="#228B22">#undef        __USE_ISOC95</font></strong>
-<strong><font color="#228B22">#undef        __USE_POSIX</font></strong>
-<strong><font color="#228B22">#undef        __USE_POSIX2</font></strong>
-<strong><font color="#228B22">#undef        __USE_POSIX199309</font></strong>
-<strong><font color="#228B22">#undef        __USE_POSIX199506</font></strong>
-<strong><font color="#228B22">#undef        __USE_XOPEN</font></strong>
-<strong><font color="#228B22">#undef        __USE_XOPEN_EXTENDED</font></strong>
-<strong><font color="#228B22">#undef        __USE_UNIX98</font></strong>
-<strong><font color="#228B22">#undef        __USE_XOPEN2K</font></strong>
-<strong><font color="#228B22">#undef        __USE_XOPEN2K8</font></strong>
-<strong><font color="#228B22">#undef        __USE_LARGEFILE</font></strong>
-<strong><font color="#228B22">#undef        __USE_LARGEFILE64</font></strong>
-<strong><font color="#228B22">#undef        __USE_FILE_OFFSET64</font></strong>
-<strong><font color="#228B22">#undef        __USE_BSD</font></strong>
-<strong><font color="#228B22">#undef        __USE_SVID</font></strong>
-<strong><font color="#228B22">#undef        __USE_MISC</font></strong>
-<strong><font color="#228B22">#undef        __USE_ATFILE</font></strong>
-<strong><font color="#228B22">#undef        __USE_GNU</font></strong>
-<strong><font color="#228B22">#undef        __USE_REENTRANT</font></strong>
-<strong><font color="#228B22">#undef        __USE_FORTIFY_LEVEL</font></strong>
-<strong><font color="#228B22">#undef        __FAVOR_BSD</font></strong>
-<strong><font color="#228B22">#undef        __KERNEL_STRICT_NAMES</font></strong>
+/* Undefine everything, so we get a clean slate.  */
+#undef        __USE_ISOC99
+#undef        __USE_ISOC95
+#undef        __USE_POSIX
+#undef        __USE_POSIX2
+#undef        __USE_POSIX199309
+#undef        __USE_POSIX199506
+#undef        __USE_XOPEN
+#undef        __USE_XOPEN_EXTENDED
+#undef        __USE_UNIX98
+#undef        __USE_XOPEN2K
+#undef        __USE_XOPEN2K8
+#undef        __USE_LARGEFILE
+#undef        __USE_LARGEFILE64
+#undef        __USE_FILE_OFFSET64
+#undef        __USE_BSD
+#undef        __USE_SVID
+#undef        __USE_MISC
+#undef        __USE_ATFILE
+#undef        __USE_GNU
+#undef        __USE_REENTRANT
+#undef        __USE_FORTIFY_LEVEL
+#undef        __FAVOR_BSD
+#undef        __KERNEL_STRICT_NAMES
 
-<font color="#B22222">/* Suppress kernel-name space pollution unless user expressedly asks
-   for it.  */</font>
-<font color="#A020F0">#ifndef _LOOSE_KERNEL_NAMES</font>
-<font color="#A020F0"># define __KERNEL_STRICT_NAMES</font>
-<font color="#A020F0">#endif</font>
+/* Suppress kernel-name space pollution unless user expressedly asks
+   for it.  */
+#ifndef _LOOSE_KERNEL_NAMES
+# define __KERNEL_STRICT_NAMES
+#endif
 
-<font color="#B22222">/* Always use ISO C things.  */</font>
-<strong><font color="#228B22">#define        __USE_ANSI        1</font></strong>
+/* Always use ISO C things.  */
+#define        __USE_ANSI        1
 
-<font color="#B22222">/* Convenience macros to test the versions of glibc and gcc.
+/* Convenience macros to test the versions of glibc and gcc.
    Use them like this:
    #if __GNUC_PREREQ (2,8)
    ... code requiring gcc 2.8 or later ...
    #endif
    Note - they won't work for gcc1 or glibc1, since the _MINOR macros
-   were not defined then.  */</font>
-<font color="#A020F0">#if defined __GNUC__ &amp;&amp; defined __GNUC_MINOR__</font>
-<font color="#A020F0"># define __GNUC_PREREQ(maj, min) \</font>
-        ((__GNUC__ &lt;&lt; 16) + __GNUC_MINOR__ &gt;= ((maj) &lt;&lt; 16) + (min))
-<font color="#A020F0">#else</font>
-<font color="#A020F0"># define __GNUC_PREREQ(maj, min) 0</font>
-<font color="#A020F0">#endif</font>
+   were not defined then.  */
+#if defined __GNUC__ && defined __GNUC_MINOR__
+# define __GNUC_PREREQ(maj, min) \
+        ((__GNUC__ << 16) + __GNUC_MINOR__ >= ((maj) << 16) + (min))
+#else
+# define __GNUC_PREREQ(maj, min) 0
+#endif
 
 
-<font color="#B22222">/* If _BSD_SOURCE was defined by the user, favor BSD over POSIX.  */</font>
-<font color="#A020F0">#if defined _BSD_SOURCE &amp;&amp; \</font>
+/* If _BSD_SOURCE was defined by the user, favor BSD over POSIX.  */
+#if defined _BSD_SOURCE && \
     !(defined _POSIX_SOURCE || defined _POSIX_C_SOURCE || \
       defined _XOPEN_SOURCE || defined _XOPEN_SOURCE_EXTENDED || \
       defined _GNU_SOURCE || defined _SVID_SOURCE)
-<font color="#A020F0"># define __FAVOR_BSD        1</font>
-<font color="#A020F0">#endif</font>
+# define __FAVOR_BSD        1
+#endif
 
-<font color="#B22222">/* If _GNU_SOURCE was defined by the user, turn on all the other features.  */</font>
-<font color="#A020F0">#ifdef _GNU_SOURCE</font>
-<font color="#A020F0"># undef  _ISOC99_SOURCE</font>
-<font color="#A020F0"># define _ISOC99_SOURCE        1</font>
-<font color="#A020F0"># undef  _POSIX_SOURCE</font>
-<font color="#A020F0"># define _POSIX_SOURCE        1</font>
-<font color="#A020F0"># undef  _POSIX_C_SOURCE</font>
-<font color="#A020F0"># define _POSIX_C_SOURCE        200809L</font>
-<font color="#A020F0"># undef  _XOPEN_SOURCE</font>
-<font color="#A020F0"># define _XOPEN_SOURCE        700</font>
-<font color="#A020F0"># undef  _XOPEN_SOURCE_EXTENDED</font>
-<font color="#A020F0"># define _XOPEN_SOURCE_EXTENDED        1</font>
-<font color="#A020F0"># undef         _LARGEFILE64_SOURCE</font>
-<font color="#A020F0"># define _LARGEFILE64_SOURCE        1</font>
-<font color="#A020F0"># undef  _BSD_SOURCE</font>
-<font color="#A020F0"># define _BSD_SOURCE        1</font>
-<font color="#A020F0"># undef  _SVID_SOURCE</font>
-<font color="#A020F0"># define _SVID_SOURCE        1</font>
-<font color="#A020F0"># undef  _ATFILE_SOURCE</font>
-<font color="#A020F0"># define _ATFILE_SOURCE        1</font>
-<font color="#A020F0">#endif</font>
+/* If _GNU_SOURCE was defined by the user, turn on all the other features.  */
+#ifdef _GNU_SOURCE
+# undef  _ISOC99_SOURCE
+# define _ISOC99_SOURCE        1
+# undef  _POSIX_SOURCE
+# define _POSIX_SOURCE        1
+# undef  _POSIX_C_SOURCE
+# define _POSIX_C_SOURCE        200809L
+# undef  _XOPEN_SOURCE
+# define _XOPEN_SOURCE        700
+# undef  _XOPEN_SOURCE_EXTENDED
+# define _XOPEN_SOURCE_EXTENDED        1
+# undef         _LARGEFILE64_SOURCE
+# define _LARGEFILE64_SOURCE        1
+# undef  _BSD_SOURCE
+# define _BSD_SOURCE        1
+# undef  _SVID_SOURCE
+# define _SVID_SOURCE        1
+# undef  _ATFILE_SOURCE
+# define _ATFILE_SOURCE        1
+#endif
 
-<font color="#B22222">/* If nothing (other than _GNU_SOURCE) is defined,
-   define _BSD_SOURCE and _SVID_SOURCE.  */</font>
-<font color="#A020F0">#if (!defined __STRICT_ANSI__ &amp;&amp; !defined _ISOC99_SOURCE &amp;&amp; \</font>
-     !defined _POSIX_SOURCE &amp;&amp; !defined _POSIX_C_SOURCE &amp;&amp; \
-     !defined _XOPEN_SOURCE &amp;&amp; !defined _XOPEN_SOURCE_EXTENDED &amp;&amp; \
-     !defined _BSD_SOURCE &amp;&amp; !defined _SVID_SOURCE)
-<font color="#A020F0"># define _BSD_SOURCE        1</font>
-<font color="#A020F0"># define _SVID_SOURCE        1</font>
-<font color="#A020F0">#endif</font>
+/* If nothing (other than _GNU_SOURCE) is defined,
+   define _BSD_SOURCE and _SVID_SOURCE.  */
+#if (!defined __STRICT_ANSI__ && !defined _ISOC99_SOURCE && \
+     !defined _POSIX_SOURCE && !defined _POSIX_C_SOURCE && \
+     !defined _XOPEN_SOURCE && !defined _XOPEN_SOURCE_EXTENDED && \
+     !defined _BSD_SOURCE && !defined _SVID_SOURCE)
+# define _BSD_SOURCE        1
+# define _SVID_SOURCE        1
+#endif
 
-<font color="#B22222">/* This is to enable the ISO C99 extension.  Also recognize the old macro
+/* This is to enable the ISO C99 extension.  Also recognize the old macro
    which was used prior to the standard acceptance.  This macro will
    eventually go away and the features enabled by default once the ISO C99
-   standard is widely adopted.  */</font>
-<font color="#A020F0">#if (defined _ISOC99_SOURCE || defined _ISOC9X_SOURCE \</font>
-     || (defined __STDC_VERSION__ &amp;&amp; __STDC_VERSION__ &gt;= 199901L))
-<font color="#A020F0"># define __USE_ISOC99        1</font>
-<font color="#A020F0">#endif</font>
+   standard is widely adopted.  */
+#if (defined _ISOC99_SOURCE || defined _ISOC9X_SOURCE \
+     || (defined __STDC_VERSION__ && __STDC_VERSION__ >= 199901L))
+# define __USE_ISOC99        1
+#endif
 
-<font color="#B22222">/* This is to enable the ISO C90 Amendment 1:1995 extension.  */</font>
-<font color="#A020F0">#if (defined _ISOC99_SOURCE || defined _ISOC9X_SOURCE \</font>
-     || (defined __STDC_VERSION__ &amp;&amp; __STDC_VERSION__ &gt;= 199409L))
-<font color="#A020F0"># define __USE_ISOC95        1</font>
-<font color="#A020F0">#endif</font>
+/* This is to enable the ISO C90 Amendment 1:1995 extension.  */
+#if (defined _ISOC99_SOURCE || defined _ISOC9X_SOURCE \
+     || (defined __STDC_VERSION__ && __STDC_VERSION__ >= 199409L))
+# define __USE_ISOC95        1
+#endif
 
-<font color="#B22222">/* If none of the ANSI/POSIX macros are defined, use POSIX.1 and POSIX.2
-   (and IEEE Std 1003.1b-1993 unless _XOPEN_SOURCE is defined).  */</font>
-<font color="#A020F0">#if ((!defined __STRICT_ANSI__ || (_XOPEN_SOURCE - 0) &gt;= 500) &amp;&amp; \</font>
-     !defined _POSIX_SOURCE &amp;&amp; !defined _POSIX_C_SOURCE)
-<font color="#A020F0"># define _POSIX_SOURCE        1</font>
-<font color="#A020F0"># if defined _XOPEN_SOURCE &amp;&amp; (_XOPEN_SOURCE - 0) &lt; 500</font>
-<font color="#A020F0">#  define _POSIX_C_SOURCE        2</font>
-<font color="#A020F0"># elif defined _XOPEN_SOURCE &amp;&amp; (_XOPEN_SOURCE - 0) &lt; 600</font>
-<font color="#A020F0">#  define _POSIX_C_SOURCE        199506L</font>
-<font color="#A020F0"># elif defined _XOPEN_SOURCE &amp;&amp; (_XOPEN_SOURCE - 0) &lt; 700</font>
-<font color="#A020F0">#  define _POSIX_C_SOURCE        200112L</font>
-<font color="#A020F0"># else</font>
-<font color="#A020F0">#  define _POSIX_C_SOURCE        200809L</font>
-<font color="#A020F0"># endif</font>
-<font color="#A020F0"># define __USE_POSIX_IMPLICITLY        1</font>
-<font color="#A020F0">#endif</font>
+/* If none of the ANSI/POSIX macros are defined, use POSIX.1 and POSIX.2
+   (and IEEE Std 1003.1b-1993 unless _XOPEN_SOURCE is defined).  */
+#if ((!defined __STRICT_ANSI__ || (_XOPEN_SOURCE - 0) >= 500) && \
+     !defined _POSIX_SOURCE && !defined _POSIX_C_SOURCE)
+# define _POSIX_SOURCE        1
+# if defined _XOPEN_SOURCE && (_XOPEN_SOURCE - 0) < 500
+#  define _POSIX_C_SOURCE        2
+# elif defined _XOPEN_SOURCE && (_XOPEN_SOURCE - 0) < 600
+#  define _POSIX_C_SOURCE        199506L
+# elif defined _XOPEN_SOURCE && (_XOPEN_SOURCE - 0) < 700
+#  define _POSIX_C_SOURCE        200112L
+# else
+#  define _POSIX_C_SOURCE        200809L
+# endif
+# define __USE_POSIX_IMPLICITLY        1
+#endif
 
-<font color="#A020F0">#if defined _POSIX_SOURCE || _POSIX_C_SOURCE &gt;= 1 || defined _XOPEN_SOURCE</font>
-<font color="#A020F0"># define __USE_POSIX        1</font>
-<font color="#A020F0">#endif</font>
+#if defined _POSIX_SOURCE || _POSIX_C_SOURCE >= 1 || defined _XOPEN_SOURCE
+# define __USE_POSIX        1
+#endif
 
-<font color="#A020F0">#if defined _POSIX_C_SOURCE &amp;&amp; _POSIX_C_SOURCE &gt;= 2 || defined _XOPEN_SOURCE</font>
-<font color="#A020F0"># define __USE_POSIX2        1</font>
-<font color="#A020F0">#endif</font>
+#if defined _POSIX_C_SOURCE && _POSIX_C_SOURCE >= 2 || defined _XOPEN_SOURCE
+# define __USE_POSIX2        1
+#endif
 
-<font color="#A020F0">#if (_POSIX_C_SOURCE - 0) &gt;= 199309L</font>
-<font color="#A020F0"># define __USE_POSIX199309        1</font>
-<font color="#A020F0">#endif</font>
+#if (_POSIX_C_SOURCE - 0) >= 199309L
+# define __USE_POSIX199309        1
+#endif
 
-<font color="#A020F0">#if (_POSIX_C_SOURCE - 0) &gt;= 199506L</font>
-<font color="#A020F0"># define __USE_POSIX199506        1</font>
-<font color="#A020F0">#endif</font>
+#if (_POSIX_C_SOURCE - 0) >= 199506L
+# define __USE_POSIX199506        1
+#endif
 
-<font color="#A020F0">#if (_POSIX_C_SOURCE - 0) &gt;= 200112L</font>
-<font color="#A020F0"># define __USE_XOPEN2K                1</font>
-<font color="#A020F0"># undef __USE_ISOC99</font>
-<font color="#A020F0"># define __USE_ISOC99                1</font>
-<font color="#A020F0">#endif</font>
+#if (_POSIX_C_SOURCE - 0) >= 200112L
+# define __USE_XOPEN2K                1
+# undef __USE_ISOC99
+# define __USE_ISOC99                1
+#endif
 
-<font color="#A020F0">#if (_POSIX_C_SOURCE - 0) &gt;= 200809L</font>
-<font color="#A020F0"># define __USE_XOPEN2K8                1</font>
-<font color="#A020F0"># undef  _ATFILE_SOURCE</font>
-<font color="#A020F0"># define _ATFILE_SOURCE        1</font>
-<font color="#A020F0">#endif</font>
+#if (_POSIX_C_SOURCE - 0) >= 200809L
+# define __USE_XOPEN2K8                1
+# undef  _ATFILE_SOURCE
+# define _ATFILE_SOURCE        1
+#endif
 
-<font color="#A020F0">#ifdef        _XOPEN_SOURCE</font>
-<font color="#A020F0"># define __USE_XOPEN        1</font>
-<font color="#A020F0"># if (_XOPEN_SOURCE - 0) &gt;= 500</font>
-<font color="#A020F0">#  define __USE_XOPEN_EXTENDED        1</font>
-<font color="#A020F0">#  define __USE_UNIX98        1</font>
-<font color="#A020F0">#  undef _LARGEFILE_SOURCE</font>
-<font color="#A020F0">#  define _LARGEFILE_SOURCE        1</font>
-<font color="#A020F0">#  if (_XOPEN_SOURCE - 0) &gt;= 600</font>
-<font color="#A020F0">#   if (_XOPEN_SOURCE - 0) &gt;= 700</font>
-<font color="#A020F0">#    define __USE_XOPEN2K8        1</font>
-<font color="#A020F0">#   endif</font>
-<font color="#A020F0">#   define __USE_XOPEN2K        1</font>
-<font color="#A020F0">#   undef __USE_ISOC99</font>
-<font color="#A020F0">#   define __USE_ISOC99                1</font>
-<font color="#A020F0">#  endif</font>
-<font color="#A020F0"># else</font>
-<font color="#A020F0">#  ifdef _XOPEN_SOURCE_EXTENDED</font>
-<font color="#A020F0">#   define __USE_XOPEN_EXTENDED        1</font>
-<font color="#A020F0">#  endif</font>
-<font color="#A020F0"># endif</font>
-<font color="#A020F0">#endif</font>
+#ifdef        _XOPEN_SOURCE
+# define __USE_XOPEN        1
+# if (_XOPEN_SOURCE - 0) >= 500
+#  define __USE_XOPEN_EXTENDED        1
+#  define __USE_UNIX98        1
+#  undef _LARGEFILE_SOURCE
+#  define _LARGEFILE_SOURCE        1
+#  if (_XOPEN_SOURCE - 0) >= 600
+#   if (_XOPEN_SOURCE - 0) >= 700
+#    define __USE_XOPEN2K8        1
+#   endif
+#   define __USE_XOPEN2K        1
+#   undef __USE_ISOC99
+#   define __USE_ISOC99                1
+#  endif
+# else
+#  ifdef _XOPEN_SOURCE_EXTENDED
+#   define __USE_XOPEN_EXTENDED        1
+#  endif
+# endif
+#endif
 
-<font color="#A020F0">#ifdef _LARGEFILE_SOURCE</font>
-<font color="#A020F0"># define __USE_LARGEFILE        1</font>
-<font color="#A020F0">#endif</font>
+#ifdef _LARGEFILE_SOURCE
+# define __USE_LARGEFILE        1
+#endif
 
-<font color="#A020F0">#ifdef _LARGEFILE64_SOURCE</font>
-<font color="#A020F0"># define __USE_LARGEFILE64        1</font>
-<font color="#A020F0">#endif</font>
+#ifdef _LARGEFILE64_SOURCE
+# define __USE_LARGEFILE64        1
+#endif
 
-<font color="#A020F0">#if defined _FILE_OFFSET_BITS &amp;&amp; _FILE_OFFSET_BITS == 64</font>
-<font color="#A020F0"># define __USE_FILE_OFFSET64        1</font>
-<font color="#A020F0">#endif</font>
+#if defined _FILE_OFFSET_BITS && _FILE_OFFSET_BITS == 64
+# define __USE_FILE_OFFSET64        1
+#endif
 
-<font color="#A020F0">#if defined _BSD_SOURCE || defined _SVID_SOURCE</font>
-<font color="#A020F0"># define __USE_MISC        1</font>
-<font color="#A020F0">#endif</font>
+#if defined _BSD_SOURCE || defined _SVID_SOURCE
+# define __USE_MISC        1
+#endif
 
-<font color="#A020F0">#ifdef        _BSD_SOURCE</font>
-<font color="#A020F0"># define __USE_BSD        1</font>
-<font color="#A020F0">#endif</font>
+#ifdef        _BSD_SOURCE
+# define __USE_BSD        1
+#endif
 
-<font color="#A020F0">#ifdef        _SVID_SOURCE</font>
-<font color="#A020F0"># define __USE_SVID        1</font>
-<font color="#A020F0">#endif</font>
+#ifdef        _SVID_SOURCE
+# define __USE_SVID        1
+#endif
 
-<font color="#A020F0">#ifdef        _ATFILE_SOURCE</font>
-<font color="#A020F0"># define __USE_ATFILE        1</font>
-<font color="#A020F0">#endif</font>
+#ifdef        _ATFILE_SOURCE
+# define __USE_ATFILE        1
+#endif
 
-<font color="#A020F0">#ifdef        _GNU_SOURCE</font>
-<font color="#A020F0"># define __USE_GNU        1</font>
-<font color="#A020F0">#endif</font>
+#ifdef        _GNU_SOURCE
+# define __USE_GNU        1
+#endif
 
-<font color="#A020F0">#if defined _REENTRANT || defined _THREAD_SAFE</font>
-<font color="#A020F0"># define __USE_REENTRANT        1</font>
-<font color="#A020F0">#endif</font>
+#if defined _REENTRANT || defined _THREAD_SAFE
+# define __USE_REENTRANT        1
+#endif
 
-<font color="#A020F0">#if defined _FORTIFY_SOURCE &amp;&amp; _FORTIFY_SOURCE &gt; 0 \</font>
-    &amp;&amp; __GNUC_PREREQ (4, 1) &amp;&amp; defined __OPTIMIZE__ &amp;&amp; __OPTIMIZE__ &gt; 0
-<font color="#A020F0"># if _FORTIFY_SOURCE &gt; 1</font>
-<font color="#A020F0">#  define __USE_FORTIFY_LEVEL 2</font>
-<font color="#A020F0"># else</font>
-<font color="#A020F0">#  define __USE_FORTIFY_LEVEL 1</font>
-<font color="#A020F0"># endif</font>
-<font color="#A020F0">#else</font>
-<font color="#A020F0"># define __USE_FORTIFY_LEVEL 0</font>
-<font color="#A020F0">#endif</font>
+#if defined _FORTIFY_SOURCE && _FORTIFY_SOURCE > 0 \
+    && __GNUC_PREREQ (4, 1) && defined __OPTIMIZE__ && __OPTIMIZE__ > 0
+# if _FORTIFY_SOURCE > 1
+#  define __USE_FORTIFY_LEVEL 2
+# else
+#  define __USE_FORTIFY_LEVEL 1
+# endif
+#else
+# define __USE_FORTIFY_LEVEL 0
+#endif
 
-<font color="#B22222">/* Define __STDC_IEC_559__ and other similar macros.  */</font>
-<font color="#A020F0">#include &lt;bits/predefs.h&gt;</font>
+/* Define __STDC_IEC_559__ and other similar macros.  */
+#include <bits/predefs.h>
 
-<font color="#B22222">/* wchar_t uses ISO 10646-1 (2nd ed., published 2000-09-15) / Unicode 3.1.  */</font>
-<strong><font color="#228B22">#define __STDC_ISO_10646__                200009L</font></strong>
+/* wchar_t uses ISO 10646-1 (2nd ed., published 2000-09-15) / Unicode 3.1.  */
+#define __STDC_ISO_10646__                200009L
 
-<font color="#B22222">/* This macro indicates that the installed library is the GNU C Library.
+/* This macro indicates that the installed library is the GNU C Library.
    For historic reasons the value now is 6 and this will stay from now
    on.  The use of this variable is deprecated.  Use __GLIBC__ and
    __GLIBC_MINOR__ now (see below) when you want to test for a specific
-   GNU C library version and use the values in &lt;gnu/lib-names.h&gt; to get
-   the sonames of the shared libraries.  */</font>
-<strong><font color="#228B22">#undef  __GNU_LIBRARY__</font></strong>
-<strong><font color="#228B22">#define __GNU_LIBRARY__ 6</font></strong>
+   GNU C library version and use the values in <gnu/lib-names.h> to get
+   the sonames of the shared libraries.  */
+#undef  __GNU_LIBRARY__
+#define __GNU_LIBRARY__ 6
 
-<font color="#B22222">/* Major and minor version number of the GNU C library package.  Use
-   these macros to test for features in specific releases.  */</font>
-<strong><font color="#228B22">#define        __GLIBC__        2</font></strong>
-<strong><font color="#228B22">#define        __GLIBC_MINOR__        11</font></strong>
+/* Major and minor version number of the GNU C library package.  Use
+   these macros to test for features in specific releases.  */
+#define        __GLIBC__        2
+#define        __GLIBC_MINOR__        11
 
-<strong><font color="#228B22">#define __GLIBC_PREREQ(maj, min) \
-        ((__GLIBC__ &lt;&lt; 16) + __GLIBC_MINOR__ &gt;= ((maj) &lt;&lt; 16) + (min))</font></strong>
+#define __GLIBC_PREREQ(maj, min) \
+        ((__GLIBC__ << 16) + __GLIBC_MINOR__ >= ((maj) << 16) + (min))
 
-<font color="#B22222">/* Decide whether a compiler supports the long long datatypes.  */</font>
-<font color="#A020F0">#if defined __GNUC__ \</font>
-    || (defined __PGI &amp;&amp; defined __i386__ ) \
-    || (defined __INTEL_COMPILER &amp;&amp; (defined __i386__ || defined __ia64__)) \
-    || (defined __STDC_VERSION__ &amp;&amp; __STDC_VERSION__ &gt;= 199901L)
-<font color="#A020F0"># define __GLIBC_HAVE_LONG_LONG        1</font>
-<font color="#A020F0">#endif</font>
+/* Decide whether a compiler supports the long long datatypes.  */
+#if defined __GNUC__ \
+    || (defined __PGI && defined __i386__ ) \
+    || (defined __INTEL_COMPILER && (defined __i386__ || defined __ia64__)) \
+    || (defined __STDC_VERSION__ && __STDC_VERSION__ >= 199901L)
+# define __GLIBC_HAVE_LONG_LONG        1
+#endif
 
-<font color="#B22222">/* This is here only because every header file already includes this one.  */</font>
-<font color="#A020F0">#ifndef __ASSEMBLER__</font>
-<font color="#A020F0"># ifndef _SYS_CDEFS_H</font>
-<font color="#A020F0">#  include &lt;sys/cdefs.h&gt;</font>
-<font color="#A020F0"># endif</font>
+/* This is here only because every header file already includes this one.  */
+#ifndef __ASSEMBLER__
+# ifndef _SYS_CDEFS_H
+#  include <sys/cdefs.h>
+# endif
 
-<font color="#B22222">/* If we don't have __REDIRECT, prototypes will be missing if
-   __USE_FILE_OFFSET64 but not __USE_LARGEFILE[64]. */</font>
-<font color="#A020F0"># if defined __USE_FILE_OFFSET64 &amp;&amp; !defined __REDIRECT</font>
-<font color="#A020F0">#  define __USE_LARGEFILE        1</font>
-<font color="#A020F0">#  define __USE_LARGEFILE64        1</font>
-<font color="#A020F0"># endif</font>
+/* If we don't have __REDIRECT, prototypes will be missing if
+   __USE_FILE_OFFSET64 but not __USE_LARGEFILE[64]. */
+# if defined __USE_FILE_OFFSET64 && !defined __REDIRECT
+#  define __USE_LARGEFILE        1
+#  define __USE_LARGEFILE64        1
+# endif
 
-<font color="#A020F0">#endif        </font><font color="#B22222">/* !ASSEMBLER */</font><font color="#A020F0"></font>
+#endif        /* !ASSEMBLER */
 
-<font color="#B22222">/* Decide whether we can define 'extern inline' functions in headers.  */</font>
-<font color="#A020F0">#if __GNUC_PREREQ (2, 7) &amp;&amp; defined __OPTIMIZE__ \</font>
-    &amp;&amp; !defined __OPTIMIZE_SIZE__ &amp;&amp; !defined __NO_INLINE__ \
-    &amp;&amp; defined __extern_inline
-<font color="#A020F0"># define __USE_EXTERN_INLINES        1</font>
-<font color="#A020F0">#endif</font>
+/* Decide whether we can define 'extern inline' functions in headers.  */
+#if __GNUC_PREREQ (2, 7) && defined __OPTIMIZE__ \
+    && !defined __OPTIMIZE_SIZE__ && !defined __NO_INLINE__ \
+    && defined __extern_inline
+# define __USE_EXTERN_INLINES        1
+#endif
 
-<font color="#B22222">/* There are some functions that must be declared 'extern inline' even with
-   -Os when building LIBC, or they'll end up undefined.  */</font>
-<font color="#A020F0">#if __GNUC_PREREQ (2, 7) &amp;&amp; defined __OPTIMIZE__ \</font>
-    &amp;&amp; (defined _LIBC || !defined __OPTIMIZE_SIZE__) &amp;&amp; !defined __NO_INLINE__ \
-    &amp;&amp; defined __extern_inline
-<font color="#A020F0"># define __USE_EXTERN_INLINES_IN_LIBC        1</font>
-<font color="#A020F0">#endif</font>
+/* There are some functions that must be declared 'extern inline' even with
+   -Os when building LIBC, or they'll end up undefined.  */
+#if __GNUC_PREREQ (2, 7) && defined __OPTIMIZE__ \
+    && (defined _LIBC || !defined __OPTIMIZE_SIZE__) && !defined __NO_INLINE__ \
+    && defined __extern_inline
+# define __USE_EXTERN_INLINES_IN_LIBC        1
+#endif
 
 
-<font color="#B22222">/* This is here only because every header file already includes this one.
+/* This is here only because every header file already includes this one.
    Get the definitions of all the appropriate `__stub_FUNCTION' symbols.
-   &lt;gnu/stubs.h&gt; contains `#define __stub_FUNCTION' when FUNCTION is a stub
-   that will always return failure (and set errno to ENOSYS).  */</font>
-<font color="#A020F0">#include &lt;gnu/stubs.h&gt;</font>
+   <gnu/stubs.h> contains `#define __stub_FUNCTION' when FUNCTION is a stub
+   that will always return failure (and set errno to ENOSYS).  */
+#include <gnu/stubs.h>
 
 
-<font color="#A020F0">#endif        </font><font color="#B22222">/* features.h  */</font><font color="#A020F0"></font>
-</pre>
+#endif        /* features.h  */
 
-
-
-</body></html>
