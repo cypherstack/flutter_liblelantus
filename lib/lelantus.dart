@@ -15,11 +15,12 @@ class Lelantus {
   }
 }
 
-final DynamicLibrary nativeAddLib = Platform.environment
-        .containsKey('FLUTTER_TEST')
-    ? DynamicLibrary.open(
-        'crypto_plugins/flutter_liblelantus/scripts/linux/build/libmobileliblelantus.so')
-    : Platform.isAndroid || Platform.isLinux
+final DynamicLibrary nativeAddLib = Platform.isWindows
+    ? DynamicLibrary.open("libmobileliblelantus.dll")
+    : Platform.environment.containsKey('FLUTTER_TEST')
+        ? DynamicLibrary.open(
+            'crypto_plugins/flutter_liblelantus/scripts/linux/build/libmobileliblelantus.so')
+        : Platform.isAndroid || Platform.isLinux
             ? DynamicLibrary.open('libmobileliblelantus.so')
             : DynamicLibrary.process();
 
