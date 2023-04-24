@@ -31,6 +31,6 @@ do
     git tag "${OS}_${TARGET}_${TAG_COMMIT}"
     git push --tags
   else
-    echo "$TARGET not found!"
+    echo "$TARGET not found at $OS/$ARCH_PATH/$BIN!"
   fi
 done
