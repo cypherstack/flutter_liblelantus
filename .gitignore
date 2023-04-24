@@ -11,13 +11,13 @@ scripts/ios/External/
 scripts/ios/CMakeLists/mobileliblelantus/CMakeLists.txt
 scripts/ios/CMakeLists/secp256k1/CMakeLists.txt
 scripts/ios/toolchain/
-scripts/ios/flutter_libepiccash_bins/
+scripts/ios/flutter_liblelantus_bins/
 
 scripts/android/CMakeLists/mobileliblelantus/CMakeLists.txt
 scripts/android/CMakeLists/secp256k1/CMakeLists.txt
 scripts/android/mobileliblelantus/
 scripts/android/android_on_mac/build/
-scripts/android/flutter_libepiccash_bins/
+scripts/android/flutter_liblelantus_bins/
 
 scripts/linux/CMakeLists/mobileliblelantus/CMakeLists.txt
 scripts/linux/CMakeLists/secp256k1/CMakeLists.txt
@@ -28,7 +28,7 @@ scripts/linux_arm64/CMakeLists/mobileliblelantus/CMakeLists.txt
 scripts/linux_arm64/CMakeLists/secp256k1/CMakeLists.txt
 scripts/linux_arm64/mobileliblelantus/
 scripts/linux_arm64/android_on_mac/build/
-scripts/linux/flutter_libepiccash_bins/
+scripts/linux/flutter_liblelantus_bins/
 
 scripts/windows/CMakeLists/mobileliblelantus/CMakeLists.txt
 scripts/windows/CMakeLists/secp256k1/CMakeLists.txt
@@ -44,10 +44,10 @@ scripts/windows/msvc/CMakeLists/mobileliblelantus/CMakeLists.txt
 scripts/windows/msvc/CMakeLists/secp256k1/CMakeLists.txt
 scripts/windows/msvc/build/
 scripts/windows/msvc/cache/
-scripts/windows/flutter_libepiccash_bins/
+scripts/windows/flutter_liblelantus_bins/
 
 .idea
 lib/git_versions.dart
 
-scripts/macos/flutter_libepiccash_bins/
+scripts/macos/flutter_liblelantus_bins/
 linux/bin/
