@@ -1,7 +1,6 @@
 #!/bin/sh
 
-IOS_SCRIPTS_DIR="$(pwd)"
-export IOS_SCRIPTS_DIR
+export IOS_SCRIPTS_DIR="$(pwd)"
 export CW_ROOT="${IOS_SCRIPTS_DIR}"
 export IOS_TOOLCHAIN_ROOT="${CW_ROOT}"/toolchain
 export MOBILE_LIB_ROOT="${CW_ROOT}"/mobileliblelantus
