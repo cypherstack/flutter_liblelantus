@@ -19,17 +19,13 @@ BIN=libmobileliblelantus.so
 
 for TARGET in arm64-v8a armeabi-v7a x86_64
 do
-  ARCH_PATH=$TARGET/release
-  if [ $(git tag -l $TARGET"_$TAG_COMMIT") ]; then
-      git checkout $TARGET"_$TAG_COMMIT"
-      if [ -f "$OS/$ARCH_PATH/$BIN" ]; then
-        mkdir -p ../$LINUX_LIBS_DIR/$ARCH_PATH
-        # TODO verify bin checksum hashes
-        cp -rf "$OS/$ARCH_PATH/$BIN" "../$LINUX_LIBS_DIR/$ARCH_PATH/$BIN"
-      else
-        echo "$TARGET not found!"
-      fi
+  ARCH_PATH=$TARGET
+  git checkout "${OS}_${TARGET}_${TAG_COMMIT}" || git checkout $OS/$TARGET
+  if [ -f "$OS/$ARCH_PATH/$BIN" ]; then
+    mkdir -p ../$ANDROID_LIBS_DIR/$ARCH_PATH
+    # TODO verify bin checksum hashes
+    cp -rf "$OS/$ARCH_PATH/$BIN" "../$ANDROID_LIBS_DIR/$ARCH_PATH/$BIN"
   else
-      echo "No precompiled bins for $TARGET found!"
+    echo "$TARGET not found at $OS/$ARCH_PATH/$BIN!"
   fi
 done
