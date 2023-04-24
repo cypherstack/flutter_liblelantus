@@ -19,12 +19,12 @@ for TARGET in aarch64-unknown-linux-gnu x86_64-unknown-linux-gnu
 do
   ARCH_PATH=$TARGET/release
 
-  if [ -f "$TARGET_PATH/$ARCH_PATH/$BIN" ]; then
+  if [ -f "$TARGET_PATH/$BIN" ]; then
     git checkout $OS/$TARGET || git checkout -b $OS/$TARGET
     if [ ! -d $OS/$ARCH_PATH ]; then
       mkdir -p $OS/$ARCH_PATH
     fi
-    cp -rf $TARGET_PATH/$ARCH_PATH/$BIN $OS/$ARCH_PATH/$BIN
+    cp -rf $TARGET_PATH/$BIN $OS/$ARCH_PATH/$BIN
     git add .
     git commit -m "$TAG_COMMIT"
     git push origin $OS/$TARGET
