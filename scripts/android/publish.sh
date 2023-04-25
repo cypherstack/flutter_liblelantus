@@ -1,6 +1,6 @@
 #!/bin/bash
 
-OS=linux
+OS=android
 TAG_COMMIT=$(git log -1 --pretty=format:"%H")
 
 rm -rf flutter_liblelantus_bins
