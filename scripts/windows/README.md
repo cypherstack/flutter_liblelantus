@@ -9,7 +9,7 @@ sudo apt-get install p7zip-full autoconf automake autopoint bash bison bzip2 cma
 ### Install MXE dependencies
 If `mxedeps.sh` wasn't ran, use the commands below: 
 ```bash
-sudo apt-get install -y gcc-mingw-w64-x86-64 g++-mingw-w64-x86-64
+sudo apt-get install -y gcc-mingw-w64-x86-64 g++-mingw-w64-x86-64 python3-mako
 ```
 
 ### Install MXE
