@@ -50,6 +50,8 @@ cd ~/development
 git clone https://github.com/mxe/mxe.git
 cd mxe
 make cc cmake cmake-conf MXE_TARGETS='x86_64-w64-mingw32.static'
+
+# Add MXE to PATH
 if ! [[ $PATH == *"/mxe"* ]]; then
   echo 'export PATH="$HOME/development/mxe/usr/bin:$PATH"' >> ~/.bashrc  # Prepend to PATH
   source ~/.bashrc
