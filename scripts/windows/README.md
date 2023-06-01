@@ -1,7 +1,7 @@
 # `flutter_liblelantus`
-## Building for Windows
-## Dependencies
-Run `mxedeps.sh` to install MXE and its dependencies, or use the commands below:
+## Windows
+### Install dependencies
+Run `scripts/windows/mxedeps.sh` to install MXE and its dependencies, or use the commands below:
 ```bash
 sudo apt-get install p7zip-full \
   autoconf \
@@ -54,6 +54,10 @@ make cmake cmake-conf MXE_TARGETS='x86_64-w64-mingw32.static'
 ```
 
 ### Build
-Run `build_all.sh` (may need to alter permissions like with `chmod +x *.sh`)
+```sh
+cd scripts/windows
+./build_all.sh
+```
+(may need to alter permissions like with `chmod +x *.sh`)
 
 Libraries will be output to `scripts/windows/build`
