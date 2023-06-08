@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # MXE dependencies
 sudo apt-get install -y p7zip-full \
