@@ -3,8 +3,8 @@
 cmake_minimum_required(VERSION 3.1)
 project(secp256k1)
 
-SET(distribution_DIR /Users/likhojiba/projects/stack_wallet/crypto_plugins/flutter_liblelantus/scripts/ios)
-SET(OPENSSL_ROOT_DIR ${distribution_DIR}/External/ios)
+SET(distribution_DIR /Users/julian/StudioProjects/cypherstack/flutter_liblelantus/scripts/macos)
+SET(OPENSSL_ROOT_DIR ${distribution_DIR}/../../macos)
 
 SET(OPENSSL_LIBRARIES_DIR "${OPENSSL_ROOT_DIR}/lib")
 SET(OPENSSL_INCLUDE_DIR ${OPENSSL_ROOT_DIR}/include)

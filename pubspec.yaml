@@ -33,6 +33,8 @@ flutter:
         pluginClass: LelantusPlugin
       ios:
         pluginClass: LelantusPlugin
+      macos:
+        pluginClass: LelantusPlugin
 
   # To add assets to your plugin package, add an assets section, like this:
   # assets:
