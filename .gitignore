@@ -42,5 +42,5 @@ scripts/windows/msvc/CMakeLists/secp256k1/CMakeLists.txt
 scripts/windows/msvc/build/
 scripts/windows/msvc/cache/
 
-.idea
+.idea/
 lib/git_versions.dart

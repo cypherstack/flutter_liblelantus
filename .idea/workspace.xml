@@ -8,17 +8,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae0f24c2-4222-40ab-9e70-3d775a5d98ef" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/scripts/macos/build_all.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/macos/build_lib.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/macos/copyCMakeLists.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/macos/copymobile.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/macos/gen_version.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/macos/linkDistros.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/macos/config.sh" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/macos/config.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/home/marco/.android/avd/Pixel_5_API_29.avd]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -27,6 +32,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -39,14 +49,6 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/example/lib/main.dart" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/scripts/CMakeLists/mobileliblelantus/template_CMakeLists.txt" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/scripts/CMakeLists/mobileliblelantus/Utils.h" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/scripts/CMakeLists/mobileliblelantus/Utils.cpp" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/scripts/CMakeLists/secp256k1/template_CMakeLists.txt" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/scripts/copyCMakeLists.sh" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/scripts/build_all.sh" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/scripts/build_openssl.sh" root0="SKIP_INSPECTION" />
-    <setting file="file://$PROJECT_DIR$/scripts/CMakeLists/mobileliblelantus/dart_interface.cpp" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectId" id="21KhcN0ZnPIi7mAYIJ1MmJq0hiq" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -62,20 +64,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="dart.analysis.tool.window.force.activate" value="true" />
-    <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/scripts/android/CMakeLists/mobileliblelantus" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.17" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="dart.settings" />
-    <property name="show.migrate.to.gradle.popup" value="false" />
-  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "dart.analysis.tool.window.visible": "false",
+    "last_opened_file_path": "/Users/julian/StudioProjects/cypherstack/flutter_liblelantus/scripts/macos"
+  }
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/scripts/macos" />
       <recent name="$PROJECT_DIR$/scripts/android/CMakeLists/mobileliblelantus" />
       <recent name="$PROJECT_DIR$/scripts/android" />
     </key>
@@ -105,11 +102,22 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/macos-build" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
