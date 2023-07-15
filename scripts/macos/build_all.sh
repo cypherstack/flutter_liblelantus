@@ -1,6 +1,6 @@
 #!/bin/sh
 
-#. ./config.sh
+. ./config.sh
 #./install_missing_headers.sh
 ./build_openssl_common.sh
 #./ioscmake.sh
