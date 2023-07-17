@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_liblelantus/flutter_liblelantus.dart';
+import 'package:lelantus/flutter_liblelantus.dart';
 
 void main() {
   const MethodChannel channel = MethodChannel('flutter_liblelantus');
