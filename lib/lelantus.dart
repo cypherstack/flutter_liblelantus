@@ -24,7 +24,7 @@ final DynamicLibrary nativeAddLib = Platform.isWindows
             ? DynamicLibrary.open('libmobileliblelantus.so')
             : DynamicLibrary.process();
 
-class LelantusEntry extends Struct {
+final class LelantusEntry extends Struct {
   @Int8()
   external int isUsed;
   @Int32()
@@ -73,8 +73,8 @@ final void Function(
     .lookup<
         NativeFunction<
             Void Function(
-      Int8, // value
-    )>>('ST')
+              Int8, // value
+            )>>('ST')
     .asFunction();
 
 void setTestnet(
@@ -94,12 +94,12 @@ final Pointer<Utf8> Function(
     .lookup<
         NativeFunction<
             Pointer<Utf8> Function(
-      Uint64, // value
-      Pointer<Utf8>, // keydata
-      Int32, // index
-      Pointer<Utf8>, // seedID
-      Int8, // isTestnet
-    )>>('CMS')
+              Uint64, // value
+              Pointer<Utf8>, // keydata
+              Int32, // index
+              Pointer<Utf8>, // seedID
+              Int8, // isTestnet
+            )>>('CMS')
     .asFunction();
 
 String getMintScript(int value, String keydata, int index, String seedID,
@@ -121,11 +121,11 @@ final Pointer<Utf8> Function(
     .lookup<
         NativeFunction<
             Pointer<Utf8> Function(
-      Pointer<Utf8>, // keydata
-      Int32, // index
-      Pointer<Utf8>, // seedID
-      Int8, // isTestnet
-    )>>('CT')
+              Pointer<Utf8>, // keydata
+              Int32, // index
+              Pointer<Utf8>, // seedID
+              Int8, // isTestnet
+            )>>('CT')
     .asFunction();
 
 String CreateTag(String keydata, int index, String seedID,
@@ -146,11 +146,11 @@ final Pointer<Utf8> Function(
     .lookup<
         NativeFunction<
             Pointer<Utf8> Function(
-      Uint64, // value
-      Pointer<Utf8>, // keydata
-      Int32, // index
-      Int8, // isTestnet
-    )>>('GPC')
+              Uint64, // value
+              Pointer<Utf8>, // keydata
+              Int32, // index
+              Int8, // isTestnet
+            )>>('GPC')
     .asFunction();
 
 String getPublicCoin(int value, String keydata, int index,
@@ -171,11 +171,11 @@ final Pointer<Utf8> Function(
     .lookup<
         NativeFunction<
             Pointer<Utf8> Function(
-      Uint64, // value
-      Pointer<Utf8>, // keydata
-      Int32, // index
-      Int8, // isTestnet
-    )>>('GSN')
+              Uint64, // value
+              Pointer<Utf8>, // keydata
+              Int32, // index
+              Int8, // isTestnet
+            )>>('GSN')
     .asFunction();
 
 String GetSerialNumber(int value, String keydata, int index,
@@ -200,15 +200,15 @@ final int Function(
     .lookup<
         NativeFunction<
             Uint64 Function(
-      Uint64, // spendAmount
-      Int8, // subtractFeeFromAmount
-      Pointer<Pointer<LelantusEntry>>, // coins
-      Int32, // coins_length
-      Pointer<Uint64>, // changeToMint
-      Pointer<Int32>, // spendCoinIndexes
-      Pointer<Int32>, // spendCoinIndexes_length
-      Int8, // isTestnet
-    )>>('EF')
+              Uint64, // spendAmount
+              Int8, // subtractFeeFromAmount
+              Pointer<Pointer<LelantusEntry>>, // coins
+              Int32, // coins_length
+              Pointer<Uint64>, // changeToMint
+              Pointer<Int32>, // spendCoinIndexes
+              Pointer<Int32>, // spendCoinIndexes_length
+              Int8, // isTestnet
+            )>>('EF')
     .asFunction();
 
 int estimateFee(
@@ -259,11 +259,11 @@ final int Function(
     .lookup<
         NativeFunction<
             Uint32 Function(
-      Uint64, // value
-      Pointer<Utf8>, // keydata
-      Int32, //index
-      Int8, // isTestnet
-    )>>('GMKP')
+              Uint64, // value
+              Pointer<Utf8>, // keydata
+              Int32, //index
+              Int8, // isTestnet
+            )>>('GMKP')
     .asFunction();
 
 int getMintKeyPath(int value, String keydata, int index,
@@ -281,8 +281,8 @@ final int Function(
     .lookup<
         NativeFunction<
             Uint32 Function(
-      Pointer<Utf8>, // serializedCoin
-    )>>('GAKP')
+              Pointer<Utf8>, // serializedCoin
+            )>>('GAKP')
     .asFunction();
 
 int GetAesKeyPath(
@@ -303,13 +303,13 @@ final Pointer<Utf8> Function(
     .lookup<
         NativeFunction<
             Pointer<Utf8> Function(
-      Uint64, // value
-      Pointer<Utf8>, // keydata
-      Int32, // index
-      Pointer<Utf8>, // seedID
-      Pointer<Utf8>, // AESkeydata
-      Int8, // isTestnet
-    )>>('CJMS')
+              Uint64, // value
+              Pointer<Utf8>, // keydata
+              Int32, // index
+              Pointer<Utf8>, // seedID
+              Pointer<Utf8>, // AESkeydata
+              Int8, // isTestnet
+            )>>('CJMS')
     .asFunction();
 
 String createJMintScript(
@@ -346,24 +346,24 @@ final Pointer<Utf8> Function(
     .lookup<
         NativeFunction<
             Pointer<Utf8> Function(
-      Pointer<Utf8>, // txhash
-      Uint64, // spendAmount
-      Int8, // subtractFeeFromAmount
-      Pointer<Utf8>, //keydata
-      Uint32, // index
-      Pointer<Pointer<LelantusEntry>>, //coins
-      Int32, //coins length
-      Pointer<Uint32>, // setIds
-      Int32, // setIds length
-      Pointer<Pointer<Pointer<Utf8>>>, // anonymitySets
-      Pointer<Int32>, // anonymitySets_lengths
-      Int32, // anonymitySets_length
-      Pointer<Pointer<Utf8>>, // anonymitySetHashes
-      Int32, // anonymitySetHashes_length
-      Pointer<Pointer<Utf8>>, // groupBlockHashes
-      Int32, // groupBlockHashes_length
-      Int8, // isTestnet
-    )>>('CJSS')
+              Pointer<Utf8>, // txhash
+              Uint64, // spendAmount
+              Int8, // subtractFeeFromAmount
+              Pointer<Utf8>, //keydata
+              Uint32, // index
+              Pointer<Pointer<LelantusEntry>>, //coins
+              Int32, //coins length
+              Pointer<Uint32>, // setIds
+              Int32, // setIds length
+              Pointer<Pointer<Pointer<Utf8>>>, // anonymitySets
+              Pointer<Int32>, // anonymitySets_lengths
+              Int32, // anonymitySets_length
+              Pointer<Pointer<Utf8>>, // anonymitySetHashes
+              Int32, // anonymitySetHashes_length
+              Pointer<Pointer<Utf8>>, // groupBlockHashes
+              Int32, // groupBlockHashes_length
+              Int8, // isTestnet
+            )>>('CJSS')
     .asFunction();
 
 String createJoinSplitScript(
@@ -459,9 +459,9 @@ final int Function(
     .lookup<
         NativeFunction<
             Uint64 Function(
-      Pointer<Utf8>, // privateKeyAES
-      Pointer<Utf8>, // encryptedValue
-    )>>('DMA')
+              Pointer<Utf8>, // privateKeyAES
+              Pointer<Utf8>, // encryptedValue
+            )>>('DMA')
     .asFunction();
 
 int decryptMintAmount(
@@ -477,8 +477,8 @@ final Pointer<Pointer<Utf8>> Function(int) allocateAnonymitySet = nativeAddLib
     .lookup<
         NativeFunction<
             Pointer<Pointer<Utf8>> Function(
-      Int32,
-    )>>('allocate_anonymity_set')
+              Int32,
+            )>>('allocate_anonymity_set')
     .asFunction();
 
 final Pointer<Pointer<Pointer<Utf8>>> Function(int) allocate_string_array =
@@ -486,8 +486,8 @@ final Pointer<Pointer<Pointer<Utf8>>> Function(int) allocate_string_array =
         .lookup<
             NativeFunction<
                 Pointer<Pointer<Pointer<Utf8>>> Function(
-          Int32,
-        )>>('allocate_string_array')
+                  Int32,
+                )>>('allocate_string_array')
         .asFunction();
 
 final Pointer<Pointer<LelantusEntry>> Function(int) make_entry_array =
@@ -495,32 +495,32 @@ final Pointer<Pointer<LelantusEntry>> Function(int) make_entry_array =
         .lookup<
             NativeFunction<
                 Pointer<Pointer<LelantusEntry>> Function(
-          Int32,
-        )>>('make_entry_array')
+                  Int32,
+                )>>('make_entry_array')
         .asFunction();
 
 final Pointer<Uint64> Function(int) uint64_t_array = nativeAddLib
     .lookup<
         NativeFunction<
             Pointer<Uint64> Function(
-      Int32,
-    )>>('uint64_t_array')
+              Int32,
+            )>>('uint64_t_array')
     .asFunction();
 
 final Pointer<Uint32> Function(int) uint32_t_array = nativeAddLib
     .lookup<
         NativeFunction<
             Pointer<Uint32> Function(
-      Int32,
-    )>>('uint32_t_array')
+              Int32,
+            )>>('uint32_t_array')
     .asFunction();
 
 final Pointer<Int32> Function(int) int32_t_array = nativeAddLib
     .lookup<
         NativeFunction<
             Pointer<Int32> Function(
-      Int32,
-    )>>('int32_t_array')
+              Int32,
+            )>>('int32_t_array')
     .asFunction();
 
 final Pointer<LelantusEntry> Function(
@@ -534,13 +534,13 @@ final Pointer<LelantusEntry> Function(
     .lookup<
         NativeFunction<
             Pointer<LelantusEntry> Function(
-      Int8,
-      Int32,
-      Int32,
-      Int64,
-      Uint32,
-      Pointer<Utf8>,
-    )>>('create_entry')
+              Int8,
+              Int32,
+              Int32,
+              Int64,
+              Uint32,
+              Pointer<Utf8>,
+            )>>('create_entry')
     .asFunction();
 
 Pointer<LelantusEntry> createEntry(
