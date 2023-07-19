@@ -2,7 +2,7 @@
 
 . ./config.sh
 ./install_missing_headers.sh
-./build_openssl_arm64.sh
+./build_openssl_universal.sh
 ./copymobile.sh
 ./linkDistros.sh
 ./copyCMakeLists.sh

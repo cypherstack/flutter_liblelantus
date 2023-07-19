@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.7 FATAL_ERROR)
 set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
+set(CMAKE_OSX_ARCHITECTURES "arm64;x86_64" CACHE STRING "" FORCE)
 project(mobileliblelantus)
-SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -arch arm64")
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -arch arm64")
+
 set(OPENSSL_USE_STATIC_LIBS OFF CACHE BOOL "" FORCE)
 
 SET(distribution_DIR /opt/android)
