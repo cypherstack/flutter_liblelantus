@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 . ./config.sh
 
 OPEN_SSL_DIR_NAME="OpenSSL"
@@ -12,11 +14,13 @@ build_openssl_init_common() {
 	DIR=$1
 	# Use 1.1.1s becasue of https://github.com/openssl/openssl/issues/18720
 	OPENSSL_VERSION="1.1.1s"
+	OPENSSL_SHA256="c5ac01e760ee6ff0dab61d6b2bbd30146724d063eb322180c6f18a6f74e4b6aa"
 
 	echo "============================ OpenSSL ============================"
 
 	cd $EXTERNAL_MACOS_SOURCE_DIR
-	curl -O https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz
+	curl -O -L https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz
+	echo "${OPENSSL_SHA256} openssl-${OPENSSL_VERSION}.tar.gz" | sha256sum --check
 	tar -xvzf openssl-$OPENSSL_VERSION.tar.gz
 	rm -rf $DIR
 	rm -rf $OPEN_SSL_DIR_PATH
