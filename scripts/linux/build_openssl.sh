@@ -19,7 +19,7 @@ git reset --hard $ZLIB_COMMIT_HASH
 ./configure --static
 make
 
-curl https://www.openssl.org/source/$OPENSSL_FILENAME -o $OPENSSL_FILE_PATH
+curl -L https://www.openssl.org/source/$OPENSSL_FILENAME -o $OPENSSL_FILE_PATH
 echo $OPENSSL_SHA256 $OPENSSL_FILE_PATH | sha256sum -c - || exit 1
 
 for arch in $TYPES_OF_BUILD
