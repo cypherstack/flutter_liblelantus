@@ -19,7 +19,7 @@ CC=clang CXX=clang++ ./configure --static
 make
 
 if [ ! -e "$OPENSSL_FILE_PATH" ]; then
-  curl https://www.openssl.org/source/$OPENSSL_FILENAME -o $OPENSSL_FILE_PATH
+  curl -L https://www.openssl.org/source/$OPENSSL_FILENAME -o $OPENSSL_FILE_PATH
 fi
 
 echo $OPENSSL_SHA256 $OPENSSL_FILE_PATH | sha256sum -c - || exit 1
