@@ -1,4 +1,9 @@
 # `flutter_liblelantus`
+## Linux
+```sh
+sudo apt install libssl-dev
+```
+
 ## Android
 ```sh
 cd scripts/android
