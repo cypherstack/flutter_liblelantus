@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e -x
+
 mkdir build
 ./build_openssl.sh
 ./copymobile.sh
