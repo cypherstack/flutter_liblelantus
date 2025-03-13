@@ -13,7 +13,11 @@ COMMIT=$(git log -1 --pretty=format:"%H")
 OS="IOS"
 sed -i '' "/\/\*${OS}_VERSION/c\\/\*${OS}_VERSION\*\/ const ${OS}_VERSION = \"$COMMIT\";" $VERSIONS_FILE
 cd $MOBILE_LIB_ROOT
-cmake . -DCMAKE_TOOLCHAIN_FILE="${IOS_TOOLCHAIN_ROOT}/toolchain/iOS.cmake" && make -j4
+
+LIBRARY_PATH="" LD_LIBRARY_PATH="" cmake . \
+  -DCMAKE_TOOLCHAIN_FILE="${IOS_TOOLCHAIN_ROOT}/toolchain/iOS.cmake" \
+  -DCMAKE_OSX_ARCHITECTURES="arm64" \
+  && LIBRARY_PATH="" LD_LIBRARY_PATH="" make -j4
 
 plutil -replace CFBundleShortVersionString -string "0.0.2" ./mobileliblelantus.framework/Info.plist
 plutil -replace CFBundleVersion -string "1" ./mobileliblelantus.framework/Info.plist
