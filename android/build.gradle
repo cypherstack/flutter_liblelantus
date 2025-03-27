@@ -2,44 +2,42 @@ group 'com.example.lelantus'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.8.0'
+    ext.kotlin_version = "1.8.22"
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath("com.android.tools.build:gradle:8.7.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
     }
 }
 
-rootProject.allprojects {
+allprojects {
     repositories {
         google()
         mavenCentral()
     }
 }
 
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
+apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
 
 android {
-    if (project.android.hasProperty("namespace")) {
-        namespace = "com.example.lelantus"
-    }
+    namespace = "com.example.lelantus"
 
-    compileSdk = 34
+    compileSdk = 35
 
-    ndkVersion = "21.1.6352462"
+    ndkVersion = "28.0.13004108"
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_1_8
+        jvmTarget = JavaVersion.VERSION_11
     }
 
     sourceSets {
@@ -49,7 +47,7 @@ android {
 
     defaultConfig {
         minSdk = 21
-        ndkVersion = "21.1.6352462"
+        ndkVersion = "28.0.13004108"
 
         externalNativeBuild {
             cmake {
