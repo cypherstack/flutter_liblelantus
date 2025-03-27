@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mkdir build
+mkdir -p build
 ./install_ndk.sh
 ./build_openssl.sh
 ./renamedistros.sh
