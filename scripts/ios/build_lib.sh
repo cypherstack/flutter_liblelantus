@@ -19,7 +19,7 @@ LIBRARY_PATH="" LD_LIBRARY_PATH="" cmake . \
   -DCMAKE_OSX_ARCHITECTURES="arm64" \
   && LIBRARY_PATH="" LD_LIBRARY_PATH="" make -j4
 
-plutil -replace CFBundleShortVersionString -string "0.0.2" ./mobileliblelantus.framework/Info.plist
+plutil -replace CFBundleShortVersionString -string "0.0.3" ./mobileliblelantus.framework/Info.plist
 plutil -replace CFBundleVersion -string "1" ./mobileliblelantus.framework/Info.plist
 
-sed -i '' "s/<dict>/<dict>\n\t<key>MinimumOSVersion<\/key>\n\t<string>11.0<\/string>/g" ./mobileliblelantus.framework/Info.plist
+sed -i '' "s/<dict>/<dict>\n\t<key>MinimumOSVersion<\/key>\n\t<string>12.0<\/string>/g" ./mobileliblelantus.framework/Info.plist
