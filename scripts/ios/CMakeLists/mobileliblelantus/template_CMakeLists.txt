@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.7 FATAL_ERROR)
 set(CMAKE_TRY_COMPILE_TARGET_TYPE "STATIC_LIBRARY")
 project(mobileliblelantus)
+set(IOS_MIN_VERSION "12.0")
 SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -arch arm64")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -arch arm64")
 set(OPENSSL_USE_STATIC_LIBS OFF CACHE BOOL "" FORCE)
@@ -82,8 +83,17 @@ set_target_properties(mobileliblelantus PROPERTIES FRAMEWORK TRUE
                                                      # "compatibility version" in semantic format in Mach-O binary file
                                                      SOVERSION 1.0.0
                                                      PUBLIC_HEADER dynamicFramework.h
+                                                     XCODE_ATTRIBUTE_IPHONEOS_DEPLOYMENT_TARGET "${IOS_MIN_VERSION}"
                                                      XCODE_ATTRIBUTE_CODE_SIGN_IDENTITY "iPhone Developer")
-target_compile_options(mobileliblelantus PUBLIC -fembed-bitcode)
+target_compile_options(mobileliblelantus PUBLIC
+    -fembed-bitcode
+    "-mios-version-min=${IOS_MIN_VERSION}"
+)
+
+target_link_options(mobileliblelantus PUBLIC
+    "-mios-version-min=${IOS_MIN_VERSION}"
+)
+
 target_link_libraries(mobileliblelantus ${OPENSSL_LIBRARIES} secp256k1 )
 
 add_dependencies(mobileliblelantus secp256k1)
