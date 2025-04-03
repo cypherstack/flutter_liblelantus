@@ -2,7 +2,7 @@
 
 set -e -x
 
-mkdir build
+mkdir -p build
 ./build_openssl.sh
 ./copymobile.sh
 ./linkDistros.sh
