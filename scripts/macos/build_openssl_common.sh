@@ -20,7 +20,7 @@ build_openssl_init_common() {
 
 	cd $EXTERNAL_MACOS_SOURCE_DIR
 	curl -O -L https://www.openssl.org/source/openssl-$OPENSSL_VERSION.tar.gz
-	echo "${OPENSSL_SHA256} openssl-${OPENSSL_VERSION}.tar.gz" | sha256sum --check
+	(echo "${OPENSSL_SHA256} openssl-${OPENSSL_VERSION}.tar.gz" | sha256sum --check) || echo "$OPENSSL_SHA256" | sha256sum -c openssl-"$OPENSSL_VERSION".tar.gz
 	tar -xvzf openssl-$OPENSSL_VERSION.tar.gz
 	rm -rf $DIR
 	rm -rf $OPEN_SSL_DIR_PATH
